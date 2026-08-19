@@ -1,0 +1,28 @@
+{
+  "target_roles": [
+    "Software Engineering Intern",
+    "Embedded Software Intern",
+    "Robotics Software Intern",
+    "Firmware Engineering Intern",
+    "Hardware Engineering Intern"
+  ],
+  "target_locations": [
+    "San Francisco, CA",
+    "New York, NY",
+    "Austin, TX",
+    "Seattle, WA",
+    "Boston, MA",
+    "Remote"
+  ],
+  "min_ats_match_threshold": 75,
+  "preferred_companies": [
+    "Apple",
+    "Tesla",
+    "NVIDIA",
+    "SpaceX",
+    "Google",
+    "Qualcomm",
+    "Rivian",
+    "Lockheed Martin"
+  ]
+}

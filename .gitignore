@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+env/
+venv/
+
+# LaTeX auxiliary files (keep PDFs)
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Builder scripts
+build_part*.py
+setup_repo.py
+test.py

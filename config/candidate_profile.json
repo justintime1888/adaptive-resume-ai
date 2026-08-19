@@ -1,0 +1,187 @@
+{
+  "personal": {
+    "full_name": "Jane Doe",
+    "location": "San Francisco, CA",
+    "phone": "(555) 019-2834",
+    "email": "janedoe@example.com",
+    "linkedin": "linkedin.com/in/janedoe",
+    "github": "github.com/janedoe",
+    "portfolio": "janedoe.dev"
+  },
+  "education": [
+    {
+      "institution": "University of California, Berkeley",
+      "location": "Berkeley, CA",
+      "degree": "Bachelor of Science in Computer Science & Electrical Engineering",
+      "graduation_date": "Expected May 2027",
+      "gpa": "3.85 / 4.00",
+      "coursework": [
+        "Data Structures & Algorithms",
+        "Operating Systems",
+        "Computer Architecture",
+        "Control Systems",
+        "Embedded Systems",
+        "Signals & Systems"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineering Intern",
+      "location": "San Jose, CA",
+      "start_date": "June 2025",
+      "end_date": "August 2025",
+      "bullets": [
+        "Engineered real-time telemetry streaming service in C++ and Python processing 10k+ events/sec with <5ms latency.",
+        "Designed and deployed microservices on AWS (ECS, Redis, DynamoDB), reducing API latency by 35%.",
+        "Automated CI/CD validation pipelines with GitHub Actions and Docker, reducing build failure rates by 40%."
+      ]
+    },
+    {
+      "company": "University Robotics Lab",
+      "role": "Lead Firmware & Systems Engineer",
+      "location": "Berkeley, CA",
+      "start_date": "September 2024",
+      "end_date": "Present",
+      "bullets": [
+        "Architected dual-core microcontroller firmware (ESP32-S3 / STM32) in modern C++ with FreeRTOS multitasking.",
+        "Implemented sensor fusion pipeline (EKF) combining 9-DOF IMU and Time-of-Flight sensors for high-speed localization.",
+        "Led team of 15 student engineers and managed sprint planning, code reviews, and hardware-in-the-loop validation."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Autonomous Navigation Rover",
+      "technologies": [
+        "C++",
+        "FreeRTOS",
+        "ESP32-S3",
+        "PID Control",
+        "PlatformIO"
+      ],
+      "date": "2025",
+      "bullets": [
+        "Designed closed-loop cascade PID controller for dual DC motors, eliminating drift across 50+ maze trials.",
+        "Programmed memory-efficient Modified Flood Fill and A* pathfinding algorithms in C++ under strict embedded SRAM limits."
+      ]
+    },
+    {
+      "name": "High-Performance Distributed Cache",
+      "technologies": [
+        "Go",
+        "gRPC",
+        "Raft Consensus",
+        "Docker",
+        "Redis"
+      ],
+      "date": "2025",
+      "bullets": [
+        "Built distributed in-memory key-value store implementing Raft consensus for fault-tolerant state replication.",
+        "Benchmarked throughput to 50,000 requests/sec with concurrent goroutine pooling and low-lock data structures."
+      ]
+    }
+  ],
+  "skill_pools": {
+    "Languages": [
+      "C",
+      "C++",
+      "Python",
+      "Go",
+      "Rust",
+      "JavaScript/TypeScript",
+      "SQL",
+      "Bash"
+    ],
+    "Frameworks & Tools": [
+      "Linux",
+      "Git",
+      "Docker",
+      "AWS",
+      "CMake",
+      "GDB",
+      "PlatformIO",
+      "FreeRTOS",
+      "Qt6"
+    ],
+    "Hardware & Protocols": [
+      "ESP32",
+      "STM32",
+      "ARM Cortex-M",
+      "I2C",
+      "SPI",
+      "UART",
+      "CAN Bus",
+      "Oscilloscopes"
+    ],
+    "Concepts & Systems": [
+      "Data Structures",
+      "Algorithms",
+      "Concurrency",
+      "Control Systems",
+      "PID",
+      "Distributed Systems"
+    ]
+  },
+  "tracks": {
+    "Software Engineering": {
+      "focus": "SWE / Backend / Distributed Systems / Algorithms",
+      "recommended_template": "software_swe.tex",
+      "priority_skills": [
+        "C++",
+        "Python",
+        "Go",
+        "Data Structures",
+        "Distributed Systems",
+        "Linux",
+        "Docker",
+        "Git"
+      ]
+    },
+    "Embedded Systems & Firmware": {
+      "focus": "Microcontrollers / RTOS / Device Drivers / Hardware Protocols",
+      "recommended_template": "embedded_firmware.tex",
+      "priority_skills": [
+        "C",
+        "C++",
+        "ESP32",
+        "STM32",
+        "FreeRTOS",
+        "I2C",
+        "SPI",
+        "UART",
+        "GDB",
+        "PlatformIO"
+      ]
+    },
+    "Robotics & Autonomous Systems": {
+      "focus": "Control Theory / Sensor Fusion / Kinematics / Navigation",
+      "recommended_template": "modern_clean.tex",
+      "priority_skills": [
+        "C++",
+        "PID Control",
+        "Sensor Fusion",
+        "Kinematics",
+        "A*",
+        "Python",
+        "MATLAB",
+        "ROS"
+      ]
+    },
+    "Hardware & Digital EE": {
+      "focus": "Digital Logic / PCB Design / FPGA / Signal Integrity",
+      "recommended_template": "hardware_ece.tex",
+      "priority_skills": [
+        "Verilog",
+        "FPGA",
+        "PCB Design",
+        "Altium",
+        "Digital Logic",
+        "Oscilloscope",
+        "I2C",
+        "SPI"
+      ]
+    }
+  }
+}

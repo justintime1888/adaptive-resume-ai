@@ -1,0 +1,36 @@
+{
+  "archetypes": {
+    "Software Engineering": {
+      "applied": 0,
+      "interviews": 0,
+      "offers": 0,
+      "keywords": {}
+    },
+    "Embedded Systems & Firmware": {
+      "applied": 0,
+      "interviews": 0,
+      "offers": 0,
+      "keywords": {}
+    },
+    "Robotics & Autonomous Systems": {
+      "applied": 0,
+      "interviews": 0,
+      "offers": 0,
+      "keywords": {}
+    },
+    "Hardware & Digital EE": {
+      "applied": 0,
+      "interviews": 0,
+      "offers": 0,
+      "keywords": {}
+    },
+    "Data Science & AI": {
+      "applied": 0,
+      "interviews": 0,
+      "offers": 0,
+      "keywords": {}
+    }
+  },
+  "top_converting_keywords": {},
+  "history": []
+}

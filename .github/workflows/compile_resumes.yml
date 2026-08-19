@@ -1,0 +1,37 @@
+name: Build & Validate LaTeX Resumes
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-resumes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Tectonic LaTeX Compiler
+        uses: WtfJoke/setup-tectonic@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile All Resumes
+        run: |
+          python3 scripts/compile_resumes.py --all
+
+      - name: Upload Compiled PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-resumes
+          path: |
+            resumes/master/*.pdf
+            resumes/tailored/PDF/*.pdf
