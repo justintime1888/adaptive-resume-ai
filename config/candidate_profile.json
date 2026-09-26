@@ -97,18 +97,18 @@
       ]
     },
     {
-      "name": "Weave - Automated SPICE Netlist Parser & Schematic Compiler",
+      "name": "4-Way Traffic Signal Controller",
       "technologies": [
-        "TypeScript",
-        "LTspice",
-        "ElkJS Graph Routing",
-        "Geometric Placement",
-        "EDA Tools"
+        "555 Timers",
+        "Digital Logic",
+        "Combinational Circuits",
+        "State Machine Timing",
+        "Oscilloscope"
       ],
-      "date": "2025",
+      "date": "2024",
       "bullets": [
-        "Built an automated compiler converting raw SPICE subcircuit netlists (.cir) into formatted LTspice schematics (.asc) using hierarchical graph theory and layered placement algorithms.",
-        "Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear circuit schematics automatically."
+        "Engineered a discrete hardware finite state controller using 555 timer astable clock generators, binary counters, and logic gates to sequence multi-phase traffic signal intervals.",
+        "Verified state transitions, propagation delays, and switching noise using benchtop oscilloscopes and digital multimeters, ensuring zero spurious transition states."
       ]
     },
     {

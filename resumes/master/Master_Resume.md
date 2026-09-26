@@ -77,10 +77,10 @@ Electrical and Computer Engineering student at **Rutgers University – New Brun
 - Won 2nd Place at Rowan Regional Competition; designed custom 4-layer ENIG PCB integrating 168 MHz ARM Cortex-M4 MCU, 5x optical ToF array over 400 kHz I²C, and dual DRV8847 motor drivers in an 84x76.5 mm chassis.
 - Programmed real-time Flood-Fill maze navigation algorithm running in <850 µs per cell transition with a 1 kHz cascaded PID control loop correcting gyro heading and velocity errors up to 4.2 m/s with zero integral windup.
 
-### ⚡ 2. Weave — Automated SPICE Netlist Parser & Schematic Compiler
-*TypeScript, LTspice, ElkJS Layered Graph Routing, Geometric Placement, EDA Tools* | [GitHub Repo](https://github.com/justintime1888/weave)
-- Built an automated compiler converting raw SPICE subcircuit netlists (`.cir`) into formatted LTspice schematics (`.asc`) using hierarchical graph theory and layered placement algorithms.
-- Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear, human-readable circuit schematics automatically.
+### ⚡ 2. 4-Way Traffic Signal Controller
+*555 Timers, Digital Logic, Combinational Circuits, State Machine Timing, Oscilloscope*
+- Engineered a discrete hardware finite state controller using 555 timer astable clock generators, binary counters, and logic gates to sequence multi-phase traffic signal intervals.
+- Verified state transitions, propagation delays, and switching noise using benchtop oscilloscopes and digital multimeters, ensuring zero spurious transition states.
 
 ### ⚡ 3. Analog Filter & Transient Signal Conditioning Analyzer
 *LTspice, MATLAB, Signal Integrity, Active Op-Amp Filters, Transient Analysis*

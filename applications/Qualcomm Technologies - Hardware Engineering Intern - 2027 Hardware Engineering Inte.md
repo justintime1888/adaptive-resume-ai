@@ -5,7 +5,7 @@ company: "Qualcomm Technologies"
 role: "Hardware Engineering Intern / 2027 Hardware Engineering Internship"
 status: "Applied"
 applied_date: "2026-09-26"
-audit_score: "97/100"
+audit_score: "96/100"
 audit_status: "APPROVED"
 latex_source: "resumes/tailored/LaTeX/Qualcomm_Technologies_Hardware_Engineering_Intern_2027_Hardware_Engineering_Intern_Resume.tex"
 pdf_path: "resumes/tailored/PDF/Qualcomm_Technologies_Hardware_Engineering_Intern_2027_Hardware_Engineering_Intern_Resume.pdf"
@@ -15,14 +15,14 @@ chatgpt_prompt: "applications/Qualcomm_Technologies_Hardware_Engineering_Intern_
 # 💼 Qualcomm Technologies — Hardware Engineering Intern / 2027 Hardware Engineering Internship
 
 > **Company:** `Qualcomm Technologies` | **Role:** `Hardware Engineering Intern / 2027 Hardware Engineering Internship` | **Status:** `Applied` | **Date:** `2026-09-26`
-> **Quality & Anti-Hallucination Score:** `🎯 97/100 [APPROVED]`
+> **Quality & Anti-Hallucination Score:** `🎯 96/100 [APPROVED]`
 
 ---
 
 ## 🛡️ Multi-Agent Verification Scorecard
 - **Authenticity (Anti-Hallucination):** `40/40`
 - **ATS Keyword Match:** `30/30 (100%)`
-- **Bullet Impact & Quantification:** `17/20 (Quant: 82%, Power Verbs: 94%)`
+- **Bullet Impact & Quantification:** `16/20 (Quant: 69%, Power Verbs: 100%)`
 - **Structure & Contact Hygiene:** `10/10`
 
 ---
@@ -46,24 +46,20 @@ TECHNICAL SKILLS
 • Tools & Platforms: Linux (Arch, Ubuntu, WSL2), Git, GitHub, CMake, LTspice, Make, GDB, Multisim
 
 EXPERIENCE
-Rutgers Micromouse — Lead Firmware & Hardware Engineer | Lead Controls Engineer | Co-President (September 2024 – Present)
+Rutgers Micromouse — Lead Firmware & Hardware Engineer / Co-President (September 2024 – Present)
 • Engineered real-time embedded **C/C++** firmware on **ESP32-S3** and **STM32** microcontrollers, utilizing **FreeRTOS** tasks to achieve deterministic **100 Hz** sensor polling and sub-millisecond motor control response.
-• Architected **dual-loop cascade PID** feedback controllers fusing **100 Hz IMU** angular velocity (**Bosch BNO055 9-DOF**) with lateral distance error from **VL53L1X Time-of-Flight** sensors, eliminating motor drift and achieving sub-millimeter maze centering.
-• Implemented memory-efficient **Modified Flood Fill** exploration and **A* pathfinding** algorithms in modern **C++** with bit-manipulated state matrices, reducing autonomous traversal solve time by **20%** under strict embedded SRAM limits.
-• Designed and routed custom **4-layer PCBs** in **Altium Designer** and **KiCad** with ENIG surface finish, integrating **STM32F405 / ESP32-S3**, **9-DOF IMU (Bosch BNO055)**, ToF arrays, and dual H-bridge motor drivers.
-• Characterized signal-to-noise ratios (SNR), bus rise times, and multi-slave arbitration across **400 kHz I2C** and **SPI** lines using mixed-signal oscilloscopes and logic analyzers, eliminating communication dropouts.
-• Scaled active club membership by **900% (40+ student engineers)** and secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication and component procurement.
+• Designed and routed custom **4-layer PCBs** in **Altium Designer** and **KiCad** with ENIG surface finish, integrating **STM32F405 / ESP32-S3**, **IMU (Bosch BNO055)**, ToF arrays, and dual H-bridge motor drivers.
+• Led a **40+ member** engineering organization as Co-President and secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication and component procurement.
 
 LPT-KEYPAK — Engineering Intern (June 2024 – August 2024)
 • Commissioned and validated automated high-speed packaging machinery for the **Bill & Melinda Gates Foundation**, boosting packaging line throughput by **30%** during pilot production qualification runs.
 • Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (**5-Whys, Pareto charts**), reducing production defect rates by **15%**.
 • Interpreted **20+ industrial electrical schematics** to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.
-• Validated sensor calibration curves, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters.
 
 VEX Robotics (Rutgers IEEE) — Lead Electrical Engineer (September 2024 – Present)
-• Architected communication and distributed power delivery architectures for competition robotics, engineering **RS-485 to UART to I2C** transceiver networks between VEX Brain and microcontrollers.
-• Designed schematics and selected components including differential transceivers, TVS surge diodes, and bus termination resistors to protect sensitive logic from inductive spikes, reducing communication bus error rates to **<0.1%** across high-vibration competition runs.
-• Executed hardware-in-the-loop (**HIL**) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet-loss rates **<0.1%** and guarantee deterministic bus arbitration.
+• Architected communication and distributed power delivery architectures for competition robotics, engineering **RS-485 to UART to I2C** transceiver networks between central VEX Brain and distributed microcontrollers.
+• Designed schematics and selected components including differential transceivers, **TVS surge diodes**, and bus termination resistors to protect sensitive logic from inductive spikes and signal reflections across high-vibration competition runs.
+• Executed hardware-in-the-loop (**HIL**) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet delivery and deterministic bus arbitration.
 
 PROJECTS
 Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist | C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847, VL6180X ToF, Cascaded PID (2025)

@@ -70,6 +70,7 @@ class ResumeRefinementEngine:
         for kws in job_kws.values():
             all_job_terms.update([k.lower() for k in kws])
 
+        projects = [p for p in self.profile.get("projects", []) if "weave" not in p.get("name", "").lower()]
         scored_projects = []
         for p in projects:
             relevance = 0
@@ -378,7 +379,12 @@ class ResumeRefinementEngine:
             for edu in self.profile.get("education", []):
                 edu["coursework"] = [c for c in edu.get("coursework", []) if "semiconductor" not in c.lower()]
 
-        # 4. Metric softening / removals
+        # 4. Weave project exclusion (copied github repo)
+        if "weave" in combined_lower:
+            actionable_directives.append("Excluded copied Weave project from resume projects")
+            self.profile["projects"] = [p for p in self.profile.get("projects", []) if "weave" not in p.get("name", "").lower()]
+
+        # 5. Metric softening / removals
         if "sub-millimeter" in combined_lower or "2 mm" in combined_lower or "centering" in combined_lower:
             actionable_directives.append("Softened maze centering claim to 2 mm lateral sensing accuracy")
             for exp in self.profile.get("experience", []):
