@@ -3,156 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adaptive Resume AI • Executive Studio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Adaptive Resume AI • Executive Career Studio</title>
+  
+  <!-- High-Precision Broadsheet & Aerospace Typography (Justin Parra Portfolio + FMI Industries) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-            mono: ['"SF Mono"', 'Menlo', 'Monaco', '"Cascadia Code"', 'Consolas', 'monospace']
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Manrope', 'Inter', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', '"Space Mono"', 'monospace']
           },
           colors: {
-            apple: {
-              bg: '#000000',
-              card: 'rgba(255, 255, 255, 0.035)',
-              cardHover: 'rgba(255, 255, 255, 0.055)',
+            aero: {
+              bg: '#08090D',
+              surface: '#0F1219',
+              surface2: '#161B26',
               border: 'rgba(255, 255, 255, 0.08)',
-              borderFocus: 'rgba(255, 255, 255, 0.28)',
-              textSubtle: '#86868b',
-              textMuted: '#6e6e73',
-              textPrimary: '#f5f5f7',
-              blue: '#0071e3',
-              blueHover: '#0077ed',
-              green: '#30d158',
-              orange: '#ff9f0a',
-              red: '#ff453a'
+              borderHover: 'rgba(255, 255, 255, 0.22)',
+              text: '#F3F4F6',
+              muted: '#717888',
+              subtle: '#9CA3AF',
+              amber: '#E9874F',
+              cyan: '#38BDF8',
+              hazard: '#C23B22',
+              green: '#22C55E'
             }
           }
         }
       }
     }
   </script>
+
   <style>
+    :root {
+      --color-bg: #08090D;
+      --color-surface: #0F1219;
+      --color-surface-2: #161B26;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-accent: #E9874F;
+      --color-cyan: #38BDF8;
+      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     body {
-      background-color: #000000;
-      color: #f5f5f7;
-      letter-spacing: -0.018em;
+      background-color: var(--color-bg);
+      color: #F3F4F6;
+      font-family: 'Manrope', sans-serif;
+      letter-spacing: -0.015em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
+
+    /* Tactile Film Grain Overlay (from justin-parra.vercel.app) */
+    .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: transparent url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.038"/></svg>') repeat;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Monospace Engineering Spec Labels */
+    .mono-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* High-Precision CAD Blueprint Crosshair Marks */
+    .card-corner-tl { position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 1.5px solid var(--color-accent); border-left: 1.5px solid var(--color-accent); }
+    .card-corner-tr { position: absolute; top: -1px; right: -1px; width: 8px; height: 8px; border-top: 1.5px solid var(--color-accent); border-right: 1.5px solid var(--color-accent); }
+    .card-corner-bl { position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px; border-bottom: 1.5px solid var(--color-accent); border-left: 1.5px solid var(--color-accent); }
+    .card-corner-br { position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-bottom: 1.5px solid var(--color-accent); border-right: 1.5px solid var(--color-accent); }
+
+    /* FMI Aerospace Card Container */
+    .fmi-card {
+      background: #0E1118;
+      border: 1px solid var(--color-border);
+      position: relative;
+      transition: border-color 0.3s var(--ease-premium), box-shadow 0.3s var(--ease-premium);
+    }
+    .fmi-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Input & Textarea Elements */
+    .aero-input {
+      background: rgba(14, 17, 24, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      color: #F3F4F6;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.22s var(--ease-premium);
     }
-    .glass-nav {
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    .aero-input:focus {
+      background: rgba(22, 27, 38, 0.95);
+      border-color: var(--color-accent);
+      outline: none;
+      box-shadow: 0 0 0 1px var(--color-accent);
+    }
+
+    /* Marquee Track */
+    .marquee-section {
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 18, 25, 0.6);
+      padding: 0.55rem 0;
+      white-space: nowrap;
     }
-    .apple-input {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    .marquee-track {
+      display: inline-flex;
+      animation: marqueeScroll 36s linear infinite;
     }
-    .apple-input:focus {
-      background: rgba(255, 255, 255, 0.045);
-      border-color: rgba(255, 255, 255, 0.32);
-      outline: none;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
-    .apple-pill-input {
+
+    /* Interactive Buttons */
+    .btn-aero-primary {
+      background: var(--color-accent);
+      color: #08090D;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s var(--ease-premium);
+    }
+    .btn-aero-primary:hover {
+      background: #F0A04B;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(233, 135, 79, 0.35);
+    }
+    .btn-aero-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-aero-outline {
       background: transparent;
-      outline: none;
-      transition: border-color 0.2s;
+      color: #F3F4F6;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.22s var(--ease-premium);
     }
-    .apple-button {
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    .btn-aero-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
     }
-    .apple-button:active {
-      transform: scale(0.98);
+
+    /* Diamond Indicator */
+    .diamond-dot {
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+      display: inline-block;
+      flex-shrink: 0;
     }
+
+    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-track { background: #08090D; }
     ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans selection:bg-[#0071e3] selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-[#E9874F] selection:text-black">
 
-  <!-- Minimalist Navigation Bar -->
-  <header class="glass-nav sticky top-0 z-50 px-6 sm:px-10 py-3.5 flex items-center justify-between">
-    <div class="flex items-center space-x-3.5">
-      <div class="h-7 w-7 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">
-        <i class="fa-solid fa-atom text-[13px]"></i>
-      </div>
-      <div class="flex items-center space-x-2">
-        <span class="text-sm font-semibold tracking-tight text-white">Adaptive Resume AI</span>
-        <span class="text-xs text-apple-textMuted">/</span>
-        <span class="text-xs text-apple-textSubtle font-medium">Executive Studio</span>
-      </div>
-    </div>
+  <!-- Tactile Film Grain Overlay -->
+  <div class="grain"></div>
 
-    <!-- Candidate Ground Truth & Direct Method 1 Launcher -->
-    <div class="flex items-center space-x-4">
-      <div class="hidden md:flex items-center space-x-2 text-xs text-apple-textSubtle">
-        <span class="h-1.5 w-1.5 rounded-full bg-apple-green animate-pulse"></span>
-        <span class="text-zinc-300 font-medium">Justin M. Parra</span>
-        <span class="text-zinc-600">·</span>
-        <span>Rutgers ECE</span>
-        <span class="text-zinc-600">·</span>
-        <span class="text-zinc-400">Expected May 2027</span>
+  <!-- Broadsheet Technical Header -->
+  <header class="sticky top-0 z-50 bg-[#08090D]/90 backdrop-blur-md border-b border-white/[0.08] px-6 sm:px-12 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo: Monogram with Broadsheet Serif & Monospace System Tag -->
+      <div class="flex items-center space-x-4">
+        <a href="#" class="flex items-center space-x-2.5 group">
+          <span class="font-display text-2xl font-bold tracking-tight text-white group-hover:text-aero-amber transition">AR<span class="text-aero-amber">.</span></span>
+          <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
+          <div class="flex flex-col">
+            <span class="mono-label text-[11px] text-white tracking-widest font-semibold">Adaptive Resume AI</span>
+            <span class="mono-label text-[9px] text-aero-muted tracking-wider">System v2.4 // Executive Studio</span>
+          </div>
+        </a>
       </div>
 
-      <a 
-        href="https://chatgpt.com" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        onclick="launchChatGPTDirect(event)" 
-        class="apple-button px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-medium text-white border border-white/[0.09] flex items-center space-x-1.5 cursor-pointer"
-        title="Open ChatGPT Plus in new tab with primed verification prompt"
-      >
-        <i class="fa-solid fa-sparkles text-amber-400 text-[11px]"></i>
-        <span>Method 1 (ChatGPT Plus)</span>
-        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-apple-textSubtle"></i>
-      </a>
+      <!-- Center / Right Telemetry Status & Method 1 Direct Opener -->
+      <div class="flex items-center space-x-4">
+        <!-- Ground Truth Verification Badge -->
+        <div class="hidden lg:flex items-center space-x-2.5 px-3 py-1 rounded-sm bg-white/[0.03] border border-white/[0.07] text-[11px] font-mono">
+          <span class="diamond-dot bg-emerald-400 animate-pulse"></span>
+          <span class="text-zinc-200 font-semibold">Justin M. Parra</span>
+          <span class="text-zinc-600">//</span>
+          <span class="text-zinc-400">Rutgers ECE</span>
+          <span class="text-zinc-600">//</span>
+          <span class="text-aero-amber" id="navGraduationDisplay">Expected Dec 2027</span>
+        </div>
+
+        <!-- Method 1: ChatGPT Plus Direct Opener -->
+        <a 
+          href="https://chatgpt.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          onclick="launchChatGPTDirect(event)" 
+          class="btn-aero-outline px-3.5 py-1.5 rounded-sm flex items-center space-x-2 text-[11px] cursor-pointer"
+          title="Open ChatGPT Plus in new tab with auto-copied adversarial audit prompt"
+        >
+          <span class="diamond-dot bg-amber-400"></span>
+          <span>Method 1 (ChatGPT Plus)</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-aero-muted"></i>
+        </a>
+      </div>
+
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-8 sm:py-10 flex flex-col space-y-8">
+  <!-- Marquee Technical Spec Ribbon (Broodsheet & Aerospace Engineering) -->
+  <div class="marquee-section">
+    <div class="marquee-track mono-label text-[10px] text-zinc-400">
+      <span>AUTONOMOUS ROBOTICS // 4-LAYER HIGH SPEED PCB // STM32F405 168MHz // FREERTOS MULTI-THREADING // ACTOR-CRITIC MULTI-AGENT ADAPTATION // ZERO-HALLUCINATION AUDITOR // TECTONIC XE-TEX 1-PAGE STANDARD // SIGNAL INTEGRITY & HIL VERIFICATION // VERILOG DV // CLOSED-LOOP CASCADE PID // SENSOR FUSION & FILTERING //&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;</span>
+      <span>AUTONOMOUS ROBOTICS // 4-LAYER HIGH SPEED PCB // STM32F405 168MHz // FREERTOS MULTI-THREADING // ACTOR-CRITIC MULTI-AGENT ADAPTATION // ZERO-HALLUCINATION AUDITOR // TECTONIC XE-TEX 1-PAGE STANDARD // SIGNAL INTEGRITY & HIL VERIFICATION // VERILOG DV // CLOSED-LOOP CASCADE PID // SENSOR FUSION & FILTERING //&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
 
-    <!-- Header Section -->
-    <div class="text-center max-w-2xl mx-auto space-y-2">
-      <h1 class="text-3xl sm:text-4xl font-semibold tracking-[-0.035em] text-white">
-        Precision Resume Tailoring.
-      </h1>
-      <p class="text-sm text-apple-textSubtle leading-relaxed">
-        Paste any target job description. The engine extracts the company and role title, enforces verified master ground truth, and refines the draft into an executive single-page Resumake-standard PDF.
-      </p>
+  <!-- Main Broadsheet Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14 flex flex-col space-y-12">
+
+    <!-- Hero Editorial Heading (FMI Industries & Justin Parra Broadsheet) -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/[0.08]">
+      <div class="max-w-2xl space-y-3">
+        <div class="flex items-center space-x-2">
+          <span class="mono-label text-aero-amber">Section 01 // Execution Pipeline</span>
+          <div class="h-px w-8 bg-aero-amber/40"></div>
+          <span class="mono-label text-zinc-500">Autonomous Adaptation</span>
+        </div>
+        <h1 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+          Precision Engineering <span class="italic font-serif font-normal text-aero-amber">in Extreme Markets.</span>
+        </h1>
+        <p class="text-sm text-zinc-400 font-sans leading-relaxed max-w-xl">
+          Zero-hallucination multi-agent resume synthesis. Anchored strictly to verified hardware credentials, optimized for ATS keyword dominance, and compiled into single-page Resumake-standard PDFs.
+        </p>
+      </div>
+
+      <div class="flex flex-col items-start md:items-end space-y-2 shrink-0">
+        <div class="flex items-center space-x-2 text-xs font-mono text-zinc-400">
+          <span class="diamond-dot bg-aero-amber"></span>
+          <span>STRICT 1-PAGE RESUMAKE SPEC</span>
+        </div>
+        <div class="text-[11px] font-mono text-zinc-500">
+          ENGINE: TECTONIC XE-TEX // 0.40 INCH MARGINS
+        </div>
+      </div>
     </div>
 
-    <!-- Main Workspace Card -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 relative flex flex-col space-y-5">
-      
-      <!-- Top Bar: Label & Quick Demos -->
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <label class="text-[11px] font-semibold tracking-wider uppercase text-apple-textSubtle">Job Description</label>
-        <div class="flex items-center space-x-2 text-xs">
-          <span class="text-apple-textMuted text-[11px]">Quick Demos:</span>
-          <button onclick="loadSample('qualcomm')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.08] hover:bg-white/[0.14] text-white font-medium border border-white/10">Qualcomm</button>
-          <button onclick="loadSample('apple')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">Apple</button>
-          <button onclick="loadSample('spacex')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">SpaceX</button>
-          <button onclick="loadSample('anduril')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">Anduril</button>
-          <span class="text-zinc-700">|</span>
-          <span id="wordCountBadge" class="text-apple-textMuted text-[11px]">0 words</span>
+    <!-- 01 / Primary Job Ingestion Workspace -->
+    <div class="fmi-card rounded-xl p-6 sm:p-8 relative">
+      <div class="card-corner-tl"></div>
+      <div class="card-corner-tr"></div>
+      <div class="card-corner-bl"></div>
+      <div class="card-corner-br"></div>
+
+      <!-- Top Header & Preset Switches -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-white/[0.06]">
+        <div class="flex items-center space-x-2.5">
+          <span class="mono-label text-white">01 // TARGET JOB DESCRIPTION</span>
+          <span class="text-zinc-600">/</span>
+          <span class="mono-label text-zinc-400" id="wordCountBadge">0 WORDS</span>
+        </div>
+
+        <!-- Quick Demo Presets -->
+        <div class="flex items-center space-x-2">
+          <span class="mono-label text-zinc-500 hidden sm:inline">PRESETS:</span>
+          <button onclick="loadSample('qualcomm')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Qualcomm</button>
+          <button onclick="loadSample('apple')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Apple</button>
+          <button onclick="loadSample('spacex')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">SpaceX</button>
+          <button onclick="loadSample('anduril')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Anduril</button>
         </div>
       </div>
 
@@ -162,76 +313,74 @@
         rows="6" 
         placeholder="Paste full job posting description here... Company name and role title will be detected automatically." 
         oninput="handleJobInput()"
-        class="apple-input w-full rounded-2xl p-4 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+        class="aero-input w-full rounded-md p-4 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
       ></textarea>
 
-      <!-- Auto-Extracted Metadata Strip (Smart Editable Pills) -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-[10px] text-apple-textMuted uppercase font-semibold tracking-wider">Detected:</span>
-          
-          <!-- Company Pill -->
-          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
-            <span class="text-apple-textSubtle text-[11px]">Company:</span>
-            <input type="text" id="companyInput" placeholder="Auto-detecting..." class="apple-pill-input text-white font-medium w-36 sm:w-44 text-xs">
-          </div>
-
-          <!-- Role Pill -->
-          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
-            <span class="text-apple-textSubtle text-[11px]">Role:</span>
-            <input type="text" id="roleInput" placeholder="Auto-detecting..." class="apple-pill-input text-white font-medium w-48 sm:w-64 text-xs">
-          </div>
-
-          <!-- Graduation Date Pill -->
-          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
-            <span class="text-apple-textSubtle text-[11px]">Graduation:</span>
-            <select id="gradDateSelect" onchange="handleGradDateChange()" class="bg-transparent text-white font-medium text-xs focus:outline-none cursor-pointer">
-              <option value="Expected December 2027" class="bg-black text-white">Expected Dec 2027 (Internship Track)</option>
-              <option value="Expected May 2027" class="bg-black text-white">Expected May 2027 (Standard Track)</option>
-              <option value="Expected August 2027" class="bg-black text-white">Expected Aug 2027 (Summer Track)</option>
-            </select>
-          </div>
-
-          <!-- ATS Keywords Pill -->
-          <div id="keywordsPill" class="hidden inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-blue-500/[0.1] border border-blue-500/[0.2] text-[11px] text-blue-400">
-            <i class="fa-solid fa-tag text-[9px]"></i>
-            <span id="keywordsCountText">0 keywords</span>
-          </div>
+      <!-- Auto-Detected Metadata Strip (Editable Aerospace Pills) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-4">
+        
+        <!-- Company Field -->
+        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
+          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Company Detected</label>
+          <input type="text" id="companyInput" placeholder="Auto-detecting..." class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none">
         </div>
 
-        <!-- Target Score Setting -->
-        <div class="flex items-center space-x-2 text-xs text-apple-textSubtle">
-          <span class="text-[11px]">Target Score:</span>
-          <select id="targetScoreSelect" class="bg-white/[0.05] border border-white/[0.08] text-white text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-white/30">
+        <!-- Role Title Field -->
+        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
+          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Role Title</label>
+          <input type="text" id="roleInput" placeholder="Auto-detecting..." class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none">
+        </div>
+
+        <!-- Graduation Date Field -->
+        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
+          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Target Timeline</label>
+          <select id="gradDateSelect" onchange="handleGradDateChange()" class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none cursor-pointer">
+            <option value="Expected December 2027" class="bg-[#0F1219] text-white">Expected Dec 2027 (Internship Track)</option>
+            <option value="Expected May 2027" class="bg-[#0F1219] text-white">Expected May 2027 (Standard Track)</option>
+            <option value="Expected August 2027" class="bg-[#0F1219] text-white">Expected Aug 2027 (Summer Track)</option>
+          </select>
+        </div>
+
+        <!-- Target Audit Score Field -->
+        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
+          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Adversarial Hurdle</label>
+          <select id="targetScoreSelect" class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none cursor-pointer">
             <option value="90" selected>90/100 (Executive Strict)</option>
             <option value="95">95/100 (Perfectionist)</option>
             <option value="85">85/100 (Standard)</option>
           </select>
         </div>
+
       </div>
 
       <!-- Eligibility & Timeline Banner (Dynamic) -->
-      <div id="eligibilityWarningPill" class="hidden p-3 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/[0.2] text-emerald-200 text-xs flex items-start space-x-2.5 transition">
-        <i class="fa-solid fa-circle-check text-emerald-400 text-sm mt-0.5 shrink-0"></i>
+      <div id="eligibilityWarningPill" class="mt-4 p-3.5 rounded-md bg-emerald-500/[0.08] border border-emerald-500/[0.25] text-emerald-200 text-xs flex items-start space-x-3 transition">
+        <span class="diamond-dot bg-emerald-400 mt-1"></span>
         <div class="space-y-0.5">
-          <div class="font-semibold text-emerald-300 text-[11px] uppercase tracking-wide">Eligibility Aligned (Internship Track)</div>
-          <div class="text-[11px] leading-relaxed text-emerald-100/90" id="eligibilityWarningText">
+          <div class="mono-label text-[10px] text-emerald-300">Eligibility Aligned (Internship Track)</div>
+          <div class="text-[11px] font-sans text-emerald-100/90" id="eligibilityWarningText">
             Target posting specifies graduation date of November 2027 or later. Your degree timeline for this internship is set to <strong>Expected December 2027</strong>, fully satisfying eligibility.
           </div>
         </div>
       </div>
 
-      <!-- Action Button Strip -->
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-3 border-t border-white/[0.06] gap-4">
-        <div class="flex items-center space-x-2 text-xs text-apple-textSubtle">
-          <i class="fa-solid fa-shield-halved text-apple-green text-sm"></i>
-          <span class="text-[11px]">Zero-Tolerance Anti-Hallucination Policy Active</span>
+      <!-- ATS Keywords Pill -->
+      <div id="keywordsPill" class="hidden mt-3 inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-sky-500/[0.1] border border-sky-500/[0.25] text-[11px] font-mono text-sky-300">
+        <span class="diamond-dot bg-sky-400"></span>
+        <span id="keywordsCountText">0 keywords</span>
+      </div>
+
+      <!-- Action Strip -->
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-5 mt-5 border-t border-white/[0.06] gap-4">
+        <div class="flex items-center space-x-2.5 text-xs text-zinc-400 font-mono">
+          <span class="diamond-dot bg-emerald-400"></span>
+          <span>Zero-Tolerance Anti-Hallucination Policy Active</span>
         </div>
 
         <button 
           id="runButton" 
           onclick="startRefinement()" 
-          class="apple-button w-full sm:w-auto px-7 py-2.5 rounded-full bg-white hover:bg-[#e5e5ea] text-black font-semibold text-xs tracking-normal shadow-lg shadow-white/10 flex items-center justify-center space-x-2 cursor-pointer"
+          class="btn-aero-primary w-full sm:w-auto px-8 py-3 rounded-sm flex items-center justify-center space-x-2.5 cursor-pointer shadow-lg"
         >
           <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
           <span>Refine & Verify Resume</span>
@@ -240,230 +389,247 @@
 
     </div>
 
-    <!-- Iterative Refinement Studio: ChatGPT Review & Personal Notes -->
-    <div class="glass-card rounded-3xl p-6 sm:p-7 relative flex flex-col space-y-4 border border-white/[0.09] transition-all" id="feedbackStudioCard">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-2.5">
-          <div class="h-6 w-6 rounded-full bg-gradient-to-tr from-amber-500 to-orange-400 text-black flex items-center justify-center text-xs font-bold shadow">
-            <i class="fa-solid fa-sparkles text-[10px]"></i>
-          </div>
+    <!-- 02 / Iterative Refinement Studio: ChatGPT Review & Personal Notes -->
+    <div class="fmi-card rounded-xl p-6 sm:p-8 relative" id="feedbackStudioCard">
+      <div class="card-corner-tl"></div>
+      <div class="card-corner-tr"></div>
+      <div class="card-corner-bl"></div>
+      <div class="card-corner-br"></div>
+
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.06]">
+        <div class="flex items-center space-x-3">
+          <span class="diamond-dot bg-aero-amber"></span>
           <div>
-            <h2 class="text-xs font-semibold text-white tracking-tight">Iterative Refinement Studio</h2>
-            <p class="text-[11px] text-apple-textSubtle">Paste ChatGPT Plus audit critiques, recruiter feedback, and personal directives in one place.</p>
+            <h2 class="mono-label text-white text-xs">02 // ITERATIVE REFINEMENT STUDIO</h2>
+            <p class="text-xs text-zinc-400 font-sans mt-0.5">Ingest external ChatGPT Plus adversarial critiques, recruiter notes, and personal ground-truth directives.</p>
           </div>
         </div>
-        <span class="text-[10px] text-apple-textMuted uppercase font-semibold tracking-wider">Method 1 Feedback Loop</span>
+        <span class="mono-label text-zinc-500 text-[10px] hidden md:inline">METHOD 1 FEEDBACK LOOP</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
         <!-- Left: ChatGPT Review Textarea -->
-        <div class="space-y-1.5">
+        <div class="space-y-2">
           <div class="flex items-center justify-between">
-            <label class="text-[11px] font-medium text-zinc-300 flex items-center space-x-1.5">
-              <i class="fa-solid fa-robot text-amber-400 text-[10px]"></i>
+            <label class="mono-label text-[11px] text-zinc-300 flex items-center space-x-2">
+              <span class="diamond-dot bg-amber-400"></span>
               <span>ChatGPT Plus Audit Critique</span>
             </label>
-            <button type="button" onclick="pasteFromClipboard('chatgptFeedbackInput')" class="text-[10px] text-apple-textSubtle hover:text-white transition">
-              <i class="fa-regular fa-paste"></i> Paste Clipboard
+            <button type="button" onclick="pasteFromClipboard('chatgptFeedbackInput')" class="mono-label text-[10px] text-aero-muted hover:text-white transition">
+              <i class="fa-regular fa-paste"></i> PASTE CLIPBOARD
             </button>
           </div>
           <textarea 
             id="chatgptFeedbackInput" 
-            rows="4" 
-            placeholder="Paste full response from ChatGPT Plus here (e.g. 'Final Score: 78/100, Claims to remove: sub-millimeter centering, 20% speedup, <0.1% error rates...')"
-            class="apple-input w-full rounded-2xl p-3.5 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+            rows="5" 
+            placeholder="Paste full critique from ChatGPT Plus here (e.g. 'Final Score: 78/100, Claims to remove: sub-millimeter maze centering, 20% traversal speedup, unbacked percentages...')"
+            class="aero-input w-full rounded-md p-3.5 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
           ></textarea>
         </div>
 
         <!-- Right: Personal Notes & Overrides -->
-        <div class="space-y-1.5">
+        <div class="space-y-2">
           <div class="flex items-center justify-between">
-            <label class="text-[11px] font-medium text-zinc-300 flex items-center space-x-1.5">
-              <i class="fa-solid fa-user-pen text-blue-400 text-[10px]"></i>
-              <span>Personal Directives & Ground-Truth Notes</span>
+            <label class="mono-label text-[11px] text-zinc-300 flex items-center space-x-2">
+              <span class="diamond-dot bg-sky-400"></span>
+              <span>Personal Directives & Ground-Truth</span>
             </label>
-            <span class="text-[10px] text-apple-textMuted">Optional</span>
+            <span class="mono-label text-[10px] text-zinc-500">OPTIONAL</span>
           </div>
           <textarea 
             id="personalNotesInput" 
-            rows="4" 
-            placeholder="e.g. 'I won 2nd place at Rowan, not 1st', 'Expected Dec 2027 graduation', 'Never took semiconductor class', 'Emphasize FreeRTOS and oscilloscope'..."
-            class="apple-input w-full rounded-2xl p-3.5 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+            rows="5" 
+            placeholder="e.g. 'Won 2nd place at Rowan, not 1st', 'Expected Dec 2027 graduation', 'Never took semiconductor class', 'Emphasize FreeRTOS and oscilloscope'..."
+            class="aero-input w-full rounded-md p-3.5 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
           ></textarea>
         </div>
       </div>
 
-      <!-- Quick Suggestion Chips -->
-      <div class="flex flex-wrap items-center gap-1.5 pt-1">
-        <span class="text-[10px] text-apple-textMuted font-medium uppercase tracking-wider mr-1">Quick Presets:</span>
-        <button type="button" onclick="addPersonalDirective('Won 2nd Place at Rowan Regional (not 1st)')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Rowan 2nd Place</button>
-        <button type="button" onclick="addPersonalDirective('Graduation date: Expected December 2027 (internship track)')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Dec 2027 Grad</button>
-        <button type="button" onclick="addPersonalDirective('Remove unverified metrics: <0.1%, 900%, 20% speedup, sub-millimeter')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Soften Unverified Metrics</button>
-        <button type="button" onclick="addPersonalDirective('Remove semiconductor devices course from coursework')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Exclude Semiconductor</button>
-        <button type="button" onclick="addPersonalDirective('Clean title to Lead Firmware & Hardware Engineer / Co-President')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Clean Title</button>
+      <!-- Quick Suggestion Presets -->
+      <div class="flex flex-wrap items-center gap-2 pt-3 mt-1">
+        <span class="mono-label text-[10px] text-zinc-500 mr-1">PRESETS:</span>
+        <button type="button" onclick="addPersonalDirective('Won 2nd Place at Rowan Regional (not 1st)')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Rowan 2nd Place</button>
+        <button type="button" onclick="addPersonalDirective('Graduation date: Expected December 2027 (internship track)')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Dec 2027 Grad</button>
+        <button type="button" onclick="addPersonalDirective('Remove unverified metrics: <0.1%, 900%, 20% speedup, sub-millimeter')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Soften Metrics</button>
+        <button type="button" onclick="addPersonalDirective('Remove semiconductor devices course from coursework')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Exclude Semiconductor</button>
+        <button type="button" onclick="addPersonalDirective('Clean title to Lead Firmware & Hardware Engineer / Co-President')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Clean Title</button>
       </div>
 
       <!-- Re-audit Action Button Strip -->
-      <div class="flex items-center justify-between pt-2 border-t border-white/[0.06]">
-        <div class="text-[11px] text-apple-textSubtle flex items-center space-x-1.5">
-          <i class="fa-solid fa-arrows-rotate text-apple-blue text-xs"></i>
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 mt-4 border-t border-white/[0.06] gap-3">
+        <div class="text-[11px] font-mono text-zinc-400 flex items-center space-x-2">
+          <i class="fa-solid fa-arrows-rotate text-aero-amber text-xs"></i>
           <span>Applies critique, scrubs ungrounded claims, synchronizes candidate truth, and re-compiles 1-page PDF.</span>
         </div>
-        <div class="flex items-center space-x-2">
-          <button type="button" onclick="clearFeedback()" class="px-3 py-1.5 rounded-full text-xs text-apple-textSubtle hover:text-white transition">Clear</button>
+        <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+          <button type="button" onclick="clearFeedback()" class="btn-aero-outline px-3.5 py-2 text-[10px] rounded-sm">CLEAR</button>
           <button 
             id="applyFeedbackBtn" 
             type="button" 
             onclick="applyFeedbackAndRefine()" 
-            class="apple-button px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs tracking-normal shadow-md flex items-center space-x-2 cursor-pointer"
+            class="btn-aero-primary px-6 py-2.5 rounded-sm flex items-center space-x-2 text-xs cursor-pointer shadow-md"
           >
             <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-            <span>Apply Feedback & Re-Audit</span>
+            <span>Apply Directives & Re-Audit</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Refinement Progress Tracker -->
-    <div id="pipelineTracker" class="glass-card rounded-2xl p-5 flex flex-col space-y-3.5">
-      <div class="flex items-center justify-between text-xs">
-        <span class="text-apple-textSubtle uppercase tracking-wider font-semibold text-[10px]">Multi-Agent Pipeline</span>
-        <span id="pipelineStatusText" class="text-apple-textMuted font-medium text-[11px]">Ready</span>
+    <!-- 03 / Multi-Agent Pipeline Telemetry -->
+    <div id="pipelineTracker" class="fmi-card rounded-xl p-5 sm:p-6 flex flex-col space-y-4">
+      <div class="flex items-center justify-between text-xs pb-3 border-b border-white/[0.06]">
+        <div class="flex items-center space-x-2">
+          <span class="diamond-dot bg-sky-400"></span>
+          <span class="mono-label text-white text-xs">03 // ACTOR-CRITIC DUAL-AGENT PIPELINE</span>
+        </div>
+        <span id="pipelineStatusText" class="mono-label text-aero-amber font-medium">READY</span>
       </div>
 
-      <!-- 4-Step Minimalist Status Cards -->
-      <div class="grid grid-cols-4 gap-2 text-center text-xs">
-        <div id="stepIngest" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
-          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotIngest"></span>
-          <span class="text-zinc-300 font-medium text-[11px]">1. Ingest & Detect</span>
+      <!-- 4-Step Telemetry Status Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+        <div id="stepIngest" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
+          <span class="diamond-dot bg-zinc-600 mb-2" id="dotIngest"></span>
+          <span class="mono-label text-zinc-300 text-[10px]">1. INGEST & DETECT</span>
+          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Parse role & keywords</span>
         </div>
-        <div id="stepGen" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
-          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotGen"></span>
-          <span class="text-zinc-300 font-medium text-[11px]">2. Generator Draft</span>
+        <div id="stepGen" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
+          <span class="diamond-dot bg-zinc-600 mb-2" id="dotGen"></span>
+          <span class="mono-label text-zinc-300 text-[10px]">2. GENERATOR DRAFT</span>
+          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Candidate profile anchored</span>
         </div>
-        <div id="stepAudit" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
-          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotAudit"></span>
-          <span class="text-zinc-300 font-medium text-[11px]">3. Auditor Verification</span>
+        <div id="stepAudit" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
+          <span class="diamond-dot bg-zinc-600 mb-2" id="dotAudit"></span>
+          <span class="mono-label text-zinc-300 text-[10px]">3. AUDITOR VERIFY</span>
+          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Zero-hallucination check</span>
         </div>
-        <div id="stepOutput" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
-          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotOutput"></span>
-          <span class="text-zinc-300 font-medium text-[11px]">4. Resumake PDF</span>
+        <div id="stepOutput" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
+          <span class="diamond-dot bg-zinc-600 mb-2" id="dotOutput"></span>
+          <span class="mono-label text-zinc-300 text-[10px]">4. TECTONIC COMPILE</span>
+          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Strict 1-page XeTeX PDF</span>
         </div>
       </div>
 
-      <!-- Terminal Log Stream -->
-      <div id="terminalStream" class="text-[11px] font-mono text-apple-textSubtle bg-black/60 rounded-xl p-3 border border-white/[0.04] max-h-20 overflow-y-auto leading-relaxed">
+      <!-- Telemetry Terminal Stream -->
+      <div id="terminalStream" class="text-[11px] font-mono text-zinc-400 bg-black/80 rounded-md p-4 border border-white/[0.06] max-h-28 overflow-y-auto leading-relaxed">
         <span>&gt; Ready. Paste a job description to trigger the refinement loop.</span>
       </div>
     </div>
 
-    <!-- Output Section (Scorecard + PDF / Plaintext Tabs) -->
+    <!-- 04 / Output Section (Scorecard + PDF / LaTeX / Plaintext Deliverables) -->
     <div id="resultsWrapper" class="space-y-6 hidden">
       
-      <!-- Minimalist Scorecard -->
-      <div class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col space-y-5">
-        <div class="flex items-center justify-between">
+      <!-- Scorecard -->
+      <div class="fmi-card rounded-xl p-6 sm:p-8 flex flex-col space-y-6">
+        <div class="card-corner-tl"></div>
+        <div class="card-corner-tr"></div>
+        <div class="card-corner-bl"></div>
+        <div class="card-corner-br"></div>
+
+        <div class="flex items-center justify-between pb-4 border-b border-white/[0.06]">
           <div class="flex items-center space-x-3">
-            <span class="text-[11px] uppercase tracking-wider font-semibold text-apple-textSubtle">Audit Scorecard</span>
-            <span id="verdictPill" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              Approved
+            <span class="diamond-dot bg-emerald-400"></span>
+            <span class="mono-label text-white text-xs">04 // AUDIT VERDICT & TELEMETRY SCORECARD</span>
+            <span id="verdictPill" class="px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+              APPROVED
             </span>
           </div>
-          <span id="dateStamp" class="text-xs text-apple-textSubtle"></span>
+          <span id="dateStamp" class="mono-label text-zinc-500 text-[10px]"></span>
         </div>
 
         <!-- Metric Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-            <span class="text-[11px] text-apple-textSubtle font-medium">Overall Rating</span>
-            <div class="text-2xl font-semibold text-white mt-1 tracking-tight">
-              <span id="overallScoreVal">--</span><span class="text-xs font-normal text-apple-textSubtle">/100</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
+            <span class="mono-label text-[10px] text-zinc-400">OVERALL RATING</span>
+            <div class="text-3xl font-display font-bold text-white mt-1">
+              <span id="overallScoreVal">--</span><span class="text-xs font-mono font-normal text-zinc-500">/100</span>
             </div>
+            <span class="text-[10px] text-zinc-500 font-mono">Composite Index</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-            <span class="text-[11px] text-apple-textSubtle font-medium">Authenticity</span>
-            <div id="authenticityVal" class="text-xl font-semibold text-emerald-400 mt-1 tracking-tight">40/40</div>
-            <span class="text-[10px] text-apple-textMuted">0 Hallucinations</span>
+          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
+            <span class="mono-label text-[10px] text-zinc-400">AUTHENTICITY</span>
+            <div id="authenticityVal" class="text-2xl font-mono font-bold text-emerald-400 mt-1">40/40</div>
+            <span class="text-[10px] text-zinc-500 font-mono">0 Hallucinations</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-            <span class="text-[11px] text-apple-textSubtle font-medium">ATS Match</span>
-            <div id="atsMatchVal" class="text-xl font-semibold text-blue-400 mt-1 tracking-tight">--</div>
-            <span class="text-[10px] text-apple-textMuted">Keyword Density</span>
+          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
+            <span class="mono-label text-[10px] text-zinc-400">ATS KEYWORD MATCH</span>
+            <div id="atsMatchVal" class="text-2xl font-mono font-bold text-sky-400 mt-1">--</div>
+            <span class="text-[10px] text-zinc-500 font-mono">Keyword Density</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-            <span class="text-[11px] text-apple-textSubtle font-medium">Metrics & Verbs</span>
-            <div id="metricsVal" class="text-xl font-semibold text-zinc-200 mt-1 tracking-tight">--</div>
-            <span class="text-[10px] text-apple-textMuted">Power Action Verbs</span>
+          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
+            <span class="mono-label text-[10px] text-zinc-400">METRICS & POWER VERBS</span>
+            <div id="metricsVal" class="text-2xl font-mono font-bold text-amber-400 mt-1">--</div>
+            <span class="text-[10px] text-zinc-500 font-mono">Action Outcomes</span>
           </div>
         </div>
 
         <!-- Hallucination Alert (if any) -->
-        <div id="hallucinationBox" class="p-4 rounded-2xl bg-rose-500/[0.08] border border-rose-500/[0.2] text-rose-300 text-xs hidden">
-          <div class="font-semibold mb-1 flex items-center space-x-1.5">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>Hallucination Detected:</span>
+        <div id="hallucinationBox" class="p-4 rounded-md bg-rose-500/[0.08] border border-rose-500/[0.25] text-rose-300 text-xs hidden">
+          <div class="mono-label text-rose-300 font-bold mb-1 flex items-center space-x-2">
+            <span class="diamond-dot bg-rose-500"></span>
+            <span>HALLUCINATION DETECTED:</span>
           </div>
-          <ul id="hallucinationUl" class="list-disc list-inside space-y-1 text-[11px] text-rose-200"></ul>
+          <ul id="hallucinationUl" class="list-disc list-inside space-y-1 font-mono text-[11px] text-rose-200"></ul>
         </div>
 
         <!-- Directives Applied Alert (Feedback Loop) -->
-        <div id="directivesBox" class="p-4 rounded-2xl bg-blue-500/[0.08] border border-blue-500/[0.2] text-blue-300 text-xs hidden">
-          <div class="font-semibold mb-1 flex items-center space-x-1.5">
-            <i class="fa-solid fa-circle-check text-blue-400"></i>
-            <span>Feedback Ingested & Resolved in this Cycle:</span>
+        <div id="directivesBox" class="p-4 rounded-md bg-sky-500/[0.08] border border-sky-500/[0.25] text-sky-300 text-xs hidden">
+          <div class="mono-label text-sky-300 font-bold mb-1 flex items-center space-x-2">
+            <span class="diamond-dot bg-sky-400"></span>
+            <span>FEEDBACK INGESTED & RESOLVED IN THIS CYCLE:</span>
           </div>
-          <ul id="directivesUl" class="list-disc list-inside space-y-1 text-[11px] text-blue-200"></ul>
+          <ul id="directivesUl" class="list-disc list-inside space-y-1 font-mono text-[11px] text-sky-200"></ul>
         </div>
       </div>
 
-      <!-- Segmented Control Tabs (macOS Style) -->
-      <div class="flex items-center justify-between">
-        <div class="inline-flex p-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-xs font-medium text-zinc-400">
-          <button onclick="setTab('pdf')" id="tabBtnPdf" class="px-4 py-1.5 rounded-full text-white bg-white/[0.12] transition">PDF Preview</button>
-          <button onclick="setTab('latex')" id="tabBtnLatex" class="px-4 py-1.5 rounded-full hover:text-white transition">LaTeX (Resumake)</button>
-          <button onclick="setTab('text')" id="tabBtnText" class="px-4 py-1.5 rounded-full hover:text-white transition">Plaintext</button>
-          <button onclick="setTab('chatgpt')" id="tabBtnChatgpt" class="px-4 py-1.5 rounded-full hover:text-white transition">ChatGPT Plus</button>
+      <!-- Segmented Control Tabs (FMI Technical Tabs) -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="inline-flex p-1 rounded-sm bg-[#0E1118] border border-white/[0.08] text-xs font-mono">
+          <button onclick="setTab('pdf')" id="tabBtnPdf" class="px-4 py-1.5 rounded-sm text-white bg-white/[0.12] transition mono-label text-[10px]">PDF PREVIEW</button>
+          <button onclick="setTab('latex')" id="tabBtnLatex" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">LATEX (RESUMAKE)</button>
+          <button onclick="setTab('text')" id="tabBtnText" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">PLAINTEXT</button>
+          <button onclick="setTab('chatgpt')" id="tabBtnChatgpt" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">CHATGPT PLUS</button>
         </div>
 
         <div class="flex items-center space-x-2">
-          <button onclick="copyCurrentTabContent()" id="copyTabBtn" class="apple-button px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-medium text-white border border-white/[0.08] flex items-center space-x-1.5 cursor-pointer">
+          <button onclick="copyCurrentTabContent()" id="copyTabBtn" class="btn-aero-outline px-3.5 py-1.5 rounded-sm flex items-center space-x-1.5 text-[11px] cursor-pointer">
             <i class="fa-regular fa-copy text-[11px]"></i>
-            <span id="copyTabLabel">Copy</span>
+            <span id="copyTabLabel">COPY</span>
           </button>
-          <a id="downloadBtn" href="#" target="_blank" class="apple-button px-3.5 py-1.5 rounded-full bg-white text-black hover:bg-[#e5e5ea] text-xs font-semibold flex items-center space-x-1.5 cursor-pointer">
+          <a id="downloadBtn" href="#" target="_blank" class="btn-aero-primary px-4 py-1.5 rounded-sm flex items-center space-x-1.5 text-xs font-bold cursor-pointer">
             <i class="fa-solid fa-arrow-down text-[11px]"></i>
-            <span>Download PDF</span>
+            <span>DOWNLOAD PDF</span>
           </a>
         </div>
       </div>
 
       <!-- Tab Content Area -->
-      <div class="glass-card rounded-3xl overflow-hidden min-h-[560px] flex flex-col p-1">
+      <div class="fmi-card rounded-xl overflow-hidden min-h-[580px] flex flex-col p-1.5">
         <!-- PDF Tab -->
-        <div id="tabPdf" class="w-full h-[620px] rounded-2xl overflow-hidden bg-black">
+        <div id="tabPdf" class="w-full h-[640px] rounded-lg overflow-hidden bg-black">
           <iframe id="pdfIframe" class="w-full h-full border-0" src="about:blank"></iframe>
         </div>
 
         <!-- LaTeX Tab -->
         <div id="tabLatex" class="hidden p-6 flex-1 flex flex-col">
-          <div class="text-[11px] text-apple-textSubtle mb-2">Jake's Resume / Resumake Template 1 Standard • XeTeX / Tectonic Compilable</div>
-          <pre id="latexPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/40 p-4 rounded-xl border border-white/5"></pre>
+          <div class="mono-label text-[10px] text-zinc-400 mb-2">Jake's Resume / Resumake Template 1 Standard • XeTeX / Tectonic Compilable</div>
+          <pre id="latexPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/60 p-4 rounded-md border border-white/5"></pre>
         </div>
 
         <!-- Plaintext Tab -->
         <div id="tabText" class="hidden p-6 flex-1 flex flex-col">
-          <pre id="plainTextPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/40 p-4 rounded-xl border border-white/5"></pre>
+          <pre id="plainTextPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/60 p-4 rounded-md border border-white/5"></pre>
         </div>
 
         <!-- ChatGPT Plus Tab -->
         <div id="tabChatgpt" class="hidden p-6 flex-1 flex flex-col space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] gap-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-md bg-white/[0.03] border border-white/[0.08] gap-3">
             <div>
-              <div class="text-xs font-semibold text-white flex items-center space-x-1.5">
-                <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
-                <span>Method 1: Final Adversarial Review (ChatGPT Plus)</span>
+              <div class="mono-label text-xs text-white flex items-center space-x-2">
+                <span class="diamond-dot bg-amber-400"></span>
+                <span>METHOD 1: ADVERSARIAL VERIFICATION PROMPT (CHATGPT PLUS)</span>
               </div>
-              <div class="text-[11px] text-apple-textSubtle mt-1 leading-relaxed">
+              <div class="text-xs text-zinc-400 font-sans mt-1 leading-relaxed">
                 Clicking the button opens ChatGPT in a new tab and copies the complete adversarial audit prompt directly to your clipboard. Simply press <strong>Ctrl+V</strong>.
               </div>
             </div>
@@ -472,31 +638,31 @@
               target="_blank" 
               rel="noopener noreferrer" 
               onclick="launchChatGPTDirect(event)" 
-              class="apple-button px-4 py-2 rounded-full bg-white text-black hover:bg-[#e5e5ea] text-xs font-semibold flex items-center justify-center space-x-1.5 cursor-pointer shrink-0"
+              class="btn-aero-primary px-5 py-2.5 rounded-sm flex items-center justify-center space-x-2 text-xs font-bold cursor-pointer shrink-0"
             >
-              <span>Launch ChatGPT Plus</span>
+              <span>LAUNCH CHATGPT PLUS</span>
               <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
           </div>
-          <pre id="chatgptPre" class="flex-1 w-full p-4 rounded-2xl bg-black/60 border border-white/[0.04] font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all"></pre>
+          <pre id="chatgptPre" class="flex-1 w-full p-4 rounded-md bg-black/80 border border-white/[0.06] font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all"></pre>
 
-          <!-- Next Step Iterative Callout -->
-          <div class="p-4 rounded-2xl bg-amber-500/[0.08] border border-amber-500/[0.2] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <!-- Return Loop Callout -->
+          <div class="p-4 rounded-md bg-amber-500/[0.08] border border-amber-500/[0.25] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-0.5">
-              <div class="text-xs font-semibold text-amber-300 flex items-center space-x-1.5">
-                <i class="fa-solid fa-sparkles text-[11px]"></i>
-                <span>Got your ChatGPT audit feedback?</span>
+              <div class="mono-label text-xs text-amber-300 flex items-center space-x-2">
+                <span class="diamond-dot bg-amber-400"></span>
+                <span>RECEIVED CHATGPT AUDIT FEEDBACK?</span>
               </div>
-              <div class="text-[11px] text-amber-100/80">
+              <div class="text-xs text-amber-100/80 font-sans">
                 Paste the review into the Iterative Refinement Studio above to automatically incorporate all edits and re-compile.
               </div>
             </div>
             <button 
               type="button" 
               onclick="scrollToFeedbackStudio()" 
-              class="apple-button px-4 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs flex items-center justify-center space-x-1.5 shrink-0 cursor-pointer"
+              class="btn-aero-primary px-4 py-2 rounded-sm text-xs flex items-center justify-center space-x-1.5 shrink-0 cursor-pointer"
             >
-              <span>Paste Feedback Above</span>
+              <span>PASTE FEEDBACK ABOVE</span>
               <i class="fa-solid fa-arrow-up text-[10px]"></i>
             </button>
           </div>
@@ -505,23 +671,26 @@
 
     </div>
 
-    <!-- Recent Resumes Minimal Drawer -->
-    <div class="pt-6 border-t border-white/[0.06] flex flex-col space-y-3">
-      <div class="flex items-center justify-between text-xs text-apple-textSubtle">
-        <span class="uppercase tracking-wider font-semibold text-[10px]">Recent Tailored Applications</span>
-        <button onclick="loadRecent()" class="hover:text-white transition text-[11px]">Refresh</button>
+    <!-- 05 / Recent Tailored Applications Drawer -->
+    <div class="pt-6 border-t border-white/[0.08] flex flex-col space-y-4">
+      <div class="flex items-center justify-between text-xs">
+        <div class="flex items-center space-x-2">
+          <span class="diamond-dot bg-zinc-500"></span>
+          <span class="mono-label text-zinc-400">05 // RECENT FLIGHT RECORDS</span>
+        </div>
+        <button onclick="loadRecent()" class="mono-label text-zinc-500 hover:text-white transition">REFRESH</button>
       </div>
-      <div id="recentContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div id="recentContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
         <!-- Injected via JS -->
       </div>
     </div>
 
   </main>
 
-  <!-- Floating Dynamic Island Toast -->
-  <div id="appleToast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2.5 rounded-full bg-white text-black text-xs font-medium shadow-2xl backdrop-blur-xl flex items-center space-x-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-3">
-    <span class="h-2 w-2 rounded-full bg-apple-green"></span>
-    <span id="toastMessage">Prompt Copied!</span>
+  <!-- Technical Toast Notification -->
+  <div id="appleToast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2.5 rounded-sm bg-[#161B26] border border-aero-amber text-white text-xs font-mono shadow-2xl backdrop-blur-xl flex items-center space-x-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-3">
+    <span class="diamond-dot bg-aero-amber"></span>
+    <span id="toastMessage">PROMPT COPIED</span>
   </div>
 
   <script>
@@ -615,7 +784,6 @@ Responsibilities:
         'Intel', 'AMD', 'Boeing', 'Stripe', 'Boston Dynamics', 'Skydio', 'Ford', 'Rivian', 'Palantir'
       ];
 
-      // 1. Check known tech companies in first chunk
       for (const c of known) {
         const re = new RegExp('\\b' + c + "(?:'s|’s)?\\b", 'i');
         if (re.test(firstChunk)) {
@@ -624,7 +792,6 @@ Responsibilities:
         }
       }
 
-      // 2. Explicit headers
       const compM = textClean.match(/^(?:Company|Employer|Organization):\s*([^\n\r,]+)/im);
       if (compM) {
         const cand = compM[1].trim();
@@ -638,7 +805,6 @@ Responsibilities:
         role = roleM[1].trim();
       }
 
-      // 3. First lines format e.g. "Company - Role" or "Role at Company"
       const lines = textClean.split('\n').map(l => l.trim()).filter(l => l);
       for (const line of lines.slice(0, 6)) {
         const cleanL = line.replace(/^[#*_\s-]+|[#*_\s-]+$/g, '').trim();
@@ -668,7 +834,6 @@ Responsibilities:
           }
         }
 
-        // Standalone line check for role title
         if (!role && cleanL.length < 85) {
           if (/\b(?:Hardware|Software|Firmware|Embedded|Electrical|Systems|Design|Robotics|Digital|SoC)?\s*(?:Engineering\s+Intern(?:ship)?|Engineer|Intern(?:ship)?|Developer|Architect)\b/i.test(cleanL)) {
             if (!['requirements', 'qualifications', 'responsibilities', 'about', 'verification', 'description', 'summary', 'seeking', 'looking for', 'hiring', 'welcome'].some(s => cleanL.toLowerCase().includes(s))) {
@@ -678,7 +843,6 @@ Responsibilities:
         }
       }
 
-      // 4. Pattern: [Company] ('s ...)? is seeking/looking for/hiring
       if (!company) {
         const seekingM = textClean.match(/([A-Z][A-Za-z0-9&.'’\s]{1,30}?)(?:'s|’s)?\s+(?:Hardware\s+|Software\s+|Engineering\s+)?(?:organization|team|group|division|corp)?\s*is\s+(?:seeking|looking for|hiring)/i);
         if (seekingM) {
@@ -689,7 +853,6 @@ Responsibilities:
         }
       }
 
-      // 5. Search for compound role titles anywhere in text
       if (!role) {
         const titleWords = '(?:202[0-9]|Hardware|Software|Firmware|Embedded|Electrical|Systems|Digital|Design|Robotics|Controls|SoC|Avionics|Lead|Senior|Staff|Principal|Junior|Graduate)';
         const fullPat = new RegExp(`\\b(${titleWords}(?:\\s+${titleWords})*\\s+(?:Engineering\\s+)?(?:Intern(?:ship)?|Engineer)(?:\\s*[/|–-]\\s*${titleWords}(?:\\s+${titleWords})*\\s+(?:Engineering\\s+)?(?:Intern(?:ship)?|Engineer))?)\\b`, 'i');
@@ -699,7 +862,6 @@ Responsibilities:
         }
       }
 
-      // Cleanup
       if (company) {
         company = company.replace(/['’]s$/i, '');
         if (company.toLowerCase() === 'qualcomm' || company.toLowerCase() === 'qualcomm inc') {
@@ -720,7 +882,6 @@ Responsibilities:
         role = role.replace(/^[\s-—|:,#*]+|[\s-—|:,#*]+$/g, '');
       }
 
-      // Blacklist fallback
       if (!company || company.toLowerCase() === 'engineering organization') company = 'Qualcomm Technologies';
       if (!role) role = 'Hardware Engineering Intern';
 
@@ -730,9 +891,8 @@ Responsibilities:
     function handleJobInput() {
       const text = document.getElementById('jobTextInput').value;
       const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-      document.getElementById('wordCountBadge').innerText = `${words} words`;
+      document.getElementById('wordCountBadge').innerText = `${words} WORDS`;
 
-      // Instant Regex Extraction
       const extracted = localExtractMetadata(text);
       if (extracted.company && !document.getElementById('companyInput').matches(':focus')) {
         document.getElementById('companyInput').value = extracted.company;
@@ -741,19 +901,20 @@ Responsibilities:
         document.getElementById('roleInput').value = extracted.role;
       }
 
-      // Check Graduation Date Alignment
       const textLower = text.toLowerCase();
       const conflictPill = document.getElementById('eligibilityWarningPill');
       const gradSelect = document.getElementById('gradDateSelect');
+      const navGrad = document.getElementById('navGraduationDisplay');
       if (textLower.includes('november 2027') || textLower.includes('2028 or later') || textLower.includes('november 2027 or later') || extracted.company.toLowerCase().includes('qualcomm')) {
         if (gradSelect) gradSelect.value = "Expected December 2027";
+        if (navGrad) navGrad.innerText = "Expected Dec 2027";
         if (conflictPill) conflictPill.classList.remove('hidden');
       } else {
         if (gradSelect) gradSelect.value = "Expected May 2027";
+        if (navGrad) navGrad.innerText = "Expected May 2027";
         if (conflictPill) conflictPill.classList.add('hidden');
       }
 
-      // Debounce call to backend /api/parse-job
       clearTimeout(parseDebounce);
       parseDebounce = setTimeout(async () => {
         if (!text.trim()) return;
@@ -773,7 +934,7 @@ Responsibilities:
           if (data.keywords && data.keywords.length > 0) {
             const pill = document.getElementById('keywordsPill');
             pill.classList.remove('hidden');
-            document.getElementById('keywordsCountText').innerText = `${data.keywords.length} ATS Keywords`;
+            document.getElementById('keywordsCountText').innerText = `${data.keywords.length} ATS KEYWORDS`;
           }
         } catch (e) {}
       }, 300);
@@ -782,6 +943,8 @@ Responsibilities:
     function handleGradDateChange() {
       const val = document.getElementById('gradDateSelect').value;
       const conflictPill = document.getElementById('eligibilityWarningPill');
+      const navGrad = document.getElementById('navGraduationDisplay');
+      if (navGrad) navGrad.innerText = val.replace('Expected ', '');
       if (val === 'Expected December 2027') {
         conflictPill.classList.remove('hidden');
       } else {
@@ -793,16 +956,16 @@ Responsibilities:
       const steps = ['stepIngest', 'stepGen', 'stepAudit', 'stepOutput'];
       steps.forEach(s => {
         const el = document.getElementById(s);
-        const dot = el.querySelector('span');
+        const dot = el.querySelector('.diamond-dot');
         if (s === stepId) {
-          el.className = "p-2.5 rounded-xl bg-white/[0.08] border border-white/[0.2] transition-all flex flex-col items-center shadow-lg";
-          dot.className = "h-2 w-2 rounded-full bg-apple-blue mb-1 animate-pulse";
+          el.className = "p-3 rounded-md bg-white/[0.08] border border-aero-amber transition-all flex flex-col items-center text-center shadow-lg";
+          if (dot) dot.className = "diamond-dot bg-aero-amber mb-2 animate-ping";
         } else {
-          el.className = "p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center";
-          dot.className = "h-2 w-2 rounded-full bg-zinc-600 mb-1";
+          el.className = "p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center";
+          if (dot) dot.className = "diamond-dot bg-zinc-600 mb-2";
         }
       });
-      document.getElementById('pipelineStatusText').innerText = stepId.replace('step', '');
+      document.getElementById('pipelineStatusText').innerText = stepId.replace('step', '').toUpperCase();
     }
 
     async function startRefinement() {
@@ -825,17 +988,17 @@ Responsibilities:
 
       const btn = document.getElementById('runButton');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Refining Resume...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>REFINING RESUME...</span>`;
 
       setPipelineStep('stepIngest');
-      logStream(`Ingesting posting for ${company} — ${role} (Graduation: ${gradDate})...`);
+      logStream(`Ingesting target parameters for ${company} — ${role} (Graduation: ${gradDate})...`);
 
       try {
         setPipelineStep('stepGen');
-        logStream(`Generator drafting candidate-anchored resume draft with ${gradDate}...`);
+        logStream(`Generator agent drafting candidate-anchored Resumake specification...`);
 
         setPipelineStep('stepAudit');
-        logStream("Auditor executing adversarial verification (Zero Hallucination check)...");
+        logStream("Auditor agent executing adversarial fact verification (Zero Hallucination check)...");
 
         const response = await fetch('/api/refine', {
           method: 'POST',
@@ -857,14 +1020,14 @@ Responsibilities:
         logStream(`Audit complete! Score: ${data.score}/100 [${data.status}]. 1-Page PDF compiled via Tectonic.`);
 
         renderResults(data);
-        showToast("Resume Verified & Compiled! ✨");
+        showToast("RESUME VERIFIED & COMPILED");
         loadRecent();
       } catch (err) {
         logStream(`Error: ${err.message}`);
         alert(`Error: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Refine & Verify Resume</span>`;
+        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>REFINE & VERIFY RESUME</span>`;
       }
     }
 
@@ -874,9 +1037,8 @@ Responsibilities:
       wrapper.classList.remove('hidden');
       wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      // Scorecard Values
       document.getElementById('overallScoreVal').innerText = data.score;
-      document.getElementById('dateStamp').innerText = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      document.getElementById('dateStamp').innerText = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
 
       const report = data.report || {};
       const breakdown = report.breakdown || {};
@@ -887,14 +1049,13 @@ Responsibilities:
 
       const verdict = document.getElementById('verdictPill');
       if (data.score >= 90) {
-        verdict.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
-        verdict.innerText = "Approved (90+ score)";
+        verdict.className = "px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25";
+        verdict.innerText = "APPROVED (90+ SCORE)";
       } else {
-        verdict.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20";
-        verdict.innerText = "Needs Review";
+        verdict.className = "px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25";
+        verdict.innerText = "NEEDS REVISION";
       }
 
-      // Feedback Directives Applied
       const dirBox = document.getElementById('directivesBox');
       const dirUl = document.getElementById('directivesUl');
       if (data.directives_applied && data.directives_applied.length > 0 && dirBox && dirUl) {
@@ -904,12 +1065,10 @@ Responsibilities:
         dirBox.classList.add('hidden');
       }
 
-      // PDF iframe
       const pdfUrl = `/pdf/${encodeURIComponent(data.pdf_name)}?t=${Date.now()}`;
       document.getElementById('pdfIframe').src = pdfUrl;
       document.getElementById('downloadBtn').href = pdfUrl;
 
-      // Tabs content
       document.getElementById('plainTextPre').innerText = data.resume_text || '';
       document.getElementById('latexPre').innerText = data.tex_content || '';
       document.getElementById('chatgptPre').innerText = data.chatgpt_prompt || '';
@@ -924,10 +1083,10 @@ Responsibilities:
         const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
         const content = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`);
         if (t === tab) {
-          btn.className = "px-4 py-1.5 rounded-full text-white bg-white/[0.12] transition";
+          btn.className = "px-4 py-1.5 rounded-sm text-white bg-white/[0.12] transition mono-label text-[10px]";
           content.classList.remove('hidden');
         } else {
-          btn.className = "px-4 py-1.5 rounded-full hover:text-white transition";
+          btn.className = "px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400";
           content.classList.add('hidden');
         }
       });
@@ -943,8 +1102,8 @@ Responsibilities:
       if (text) {
         await navigator.clipboard.writeText(text);
         const lbl = document.getElementById('copyTabLabel');
-        lbl.innerText = "Copied! ✨";
-        setTimeout(() => lbl.innerText = "Copy", 2000);
+        lbl.innerText = "COPIED";
+        setTimeout(() => lbl.innerText = "COPY", 2000);
       }
     }
 
@@ -955,14 +1114,12 @@ Responsibilities:
       return "";
     }
 
-    // Direct synchronous ChatGPT Plus opener (prevents browser popup blocker)
     function launchChatGPTDirect(event) {
       const promptText = getLatestPromptText();
       if (promptText && navigator.clipboard) {
         navigator.clipboard.writeText(promptText).catch(() => {});
       }
-      showToast("Audit Prompt Copied! Opening ChatGPT Plus...");
-      // Let the native <a> click navigate without interference
+      showToast("PROMPT COPIED // OPENING CHATGPT");
     }
 
     async function pasteFromClipboard(targetId) {
@@ -970,15 +1127,15 @@ Responsibilities:
         const text = await navigator.clipboard.readText();
         if (text) {
           document.getElementById(targetId).value = text;
-          showToast("Clipboard Pasted! 📋");
+          showToast("CLIPBOARD PASTED");
         } else {
-          showToast("Clipboard is empty");
+          showToast("CLIPBOARD EMPTY");
         }
       } catch (e) {
-        const text = prompt("Paste your ChatGPT critique or notes here:");
+        const text = prompt("Paste your ChatGPT critique or directives here:");
         if (text) {
           document.getElementById(targetId).value = text;
-          showToast("Pasted! 📋");
+          showToast("PASTED");
         }
       }
     }
@@ -991,21 +1148,21 @@ Responsibilities:
       } else if (!cur.includes(text)) {
         input.value = `${cur}\n• ${text}`;
       }
-      showToast("Directive Added! ✨");
+      showToast("DIRECTIVE APPENDED");
     }
 
     function clearFeedback() {
       document.getElementById('chatgptFeedbackInput').value = "";
       document.getElementById('personalNotesInput').value = "";
-      showToast("Feedback cleared");
+      showToast("FEEDBACK CLEARED");
     }
 
     function scrollToFeedbackStudio() {
       const card = document.getElementById('feedbackStudioCard');
       if (card) {
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        card.classList.add('ring-2', 'ring-amber-400/40');
-        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-400/40'), 2000);
+        card.classList.add('ring-1', 'ring-aero-amber');
+        setTimeout(() => card.classList.remove('ring-1', 'ring-aero-amber'), 2500);
         const fbInput = document.getElementById('chatgptFeedbackInput');
         if (fbInput) fbInput.focus();
       }
@@ -1040,10 +1197,10 @@ Responsibilities:
 
       const btn = document.getElementById('applyFeedbackBtn');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Applying Feedback...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>APPLYING CRITIQUE...</span>`;
 
       setPipelineStep('stepIngest');
-      logStream(`[Feedback Loop] Ingesting ChatGPT review & personal notes for ${company}...`);
+      logStream(`[Feedback Loop] Ingesting critique & directives for ${company}...`);
 
       try {
         setPipelineStep('stepGen');
@@ -1077,14 +1234,14 @@ Responsibilities:
         logStream(`Audit Cycle complete! Score: ${data.score}/100 [${data.status}]. 1-Page PDF updated.`);
 
         renderResults(data);
-        showToast("Feedback Applied & Resume Re-Audited! ✨");
+        showToast("FEEDBACK APPLIED // RE-AUDITED");
         loadRecent();
       } catch (err) {
         logStream(`Error: ${err.message}`);
         alert(`Error: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Apply Feedback & Re-Audit</span>`;
+        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Apply Directives & Re-Audit</span>`;
       }
     }
 
@@ -1094,18 +1251,18 @@ Responsibilities:
         const apps = await res.json();
         const container = document.getElementById('recentContainer');
         if (!apps.length) {
-          container.innerHTML = `<div class="text-zinc-600 text-xs italic py-1">No past applications yet.</div>`;
+          container.innerHTML = `<div class="text-zinc-500 font-mono text-xs italic py-1">No past applications logged.</div>`;
           return;
         }
 
         container.innerHTML = apps.slice(0, 3).map(a => `
-          <div class="p-3.5 rounded-2xl bg-white/[0.025] border border-white/[0.06] flex items-center justify-between hover:border-white/[0.14] transition">
+          <div class="p-3.5 rounded-md bg-white/[0.025] border border-white/[0.06] flex items-center justify-between hover:border-white/[0.18] transition">
             <div>
-              <div class="font-medium text-xs text-white">${a.company}</div>
-              <div class="text-[11px] text-apple-textSubtle">${a.role}</div>
+              <div class="font-bold text-xs text-white font-mono">${a.company}</div>
+              <div class="text-[11px] text-zinc-400 font-sans">${a.role}</div>
             </div>
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-zinc-300">${a.score || '90+'}</span>
+              <span class="px-2 py-0.5 rounded-sm mono-label text-[10px] bg-white/[0.06] text-zinc-300">${a.score || '90+'}</span>
               ${a.pdf_name ? `<a href="/pdf/${encodeURIComponent(a.pdf_name)}" target="_blank" class="text-zinc-400 hover:text-white transition text-xs" title="Open PDF"><i class="fa-solid fa-file-pdf"></i></a>` : ''}
             </div>
           </div>
@@ -1113,10 +1270,8 @@ Responsibilities:
       } catch (e) {}
     }
 
-    // Init
     window.addEventListener('DOMContentLoaded', () => {
       loadRecent();
-      // Preload Qualcomm as default showcase
       loadSample('qualcomm');
     });
   </script>
