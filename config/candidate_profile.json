@@ -6,7 +6,7 @@
     "email": "jstnp18@gmail.com",
     "linkedin": "linkedin.com/in/justin-parra-/",
     "github": "github.com/justintime1888",
-    "portfolio": "justin-parra-vercel.vercel.app"
+    "portfolio": "justin-parra.vercel.app"
   },
   "education": [
     {
@@ -15,7 +15,7 @@
       "degree": "Bachelor of Science in Electrical and Computer Engineering (ECE)",
       "graduation_date": "Expected May 2027",
       "graduation_date_internship": "Expected December 2027",
-      "graduation_timeline_notes": "Completing a selective engineering internship/co-op extends degree timeline to December 2027; standard full-time trajectory completes May/August 2027.",
+      "graduation_timeline_notes": "Completing a selective engineering internship/co-op extends degree timeline to December 2027; standard full-time trajectory completes May 2027.",
       "gpa": "N/A",
       "coursework": [
         "Principles of Electrical Engineering I & II",
@@ -26,30 +26,21 @@
         "Digital Logic Design",
         "Computer Architecture",
         "Embedded Systems & Microcontrollers",
-        "Data Structures & Algorithms",
-        "Differential Equations for Engineering & Physics"
-      ],
-      "track_interests": [
-        "SoC Systems Engineering",
-        "Digital Design / DV",
-        "CPU Engineering"
+        "Data Structures & Algorithms"
       ]
     }
   ],
   "experience": [
     {
       "company": "Rutgers Micromouse",
-      "role": "Lead Firmware & Hardware Engineer / Co-President",
+      "role": "Co-President & Lead Hardware/Firmware Engineer",
       "location": "New Brunswick, NJ",
       "start_date": "September 2024",
       "end_date": "Present",
       "bullets": [
-        "Engineered real-time embedded **C/C++** firmware on **ESP32-S3** and **STM32** microcontrollers, utilizing **FreeRTOS** tasks to achieve deterministic **100 Hz** sensor polling and sub-millisecond motor control response.",
-        "Designed and routed custom **4-layer PCBs** in **Altium Designer** and **KiCad** with ENIG surface finish, integrating **STM32F405 / ESP32-S3**, **IMU (Bosch BNO055)**, ToF arrays, and dual H-bridge motor drivers.",
-        "Led a **40+ member** engineering organization as Co-President and secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication and component procurement.",
-        "Architected **dual-loop cascade PID** feedback controllers fusing **100 Hz IMU** angular velocity (**Bosch BNO055**) with lateral distance error from **VL53L1X Time-of-Flight** sensors, improving heading stability and maintaining **2 mm** lateral sensing accuracy during autonomous navigation.",
-        "Implemented memory-efficient **Modified Flood Fill** exploration and **A* pathfinding** algorithms in modern **C++** with bit-manipulated state matrices, optimizing autonomous traversal under strict embedded SRAM limits.",
-        "Characterized signal-to-noise ratios (SNR), bus rise times, and multi-slave arbitration across **400 kHz I2C** and **SPI** lines using mixed-signal oscilloscopes and logic analyzers, mitigating communication dropouts and bus contention."
+        "Developed embedded firmware in **C/C++** on **STM32F405** and **ESP32-S3** microcontrollers for real-time motion control and sensor fusion utilizing **FreeRTOS**.",
+        "Designed and routed custom **4-layer PCBs** in **KiCad** and **Altium Designer** with ENIG surface finish, integrating **STM32F405**, IMU, optical ToF sensors, and dual H-bridge motor drivers.",
+        "Led a **40+ member** engineering organization as Co-President, secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication, and guided the team to **2nd Place at the 2025 Rowan Regional Competition**."
       ]
     },
     {
@@ -59,10 +50,9 @@
       "start_date": "June 2024",
       "end_date": "August 2024",
       "bullets": [
-        "Commissioned and validated automated high-speed packaging machinery for the **Bill & Melinda Gates Foundation**, boosting packaging line throughput by **30%** during pilot production qualification runs.",
-        "Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (**5-Whys, Pareto charts**), reducing production defect rates by **15%**.",
-        "Interpreted **20+ industrial electrical schematics** to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.",
-        "Validated sensor calibration curves, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters."
+        "Commissioned and validated an automated packaging machine for the **Bill & Melinda Gates Foundation**, increasing packaging line throughput by **30%**.",
+        "Diagnosed electromechanical failure points in automated manufacturing equipment, reducing production defect rates by **15%**.",
+        "Interpreted **20+ complex industrial electrical schematics** to troubleshoot PLCs, motor drives, and sensor relays, establishing standardized maintenance SOPs."
       ]
     },
     {
@@ -72,15 +62,15 @@
       "start_date": "September 2024",
       "end_date": "Present",
       "bullets": [
-        "Architected communication and distributed power delivery architectures for competition robotics, engineering **RS-485 to UART to I2C** transceiver networks between central VEX Brain and distributed microcontrollers.",
-        "Designed schematics and selected components including differential transceivers, **TVS surge diodes**, and bus termination resistors to protect sensitive logic from inductive spikes and signal reflections across high-vibration competition runs.",
-        "Executed hardware-in-the-loop (**HIL**) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet delivery and deterministic bus arbitration."
+        "Designed communication and power distribution architecture using the VEX Brain, enabling **RS-485 to UART to I2C** data transfer between embedded subsystems.",
+        "Selected and integrated differential transceivers, **TVS surge protection diodes**, decoupling capacitors, and pull-up/down resistors to protect logic from inductive spikes and signal reflections.",
+        "Conducted functional bench testing and signal analysis on communication lines using digital oscilloscopes to validate signal integrity and reliable data transmission across competition runs."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist",
+      "name": "Autonomous Micromouse Robot (Jerrieee)",
       "technologies": [
         "C/C++",
         "STM32F405RG",
@@ -90,40 +80,10 @@
         "VL6180X ToF",
         "Cascaded PID"
       ],
-      "date": "2025",
+      "date": "2024 – Present",
       "bullets": [
-        "Won **2nd Place at Rowan Regional Competition**; designed custom **4-layer ENIG PCB** integrating **168 MHz ARM Cortex-M4 MCU**, 5x optical ToF array over **400 kHz I2C**, and dual **DRV8847** motor drivers in an 84x76.5 mm chassis.",
-        "Programmed real-time Flood-Fill maze navigation algorithm running in **sub-850 microseconds** per cell transition with a **1 kHz cascaded PID** control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing **anti-windup clamping** to maintain stable tracking."
-      ]
-    },
-    {
-      "name": "4-Way Traffic Signal Controller",
-      "technologies": [
-        "555 Timers",
-        "Digital Logic",
-        "Combinational Circuits",
-        "State Machine Timing",
-        "Oscilloscope"
-      ],
-      "date": "2024",
-      "bullets": [
-        "Engineered a discrete hardware finite state controller using 555 timer astable clock generators, binary counters, and logic gates to sequence multi-phase traffic signal intervals.",
-        "Verified state transitions, propagation delays, and switching noise using benchtop oscilloscopes and digital multimeters, ensuring zero spurious transition states."
-      ]
-    },
-    {
-      "name": "Analog Filter & Transient Signal Conditioning Analyzer",
-      "technologies": [
-        "LTspice",
-        "MATLAB",
-        "Signal Integrity",
-        "Active Op-Amp Filters",
-        "Transient Analysis"
-      ],
-      "date": "2025",
-      "bullets": [
-        "Simulated active 2nd-order RLC filter topologies and operational amplifier stages in LTspice, evaluating AC frequency responses, Bode phase margins, and transient damping factors.",
-        "Designed hardware low-pass signal conditioning stages to suppress inductive switching transients from high-current DC motors, preventing ADC input distortion and verifying performance with benchtop instrumentation."
+        "Won **2nd Place at Rowan Regional Competition**; designed custom **4-layer ENIG PCB** integrating **168 MHz ARM Cortex-M4 MCU**, optical ToF sensors over **400 kHz I2C**, and dual **DRV8847** motor drivers in an 84x76.5 mm chassis.",
+        "Programmed real-time Flood-Fill maze navigation algorithm with a **cascaded PID** motion control loop correcting gyro heading and velocity errors with **anti-windup clamping** to maintain stable tracking."
       ]
     },
     {
@@ -136,13 +96,12 @@
         "SciPy",
         "Matplotlib",
         "PySerial",
-        "POSIX Pipes",
-        "Arch Linux"
+        "Linux"
       ],
       "date": "2025",
       "bullets": [
-        "Built a headless simulation pipeline in Qt6/C++ benchmarking pathfinding algorithms across 100+ competition maze layouts over POSIX inter-process pipes under Arch Linux.",
-        "Developed a real-time serial telemetry data logger capturing motor PWM output, angular error, and ToF distance streams at 100 Hz using Python and Matplotlib to benchmark PID settling time."
+        "Built a headless simulation pipeline in **Qt6/C++** benchmarking pathfinding algorithms across competition maze layouts over POSIX inter-process pipes under Linux.",
+        "Developed a serial telemetry logger capturing motor PWM output, angular error, and ToF distance streams at **100 Hz** using Python and Matplotlib to benchmark PID settling time."
       ]
     },
     {
@@ -157,47 +116,58 @@
       ],
       "date": "2024",
       "bullets": [
-        "Built an autonomous mobile robot using an ESP32-S3 and OV2640 camera module, developing an onboard vision-processing pipeline in C++ to detect track curvature in real time.",
-        "Tuned closed-loop PID control algorithms for dual DC motors, maintaining trajectory tracking stability at speeds up to 1.2 m/s with zero track departures."
+        "Built an autonomous line-tracking mobile robot using an **ESP32-S3** and **OV2640** camera module, developing an onboard vision-processing pipeline in C++ to detect track curvature in real time.",
+        "Tuned closed-loop **PID** control algorithms for dual DC motors, maintaining trajectory tracking stability at speeds up to 1.2 m/s."
+      ]
+    },
+    {
+      "name": "4-Way Traffic Signal Controller",
+      "technologies": [
+        "555 Timers",
+        "Digital Logic",
+        "Combinational Circuits",
+        "State Machine Timing",
+        "Oscilloscope"
+      ],
+      "date": "2024",
+      "bullets": [
+        "Engineered a discrete hardware finite state controller using **555 timer** astable clock generators, binary counters, and logic gates to sequence multi-phase traffic signal intervals.",
+        "Verified state transitions, propagation delays, and switching noise using benchtop oscilloscopes and digital multimeters, ensuring glitch-free operation."
       ]
     }
   ],
   "skill_pools": {
     "Languages": [
       "C",
-      "C++ (C++11/17/20)",
+      "C++ (C++17)",
       "Python",
-      "TypeScript",
-      "JavaScript",
+      "Java",
       "MATLAB",
       "Verilog HDL",
       "Assembly",
-      "Bash",
-      "SQL"
+      "Bash"
     ],
     "Embedded & Microcontrollers": [
-      "ESP32-S3",
-      "STM32F405",
-      "STM32",
+      "STM32 (HAL & LL, STM32F405)",
+      "ESP32 / ESP32-S3",
       "ARM Cortex-M4",
       "FreeRTOS",
       "Bare-Metal C",
-      "HAL",
       "Timer ISRs",
       "DMA",
-      "PlatformIO",
-      "Arduino"
+      "Arduino",
+      "PlatformIO"
     ],
     "Hardware & PCB Design": [
+      "KiCad (4-Layer)",
       "Altium Designer",
-      "KiCad 8.0",
+      "EasyEDA",
       "4-Layer PCB Routing",
       "ENIG Finish",
       "Controlled Impedance",
       "Coplanar Ground Shielding",
       "Analog Signal Conditioning",
       "Active Op-Amp Filters",
-      "RLC Transient Analysis",
       "TVS Surge Protection",
       "Decoupling"
     ],
@@ -211,25 +181,22 @@
       "GPIO",
       "ADC/DAC"
     ],
-    "Robotics & Control": [
-      "Cascade PID Control",
-      "Sensor Fusion (EMA, EKF Principles)",
-      "Differential Drive Kinematics",
-      "Modified Flood Fill",
-      "A* Pathfinding",
-      "State Estimation"
+    "Test & Measurement": [
+      "Digital Storage Oscilloscopes",
+      "Logic Analyzers",
+      "Digital Multimeters",
+      "Signal Analysis",
+      "Benchtop Debugging"
     ],
     "Tools & Platforms": [
       "Linux (Arch, Ubuntu, WSL2)",
       "Git",
-      "GitHub",
+      "GitHub CI/CD",
       "CMake",
       "Make",
       "GDB",
       "LTspice",
-      "Multisim",
-      "SOLIDWORKS",
-      "Qt6"
+      "SOLIDWORKS"
     ]
   }
 }

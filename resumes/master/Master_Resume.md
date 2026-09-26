@@ -40,32 +40,26 @@ Electrical and Computer Engineering student at **Rutgers University – New Brun
 
 ## 💼 Engineering Work Experience
 
-### 🐭 Rutgers Micromouse — Lead Firmware & Hardware Engineer | Lead Controls Engineer | Co-President
+### 🐭 Rutgers Micromouse — Co-President & Lead Hardware/Firmware Engineer
 *September 2024 – Present | New Brunswick, NJ*
-- Engineered real-time embedded C/C++ firmware on ESP32-S3 (dual-core Xtensa 32-bit) and STM32 microcontrollers, utilizing FreeRTOS tasks to achieve deterministic 100 Hz sensor polling and sub-millisecond motor control response.
-- Architected dual-loop cascade PID feedback controllers fusing 100 Hz IMU angular velocity (Bosch BNO055 9-DOF) with lateral distance error from ST VL53L1X Time-of-Flight sensors, eliminating motor drift and achieving sub-millimeter maze centering.
-- Implemented memory-efficient Modified Flood Fill exploration and A* pathfinding algorithms in modern C++ with bit-manipulated state matrices and discrete PID velocity control, reducing autonomous traversal solve time by 20% under strict embedded SRAM limits.
-- Designed and routed custom 4-layer PCBs in Altium Designer and KiCad with ENIG surface finish, integrating STM32F405 / ESP32-S3, 9-DOF IMU (Bosch BNO055), ToF arrays, and dual H-bridge motor drivers while optimizing trace impedance and coplanar ground shielding.
-- Developed precision analog IR optical distance-sensing circuits with active ambient-light filtering and analog low-pass stages, improving obstacle detection repeatability to ±2 mm at velocities up to 1.5 m/s.
-- Characterized signal-to-noise ratios (SNR), bus rise times, and multi-slave arbitration across 400 kHz I²C and SPI lines using mixed-signal oscilloscopes and logic analyzers, eliminating communication dropouts.
-- Programmed low-level register-direct I²C and SPI peripheral drivers, hardware abstraction layers (HAL), and timer ISRs to guarantee microsecond deterministic execution and glitch-free PWM motor drive.
-- Built a headless POSIX simulation pipeline using Qt6 MMS under Arch Linux communicating over inter-process pipes, verifying state-machine transitions and sensor logic prior to hardware deployment.
-- Developed Python mathematical modeling scripts (NumPy, SciPy, Matplotlib) to simulate motor torque-inertia curves, filter analog sensor noise, and stream real-time serial telemetry.
-- Scaled active club membership by 900% (40+ student engineers across robotics hardware and software sub-teams) and secured $2,500+ in corporate sponsorship to fund custom PCB fabrication, component procurement, and regional competitions.
+- Developed embedded firmware in C/C++ on STM32F405 and ESP32-S3 microcontrollers for real-time motion control and sensor fusion utilizing FreeRTOS.
+- Designed and routed custom 4-layer PCBs in KiCad and Altium Designer with ENIG surface finish, integrating STM32F405, IMU, optical ToF sensors, and dual H-bridge motor drivers.
+- Led a 40+ member engineering organization as Co-President, secured $2,500+ in corporate sponsorship to fund custom PCB fabrication, and guided the team to 2nd Place at the 2025 Rowan Regional Competition.
+- Implemented real-time Flood-Fill maze navigation and cascaded PID motion control loops in modern C++ to stabilize heading and velocity errors during autonomous traversal.
+- Characterized signal integrity, bus rise times, and multi-slave arbitration across 400 kHz I²C and SPI lines using mixed-signal oscilloscopes and logic analyzers.
 
 ### 🏭 LPT-KEYPAK — Engineering Intern
 *June 2024 – August 2024 | Tewksbury, NJ*
-- Commissioned and validated automated high-speed packaging machinery for the Bill & Melinda Gates Foundation, boosting packaging line throughput by 30% during pilot production qualification runs.
-- Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (5-Whys, Pareto charts), reducing production defect rates by 15%.
-- Interpreted 20+ industrial electrical schematics to troubleshoot PLCs, motor drives, and sensor relays; authored comprehensive technical documentation, Best-Known Methods (BKMs), and maintenance SOPs to standardize equipment integration and operator workflows.
-- Validated sensor calibration curves, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters, ensuring strict compliance with operational safety and quality standards.
-- Formulated process validation protocols and coordinated directly with field technicians and senior controls engineers to resolve intermittent electrical noise and grounding anomalies.
+- Commissioned and validated automated high-speed packaging machinery for the Bill & Melinda Gates Foundation, increasing packaging line throughput by 30%.
+- Diagnosed electromechanical failure points in automated manufacturing equipment, reducing production defect rates by 15%.
+- Interpreted 20+ complex industrial electrical schematics to troubleshoot PLCs, motor drives, and sensor relays, establishing standardized maintenance SOPs.
+- Validated sensor calibration, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters.
 
 ### 🤖 VEX Robotics (Rutgers IEEE) — Lead Electrical Engineer
 *September 2024 – Present | New Brunswick, NJ*
-- Architected communication and distributed power delivery architectures for competition robotics, engineering RS-485 → UART → I²C transceiver networks between central VEX Brain and distributed peripheral microcontrollers.
-- Designed schematics and selected components including differential transceivers, TVS transient surge diodes, decoupling filter networks, and bus termination pull-up/down resistors to protect sensitive logic from inductive spikes.
-- Executed hardware-in-the-loop (HIL) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet-loss rates <0.1% and guarantee deterministic bus arbitration.
+- Designed communication and power distribution architecture using the VEX Brain, enabling RS-485 to UART to I2C data transfer between embedded subsystems.
+- Selected and integrated differential transceivers, TVS surge protection diodes, decoupling capacitors, and pull-up/down resistors to protect logic from inductive spikes and signal reflections.
+- Conducted functional bench testing and signal integrity validation on serial communication lines using digital oscilloscopes to ensure reliable data transmission across competition runs.
 - Managed wiring harness fabrication, power budgeting across multi-motor drive subsystems, and electrical subsystem compliance under strict competition rules.
 
 ---

@@ -75,52 +75,52 @@
 \section{Technical Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Languages:} C, C++ (C++11/17/20), Python, TypeScript, JavaScript, MATLAB, Verilog HDL, Assembly \\
-     \textbf{Embedded \& Microcontrollers:} ESP32-S3, STM32F405, STM32, ARM Cortex-M4, FreeRTOS, Bare-Metal C, HAL, Timer ISRs \\
-     \textbf{Hardware \& PCB Design:} Altium Designer, KiCad 8.0, 4-Layer PCB Routing, Controlled Impedance, Coplanar Ground Shielding, Analog Signal Conditioning, Active Op-Amp Filters, RLC Transient Analysis, TVS Surge Protection, Decoupling \\
+     \textbf{Languages:} C, C++ (C++17), Python, MATLAB, Verilog HDL, Assembly, Bash, Java \\
+     \textbf{Embedded \& Microcontrollers:} STM32 (HAL \& LL, STM32F405), ESP32 / ESP32-S3, ARM Cortex-M4, FreeRTOS, Bare-Metal C, Timer ISRs, DMA, Arduino \\
+     \textbf{Hardware \& PCB Design:} KiCad (4-Layer), Altium Designer, EasyEDA, 4-Layer PCB Routing, Controlled Impedance, Coplanar Ground Shielding, Analog Signal Conditioning, Active Op-Amp Filters, TVS Surge Protection, Decoupling \\
      \textbf{Protocols \& Buses:} I2C (400 kHz), SPI, UART, RS-485, CAN Bus, PWM Motor Control, GPIO, ADC/DAC \\
-     \textbf{Robotics \& Control:} Cascade PID Control, Sensor Fusion (EMA, EKF Principles), Differential Drive Kinematics, Modified Flood Fill, A* Pathfinding, State Estimation \\
-     \textbf{Tools \& Platforms:} Linux (Arch, Ubuntu, WSL2), Git, GitHub, CMake, Make, GDB, LTspice, Multisim \\
+     \textbf{Test \& Measurement:} Digital Storage Oscilloscopes, Logic Analyzers, Digital Multimeters, Benchtop Debugging, Signal Analysis \\
+     \textbf{Tools \& Platforms:} Linux (Arch, Ubuntu, WSL2), Git, GitHub CI/CD, CMake, Make, GDB, LTspice, SOLIDWORKS \\
     }}
  \end{itemize}\vspace{-14pt}
 
 \section{Engineering Experience}
   \resumeSubHeadingListStart
-    \resumeSubheading{Rutgers Micromouse}{New Brunswick, NJ}{Lead Firmware \& Hardware Engineer / Co-President}{September 2024 -- Present}
+    \resumeSubheading{Rutgers Micromouse}{New Brunswick, NJ}{Co-President \& Lead Hardware/Firmware Engineer}{September 2024 -- Present}
       \resumeItemListStart
-        \resumeItem{Engineered real-time embedded \textbf{C/C++} firmware on \textbf{ESP32-S3} and \textbf{STM32} microcontrollers, utilizing \textbf{FreeRTOS} tasks to achieve deterministic \textbf{100 Hz} sensor polling and sub-millisecond motor control response.}
-        \resumeItem{Designed and routed custom \textbf{4-layer PCBs} in \textbf{Altium Designer} and \textbf{KiCad} with ENIG surface finish, integrating \textbf{STM32F405 / ESP32-S3}, \textbf{IMU (Bosch BNO055)}, ToF arrays, and dual H-bridge motor drivers.}
-        \resumeItem{Led a \textbf{40+ member} engineering organization as Co-President and secured \textbf{\$2,500+} in corporate sponsorship to fund custom PCB fabrication and component procurement.}
+        \resumeItem{Developed embedded firmware in \textbf{C/C++} on \textbf{STM32F405} and \textbf{ESP32-S3} microcontrollers for real-time motion control and sensor fusion utilizing \textbf{FreeRTOS}.}
+        \resumeItem{Designed and routed custom \textbf{4-layer PCBs} in \textbf{KiCad} and \textbf{Altium Designer} with ENIG surface finish, integrating \textbf{STM32F405}, IMU, optical ToF sensors, and dual H-bridge motor drivers.}
+        \resumeItem{Led a \textbf{40+ member} engineering organization as Co-President, secured \textbf{\$2,500+} in corporate sponsorship to fund custom PCB fabrication, and guided the team to \textbf{2nd Place at the 2025 Rowan Regional Competition}.}
       \resumeItemListEnd
 
     \resumeSubheading{LPT-KEYPAK}{Tewksbury, NJ}{Engineering Intern}{June 2024 -- August 2024}
       \resumeItemListStart
-        \resumeItem{Commissioned and validated automated high-speed packaging machinery for the \textbf{Bill \& Melinda Gates Foundation}, boosting packaging line throughput by \textbf{30\%} during pilot production qualification runs.}
-        \resumeItem{Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (\textbf{5-Whys, Pareto charts}), reducing production defect rates by \textbf{15\%}.}
-        \resumeItem{Interpreted \textbf{20+ industrial electrical schematics} to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.}
+        \resumeItem{Commissioned and validated an automated packaging machine for the \textbf{Bill \& Melinda Gates Foundation}, increasing packaging line throughput by \textbf{30\%}.}
+        \resumeItem{Diagnosed electromechanical failure points in automated manufacturing equipment, reducing production defect rates by \textbf{15\%}.}
+        \resumeItem{Interpreted \textbf{20+ complex industrial electrical schematics} to troubleshoot PLCs, motor drives, and sensor relays, establishing standardized maintenance SOPs.}
       \resumeItemListEnd
 
     \resumeSubheading{VEX Robotics (Rutgers IEEE)}{New Brunswick, NJ}{Lead Electrical Engineer}{September 2024 -- Present}
       \resumeItemListStart
-        \resumeItem{Architected communication and distributed power delivery architectures for competition robotics, engineering \textbf{RS-485 to UART to I2C} transceiver networks between central VEX Brain and distributed microcontrollers.}
-        \resumeItem{Designed schematics and selected components including differential transceivers, \textbf{TVS surge diodes}, and bus termination resistors to protect sensitive logic from inductive spikes and signal reflections across high-vibration competition runs.}
-        \resumeItem{Executed hardware-in-the-loop (\textbf{HIL}) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet delivery and deterministic bus arbitration.}
+        \resumeItem{Designed communication and power distribution architecture using the VEX Brain, enabling \textbf{RS-485 to UART to I2C} data transfer between embedded subsystems.}
+        \resumeItem{Selected and integrated differential transceivers, \textbf{TVS surge protection diodes}, decoupling capacitors, and pull-up/down resistors to protect logic from inductive spikes and signal reflections.}
+        \resumeItem{Conducted functional bench testing and signal analysis on communication lines using digital oscilloscopes to validate signal integrity and reliable data transmission across competition runs.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd\vspace{-12pt}
 
 \section{Technical Projects}
   \resumeSubHeadingListStart
-    \resumeProjectHeading{Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist}{2025}{C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847}
+    \resumeProjectHeading{Autonomous Micromouse Robot (Jerrieee)}{2024 -- Present}{C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847}
       \resumeItemListStart
-        \resumeItem{Won \textbf{2nd Place at Rowan Regional Competition}; designed custom \textbf{4-layer ENIG PCB} integrating \textbf{168 MHz ARM Cortex-M4 MCU}, 5x optical ToF array over \textbf{400 kHz I2C}, and dual \textbf{DRV8847} motor drivers in an 84x76.5 mm chassis.}
-        \resumeItem{Programmed real-time Flood-Fill maze navigation algorithm running in \textbf{sub-850 microseconds} per cell transition with a \textbf{1 kHz cascaded PID} control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing \textbf{anti-windup clamping} to maintain stable tracking.}
+        \resumeItem{Won \textbf{2nd Place at Rowan Regional Competition}; designed custom \textbf{4-layer ENIG PCB} integrating \textbf{168 MHz ARM Cortex-M4 MCU}, optical ToF sensors over \textbf{400 kHz I2C}, and dual \textbf{DRV8847} motor drivers in an 84x76.5 mm chassis.}
+        \resumeItem{Programmed real-time Flood-Fill maze navigation algorithm with a \textbf{cascaded PID} motion control loop correcting gyro heading and velocity errors with \textbf{anti-windup clamping} to maintain stable tracking.}
       \resumeItemListEnd
 
     \resumeProjectHeading{POSIX Robotics Simulation \& Telemetry Engine}{2025}{C++, Qt6, Python, NumPy, SciPy}
       \resumeItemListStart
-        \resumeItem{Built a headless simulation pipeline in Qt6/C++ benchmarking pathfinding algorithms across 100+ competition maze layouts over POSIX inter-process pipes under Arch Linux.}
-        \resumeItem{Developed a real-time serial telemetry data logger capturing motor PWM output, angular error, and ToF distance streams at 100 Hz using Python and Matplotlib to benchmark PID settling time.}
+        \resumeItem{Built a headless simulation pipeline in \textbf{Qt6/C++} benchmarking pathfinding algorithms across competition maze layouts over POSIX inter-process pipes under Linux.}
+        \resumeItem{Developed a serial telemetry logger capturing motor PWM output, angular error, and ToF distance streams at \textbf{100 Hz} using Python and Matplotlib to benchmark PID settling time.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd

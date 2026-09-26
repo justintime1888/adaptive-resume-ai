@@ -17,6 +17,12 @@ MASTER_DIR = REPO_ROOT / "resumes" / "master"
 TAILORED_LATEX_DIR = REPO_ROOT / "resumes" / "tailored" / "LaTeX"
 TAILORED_PDF_DIR = REPO_ROOT / "resumes" / "tailored" / "PDF"
 
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 def compile_single_tex(tex_path: Path, output_pdf_dir: Path = None) -> bool:
     if not tex_path.exists():
         print(f"[!] File not found: {tex_path}")
@@ -102,5 +108,6 @@ if __name__ == "__main__":
         compile_all()
     else:
         target = Path(args.file)
-        if compile_single_tex(target):
-            print(f"[✓] Compiled successfully: {target.stem}.pdf")
+        out_dir = TAILORED_PDF_DIR if target.parent == TAILORED_LATEX_DIR else None
+        if compile_single_tex(target, out_dir):
+            print(f"[+] Compiled successfully: {target.stem}.pdf")

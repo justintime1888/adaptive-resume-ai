@@ -64,10 +64,14 @@ class ResumeVerifier:
         for proj in self.profile.get("projects", []):
             all_master_text.extend(proj.get("bullets", []))
 
-        # Check Master_Resume.md if exists
+        # Check Master_Resume.md and Master LaTeX files if exist
         master_md = MASTER_DIR / "Master_Resume.md"
         if master_md.exists():
             all_master_text.append(master_md.read_text(encoding="utf-8"))
+        for tex_name in ["Master_Resume.tex", "Justin_Parra_Master_Resume_Everything.tex"]:
+            tex_file = MASTER_DIR / tex_name
+            if tex_file.exists():
+                all_master_text.append(tex_file.read_text(encoding="utf-8"))
 
         combined_master = " ".join(all_master_text)
         
@@ -122,23 +126,74 @@ class ResumeVerifier:
             r'\b\d+(?:\.\d+)?\+?\s*(?:servers|users|clients|engineers|members|trials|benchmarks|schematics|lines|projects|layers)\b'
         ]
 
-        for line in lines:
-            if not line.startswith(("•", "-", "*", "\\item")):
+        bullets_to_check = []
+        if r'\resumeItem' in resume_text:
+            bullets_to_check = self.ats_checker.extract_latex_resume_items(resume_text)
+        else:
+            for line in lines:
+                if line.startswith(("•", "-", "*", "\\item")):
+                    bullets_to_check.append(line)
+
+        for bullet in bullets_to_check:
+            if re.match(r'^(relevant\s+coursework|coursework|languages|tools|skills):', bullet, re.I):
                 continue
 
-            line_lower = line.lower()
+            bullet_lower = bullet.lower()
             for pattern in metric_regexes:
-                for match in re.finditer(pattern, line_lower, re.IGNORECASE):
+                for match in re.finditer(pattern, bullet_lower, re.IGNORECASE):
                     token = match.group(0).strip()
                     token_norm = re.sub(r'\s+', ' ', token.lower())
                     if token_norm not in self.ground_truth["master_metrics"] and token_norm not in self.ground_truth["master_text"]:
-                        # Exclude standard benign words like '1-page', '1st', '2nd'
                         if token_norm not in ["1st", "2nd", "100%", "4-layer"]:
                             hallucinations.append({
                                 "category": "Fabricated Metric",
-                                "claim": f"'{token}' in bullet: {line[:80]}...",
+                                "claim": f"'{token}' in bullet: {bullet[:80]}...",
                                 "reason": f"Claimed metric '{token}' does not exist in master ground truth."
                             })
+
+        # 3. Known Fabrications & Adversarial Checks
+        resume_lower_full = resume_text.lower()
+        if "weave" in resume_lower_full:
+            hallucinations.append({
+                "category": "Unverified Project (Copied Repo)",
+                "claim": "Weave - Automated SPICE Netlist Parser",
+                "reason": "Candidate explicitly noted Weave was a copied GitHub repository, not an original engineering project."
+            })
+
+        if "semiconductor" in resume_lower_full and "coursework" in resume_lower_full:
+            hallucinations.append({
+                "category": "Fabricated Coursework",
+                "claim": "Semiconductor Devices / Materials coursework",
+                "reason": "Candidate never took semiconductor classes; explicitly verified as hallucinated."
+            })
+
+        if "1st place" in resume_lower_full or "first place" in resume_lower_full:
+            hallucinations.append({
+                "category": "Inaccurate Award Placement",
+                "claim": "1st Place Champion at Rowan",
+                "reason": "Candidate achieved 2nd Place Regional Finalist at Rowan Regional Competition."
+            })
+
+        if "<0.1%" in resume_lower_full or "0.1%" in resume_lower_full:
+            hallucinations.append({
+                "category": "Unbacked Metric",
+                "claim": "<0.1% bus error rate / packet loss",
+                "reason": "Unbacked quantitative claim not verified by empirical measurement methodology."
+            })
+
+        if "sub-millimeter" in resume_lower_full:
+            hallucinations.append({
+                "category": "Exaggerated Accuracy",
+                "claim": "sub-millimeter maze centering",
+                "reason": "Conflicts with verified 2 mm optical sensing accuracy specification."
+            })
+
+        if "20%" in resume_lower_full and ("speedup" in resume_lower_full or "solve time" in resume_lower_full or "reduction" in resume_lower_full):
+            hallucinations.append({
+                "category": "Unbacked Speedup Metric",
+                "claim": "20% autonomous traversal solve time reduction",
+                "reason": "Unbacked quantitative benchmark without documented measurement baseline."
+            })
 
         return hallucinations
 

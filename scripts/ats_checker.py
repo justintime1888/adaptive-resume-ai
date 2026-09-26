@@ -113,6 +113,8 @@ class ATSChecker:
         # Normalize common unicode symbols in tech resumes
         normalized = text.replace('²', '2').replace('³', '3')
         normalized = re.sub(r'[–—−]', '-', normalized)
+        # Strip common LaTeX escaped symbols
+        normalized = normalized.replace(r'\%', '%').replace(r'\$', '$').replace(r'\&', '&').replace(r'\_', '_').replace(r'\#', '#')
         return re.sub(r'\s+', ' ', normalized).strip()
 
     def audit_contact_info(self, text: str) -> Dict[str, Any]:
@@ -214,20 +216,69 @@ class ATSChecker:
             "stuffed_keywords": stuffed
         }
 
+    def extract_latex_resume_items(self, text: str) -> List[str]:
+        """Extract and clean accomplishment bullets from LaTeX \\resumeItem{...} blocks."""
+        items = []
+        body = text
+        if r"\begin{document}" in text:
+            body = text.split(r"\begin{document}")[1]
+        if r"\end{document}" in body:
+            body = body.split(r"\end{document}")[0]
+
+        pos = 0
+        tag = r"\resumeItem{"
+        while True:
+            idx = body.find(tag, pos)
+            if idx == -1:
+                break
+            brace_open = idx + len(tag) - 1
+            depth = 1
+            curr = brace_open + 1
+            n = len(body)
+            while curr < n and depth > 0:
+                ch = body[curr]
+                if ch == '{' and (curr == 0 or body[curr - 1] != '\\'):
+                    depth += 1
+                elif ch == '}' and (curr == 0 or body[curr - 1] != '\\'):
+                    depth -= 1
+                curr += 1
+
+            if depth == 0:
+                raw_item = body[brace_open + 1 : curr - 1]
+                cleaned = re.sub(r'\\[a-zA-Z]+\{([^}]+)\}', r'\1', raw_item)
+                cleaned = cleaned.replace(r'\%', '%').replace(r'\$', '$').replace(r'\&', '&').replace(r'\_', '_').replace(r'\#', '#')
+                cleaned = re.sub(r'\\vspace\{[^}]*\}', '', cleaned)
+                cleaned = re.sub(r'\\[a-zA-Z]+', ' ', cleaned)
+                cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+                if cleaned:
+                    items.append(cleaned)
+                pos = curr
+            else:
+                pos = brace_open + 1
+        return items
+
     def audit_bullets(self, resume_text: str) -> Dict[str, Any]:
         """Analyze action verb strength and quantification rate."""
         lines = resume_text.splitlines()
-        # Only collect actual experience/project accomplishment bullets, excluding skills category rows
         bullet_lines = []
-        for line in lines:
-            l_str = line.strip()
-            if l_str.startswith(('•', '-', '*', '–')) or l_str.startswith(r'\item'):
-                # Ignore skills categories e.g. "• Languages: ...", "• Tools: ..."
-                if re.match(r'^[•\-*–\s]*\\item\s*\{?\\textbf\{[A-Za-z\s&/]+:\}', l_str, re.I):
+
+        if r'\resumeItem' in resume_text:
+            items = self.extract_latex_resume_items(resume_text)
+            for it in items:
+                if re.match(r'^(relevant\s+coursework|coursework|languages|tools|skills):', it, re.I):
                     continue
-                if re.match(r'^[•\-*–\s]*[A-Za-z\s&/]{2,30}:', l_str):
-                    continue
-                bullet_lines.append(l_str)
+                bullet_lines.append(it)
+        else:
+            # Markdown / plain text bullets
+            for line in lines:
+                l_str = line.strip()
+                if l_str.startswith(('•', '-', '*', '–')) or l_str.startswith(r'\item'):
+                    # Ignore skills categories e.g. "• Languages: ...", "• Tools: ..."
+                    if re.match(r'^[•\-*–\s]*\\item\s*\{?\\textbf\{[A-Za-z\s&/]+:\}', l_str, re.I):
+                        continue
+                    if re.match(r'^[•\-*–\s]*[A-Za-z\s&/]{2,30}:', l_str):
+                        continue
+                    bullet_lines.append(l_str)
 
         if not bullet_lines:
             # Fallback: identify lines that look like bullet accomplishments

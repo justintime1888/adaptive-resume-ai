@@ -5,7 +5,7 @@ company: "Qualcomm Technologies"
 role: "Hardware Engineering Intern / 2027 Hardware Engineering Internship"
 status: "Applied"
 applied_date: "2026-09-26"
-audit_score: "96/100"
+audit_score: "98/100"
 audit_status: "APPROVED"
 latex_source: "resumes/tailored/LaTeX/Qualcomm_Technologies_Hardware_Engineering_Intern_2027_Hardware_Engineering_Intern_Resume.tex"
 pdf_path: "resumes/tailored/PDF/Qualcomm_Technologies_Hardware_Engineering_Intern_2027_Hardware_Engineering_Intern_Resume.pdf"
@@ -15,14 +15,14 @@ chatgpt_prompt: "applications/Qualcomm_Technologies_Hardware_Engineering_Intern_
 # 💼 Qualcomm Technologies — Hardware Engineering Intern / 2027 Hardware Engineering Internship
 
 > **Company:** `Qualcomm Technologies` | **Role:** `Hardware Engineering Intern / 2027 Hardware Engineering Internship` | **Status:** `Applied` | **Date:** `2026-09-26`
-> **Quality & Anti-Hallucination Score:** `🎯 96/100 [APPROVED]`
+> **Quality & Anti-Hallucination Score:** `🎯 98/100 [APPROVED]`
 
 ---
 
 ## 🛡️ Multi-Agent Verification Scorecard
 - **Authenticity (Anti-Hallucination):** `40/40`
 - **ATS Keyword Match:** `30/30 (100%)`
-- **Bullet Impact & Quantification:** `16/20 (Quant: 69%, Power Verbs: 100%)`
+- **Bullet Impact & Quantification:** `18/20 (Quant: 84%, Power Verbs: 100%)`
 - **Structure & Contact Hygiene:** `10/10`
 
 ---
@@ -66,9 +66,9 @@ Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist | C/C++, ST
 • Won **2nd Place at Rowan Regional Competition**; designed custom **4-layer ENIG PCB** integrating **168 MHz ARM Cortex-M4 MCU**, 5x optical ToF array over **400 kHz I2C**, and dual **DRV8847** motor drivers in an 84x76.5 mm chassis.
 • Programmed real-time Flood-Fill maze navigation algorithm running in **sub-850 microseconds** per cell transition with a **1 kHz cascaded PID** control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing **anti-windup clamping** to maintain stable tracking.
 
-Weave - Automated SPICE Netlist Parser & Schematic Compiler | TypeScript, LTspice, ElkJS Graph Routing, Geometric Placement, EDA Tools (2025)
-• Built an automated compiler converting raw SPICE subcircuit netlists (.cir) into formatted LTspice schematics (.asc) using hierarchical graph theory and layered placement algorithms.
-• Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear circuit schematics automatically.
+POSIX Robotics Simulation & Telemetry Engine | C++, Qt6, Python, NumPy, SciPy, Matplotlib, PySerial, POSIX Pipes, Arch Linux (2025)
+• Built a headless simulation pipeline in Qt6/C++ benchmarking pathfinding algorithms across 100+ competition maze layouts over POSIX inter-process pipes under Arch Linux.
+• Developed a real-time serial telemetry data logger capturing motor PWM output, angular error, and ToF distance streams at 100 Hz using Python and Matplotlib to benchmark PID settling time.
 ```
 
 ---
