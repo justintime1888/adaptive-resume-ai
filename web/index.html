@@ -1,695 +1,752 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adaptive Resume AI • Executive Career Studio</title>
+  <title>Adaptive Resume AI • Justin M. Parra</title>
   
-  <!-- High-Precision Broadsheet & Aerospace Typography (Justin Parra Portfolio + FMI Industries) -->
+  <!-- High-Fashion Swiss Broadsheet & Monospace Typography (Direct from justin-parra.vercel.app) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome 6 Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['"Playfair Display"', 'Georgia', 'serif'],
-            sans: ['Manrope', 'Inter', '-apple-system', 'sans-serif'],
-            mono: ['"JetBrains Mono"', '"Space Mono"', 'monospace']
-          },
-          colors: {
-            aero: {
-              bg: '#08090D',
-              surface: '#0F1219',
-              surface2: '#161B26',
-              border: 'rgba(255, 255, 255, 0.08)',
-              borderHover: 'rgba(255, 255, 255, 0.22)',
-              text: '#F3F4F6',
-              muted: '#717888',
-              subtle: '#9CA3AF',
-              amber: '#E9874F',
-              cyan: '#38BDF8',
-              hazard: '#C23B22',
-              green: '#22C55E'
-            }
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
+    /* ========================================
+       VARIABLES & PALETTES (Swiss Broadsheet Editorial)
+       ======================================== */
     :root {
-      --color-bg: #08090D;
-      --color-surface: #0F1219;
-      --color-surface-2: #161B26;
-      --color-border: rgba(255, 255, 255, 0.08);
-      --color-accent: #E9874F;
-      --color-cyan: #38BDF8;
-      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+      --color-bg: #edebe7;
+      --color-surface: #e3e0db;
+      --color-surface-2: #d9d5cf;
+      --color-card: #f2f0ec;
+      --color-border: rgba(20, 20, 20, 0.12);
+      --color-border-hover: rgba(20, 20, 20, 0.32);
+      --color-text: #141414;
+      --color-text-secondary: #5c5650;
+      --color-text-muted: #8c8680;
+      --color-hazard: #c23b22;
+      --color-accent: #141414;
+      --color-highlight: rgba(194, 59, 34, 0.08);
+
+      --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body: 'Libre Baskerville', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    body {
+    body.dark-mode {
+      --color-bg: #0c0e12;
+      --color-surface: #14161f;
+      --color-surface-2: #1b1e2a;
+      --color-card: #161822;
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-border-hover: rgba(255, 255, 255, 0.28);
+      --color-text: #f4f4f6;
+      --color-text-secondary: #9da3af;
+      --color-text-muted: #6b7280;
+      --color-hazard: #e9874f;
+      --color-accent: #f4f4f6;
+      --color-highlight: rgba(233, 135, 79, 0.12);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
       background-color: var(--color-bg);
-      color: #F3F4F6;
-      font-family: 'Manrope', sans-serif;
-      letter-spacing: -0.015em;
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      letter-spacing: -0.01em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
       overflow-x: hidden;
     }
 
-    /* Tactile Film Grain Overlay (from justin-parra.vercel.app) */
+    /* Tactile Film Grain Overlay (Identical to justin-parra.vercel.app) */
     .grain {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: transparent url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.038"/></svg>') repeat;
+      background: transparent url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.045"/></svg>') repeat;
       pointer-events: none;
       z-index: 9999;
     }
 
-    /* Monospace Engineering Spec Labels */
+    /* Broadsheet Editorial Typography */
+    .font-serif-display {
+      font-family: var(--font-display);
+    }
     .mono-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--color-text-secondary);
       font-weight: 600;
+      display: inline-block;
     }
 
-    /* High-Precision CAD Blueprint Crosshair Marks */
-    .card-corner-tl { position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 1.5px solid var(--color-accent); border-left: 1.5px solid var(--color-accent); }
-    .card-corner-tr { position: absolute; top: -1px; right: -1px; width: 8px; height: 8px; border-top: 1.5px solid var(--color-accent); border-right: 1.5px solid var(--color-accent); }
-    .card-corner-bl { position: absolute; bottom: -1px; left: -1px; width: 8px; height: 8px; border-bottom: 1.5px solid var(--color-accent); border-left: 1.5px solid var(--color-accent); }
-    .card-corner-br { position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-bottom: 1.5px solid var(--color-accent); border-right: 1.5px solid var(--color-accent); }
+    /* Section Header with Horizontal Rule (Classic Justin Parra Broadsheet) */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .section-header-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
 
-    /* FMI Aerospace Card Container */
-    .fmi-card {
-      background: #0E1118;
+    /* Clean Card Architecture */
+    .broadsheet-card {
+      background: var(--color-card);
       border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: clamp(1.25rem, 2.5vw, 2.25rem);
       position: relative;
-      transition: border-color 0.3s var(--ease-premium), box-shadow 0.3s var(--ease-premium);
+      transition: border-color 0.25s var(--ease-out);
     }
-    .fmi-card:hover {
-      border-color: rgba(255, 255, 255, 0.16);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.85);
+    .broadsheet-card:hover {
+      border-color: var(--color-border-hover);
     }
 
-    /* Input & Textarea Elements */
-    .aero-input {
-      background: rgba(14, 17, 24, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #F3F4F6;
-      font-family: 'JetBrains Mono', monospace;
-      transition: all 0.22s var(--ease-premium);
+    /* Inputs */
+    .broadsheet-input {
+      width: 100%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.6;
+      padding: 0.85rem 1rem;
+      border-radius: 2px;
+      transition: all 0.2s var(--ease-out);
     }
-    .aero-input:focus {
-      background: rgba(22, 27, 38, 0.95);
-      border-color: var(--color-accent);
+    .broadsheet-input:focus {
       outline: none;
-      box-shadow: 0 0 0 1px var(--color-accent);
+      border-color: var(--color-text);
+      background: var(--color-surface-2);
     }
 
-    /* Marquee Track */
+    /* Buttons */
+    .btn-ink {
+      background: var(--color-text);
+      color: var(--color-bg);
+      border: 1px solid var(--color-text);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.4rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 2px;
+      transition: all 0.2s var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn-ink:hover {
+      background: var(--color-hazard);
+      border-color: var(--color-hazard);
+      color: #ffffff;
+    }
+
+    .btn-wire {
+      background: transparent;
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 2px;
+      transition: all 0.2s var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn-wire:hover {
+      background: var(--color-surface);
+      border-color: var(--color-text);
+    }
+
+    /* Preset Pill Chip */
+    .chip-btn {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border-radius: 2px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .chip-btn:hover {
+      background: var(--color-text);
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+
+    /* Marquee Running Spec Ribbon */
     .marquee-section {
       width: 100%;
       overflow: hidden;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(15, 18, 25, 0.6);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface);
       padding: 0.55rem 0;
       white-space: nowrap;
     }
     .marquee-track {
       display: inline-flex;
-      animation: marqueeScroll 36s linear infinite;
+      animation: marqueeScroll 40s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
     }
     @keyframes marqueeScroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-    /* Interactive Buttons */
-    .btn-aero-primary {
-      background: var(--color-accent);
-      color: #08090D;
-      font-family: 'JetBrains Mono', monospace;
+    /* Navigation */
+    .broadsheet-nav {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0.95rem clamp(1rem, 4vw, 3rem);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      transition: padding 0.3s ease;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .nav-logo-dot {
+      color: var(--color-hazard);
+    }
+
+    /* Container */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    /* Hero Typography */
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.25s var(--ease-premium);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
     }
-    .btn-aero-primary:hover {
-      background: #F0A04B;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(233, 135, 79, 0.35);
+    .hero-name-italic {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-hazard);
     }
-    .btn-aero-primary:active {
-      transform: translateY(0);
-    }
-
-    .btn-aero-outline {
-      background: transparent;
-      color: #F3F4F6;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.22s var(--ease-premium);
-    }
-    .btn-aero-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: #FFFFFF;
+    .hero-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--color-border);
+      margin: 1.25rem 0 1.5rem 0;
     }
 
-    /* Diamond Indicator */
-    .diamond-dot {
-      width: 7px;
-      height: 7px;
-      transform: rotate(45deg);
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    /* Custom Scrollbar */
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: #08090D; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--color-border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-[#E9874F] selection:text-black">
+<body class="broadsheet-layout">
 
   <!-- Tactile Film Grain Overlay -->
   <div class="grain"></div>
 
-  <!-- Broadsheet Technical Header -->
-  <header class="sticky top-0 z-50 bg-[#08090D]/90 backdrop-blur-md border-b border-white/[0.08] px-6 sm:px-12 py-3.5 transition-all">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      
-      <!-- Logo: Monogram with Broadsheet Serif & Monospace System Tag -->
-      <div class="flex items-center space-x-4">
-        <a href="#" class="flex items-center space-x-2.5 group">
-          <span class="font-display text-2xl font-bold tracking-tight text-white group-hover:text-aero-amber transition">AR<span class="text-aero-amber">.</span></span>
-          <div class="h-4 w-px bg-white/20 hidden sm:block"></div>
-          <div class="flex flex-col">
-            <span class="mono-label text-[11px] text-white tracking-widest font-semibold">Adaptive Resume AI</span>
-            <span class="mono-label text-[9px] text-aero-muted tracking-wider">System v2.4 // Executive Studio</span>
-          </div>
-        </a>
+  <!-- Navigation Bar (Swiss Broadsheet Style) -->
+  <nav class="broadsheet-nav">
+    <div class="nav-inner">
+      <div style="display: flex; align-items: baseline; gap: 0.85rem;">
+        <a href="#" class="nav-logo">JP<span class="nav-logo-dot">.</span></a>
+        <span class="mono-label" style="font-size: 0.65rem;">Adaptive Resume AI</span>
       </div>
 
-      <!-- Center / Right Telemetry Status & Method 1 Direct Opener -->
-      <div class="flex items-center space-x-4">
-        <!-- Ground Truth Verification Badge -->
-        <div class="hidden lg:flex items-center space-x-2.5 px-3 py-1 rounded-sm bg-white/[0.03] border border-white/[0.07] text-[11px] font-mono">
-          <span class="diamond-dot bg-emerald-400 animate-pulse"></span>
-          <span class="text-zinc-200 font-semibold">Justin M. Parra</span>
-          <span class="text-zinc-600">//</span>
-          <span class="text-zinc-400">Rutgers ECE</span>
-          <span class="text-zinc-600">//</span>
-          <span class="text-aero-amber" id="navGraduationDisplay">Expected Dec 2027</span>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <!-- Candidate Metadata Capsule -->
+        <div style="display: none; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-secondary);" id="navCandidateCapsule">
+          <span style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-hazard); display: inline-block;"></span>
+          <span style="font-weight: 600; color: var(--color-text);">Justin M. Parra</span>
+          <span>·</span>
+          <span>Rutgers ECE</span>
+          <span>·</span>
+          <span id="navGraduationDisplay" style="color: var(--color-hazard);">Expected Dec 2027</span>
         </div>
 
-        <!-- Method 1: ChatGPT Plus Direct Opener -->
+        <!-- Theme Switcher (Broadsheet Linen vs. Industrial Dark) -->
+        <button onclick="toggleTheme()" id="themeToggleBtn" class="btn-wire" style="padding: 0.4rem 0.8rem; font-size: 0.65rem;" title="Toggle between Swiss Broadsheet & Industrial Dark mode">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+          <span id="themeToggleLabel">Dark</span>
+        </button>
+
+        <!-- Method 1 (ChatGPT Plus Direct Opener) -->
         <a 
           href="https://chatgpt.com" 
           target="_blank" 
           rel="noopener noreferrer" 
           onclick="launchChatGPTDirect(event)" 
-          class="btn-aero-outline px-3.5 py-1.5 rounded-sm flex items-center space-x-2 text-[11px] cursor-pointer"
-          title="Open ChatGPT Plus in new tab with auto-copied adversarial audit prompt"
+          class="btn-wire"
+          style="padding: 0.4rem 0.9rem;"
+          title="Open ChatGPT Plus with primed adversarial audit prompt"
         >
-          <span class="diamond-dot bg-amber-400"></span>
-          <span>Method 1 (ChatGPT Plus)</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-aero-muted"></i>
+          <span>Method 1 (ChatGPT Plus) ↗</span>
         </a>
       </div>
-
     </div>
-  </header>
+  </nav>
 
-  <!-- Marquee Technical Spec Ribbon (Broodsheet & Aerospace Engineering) -->
+  <!-- Marquee Technical Specs Ribbon -->
   <div class="marquee-section">
-    <div class="marquee-track mono-label text-[10px] text-zinc-400">
-      <span>AUTONOMOUS ROBOTICS // 4-LAYER HIGH SPEED PCB // STM32F405 168MHz // FREERTOS MULTI-THREADING // ACTOR-CRITIC MULTI-AGENT ADAPTATION // ZERO-HALLUCINATION AUDITOR // TECTONIC XE-TEX 1-PAGE STANDARD // SIGNAL INTEGRITY & HIL VERIFICATION // VERILOG DV // CLOSED-LOOP CASCADE PID // SENSOR FUSION & FILTERING //&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;</span>
-      <span>AUTONOMOUS ROBOTICS // 4-LAYER HIGH SPEED PCB // STM32F405 168MHz // FREERTOS MULTI-THREADING // ACTOR-CRITIC MULTI-AGENT ADAPTATION // ZERO-HALLUCINATION AUDITOR // TECTONIC XE-TEX 1-PAGE STANDARD // SIGNAL INTEGRITY & HIL VERIFICATION // VERILOG DV // CLOSED-LOOP CASCADE PID // SENSOR FUSION & FILTERING //&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;</span>
+    <div class="marquee-track">
+      <span>C++ &mdash; Python &mdash; Altium &mdash; ESP32 &mdash; STM32F405 &mdash; KiCad 4-Layer &mdash; Verilog &mdash; SOLIDWORKS &mdash; MATLAB &mdash; PCB Design &mdash; FreeRTOS &mdash; Closed-Loop PID &mdash; Actor-Critic AI &mdash; Resumake Standard &mdash;&nbsp;</span>
+      <span>C++ &mdash; Python &mdash; Altium &mdash; ESP32 &mdash; STM32F405 &mdash; KiCad 4-Layer &mdash; Verilog &mdash; SOLIDWORKS &mdash; MATLAB &mdash; PCB Design &mdash; FreeRTOS &mdash; Closed-Loop PID &mdash; Actor-Critic AI &mdash; Resumake Standard &mdash;&nbsp;</span>
     </div>
   </div>
 
-  <!-- Main Broadsheet Container -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14 flex flex-col space-y-12">
+  <!-- Main Content Container -->
+  <main class="main-container">
 
-    <!-- Hero Editorial Heading (FMI Industries & Justin Parra Broadsheet) -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/[0.08]">
-      <div class="max-w-2xl space-y-3">
-        <div class="flex items-center space-x-2">
-          <span class="mono-label text-aero-amber">Section 01 // Execution Pipeline</span>
-          <div class="h-px w-8 bg-aero-amber/40"></div>
-          <span class="mono-label text-zinc-500">Autonomous Adaptation</span>
-        </div>
-        <h1 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-          Precision Engineering <span class="italic font-serif font-normal text-aero-amber">in Extreme Markets.</span>
-        </h1>
-        <p class="text-sm text-zinc-400 font-sans leading-relaxed max-w-xl">
-          Zero-hallucination multi-agent resume synthesis. Anchored strictly to verified hardware credentials, optimized for ATS keyword dominance, and compiled into single-page Resumake-standard PDFs.
-        </p>
+    <!-- Hero Editorial Headline -->
+    <div>
+      <div style="margin-bottom: 0.75rem;">
+        <span class="mono-label">Electrical & Computer Engineering &mdash; Resume Adaptation</span>
       </div>
-
-      <div class="flex flex-col items-start md:items-end space-y-2 shrink-0">
-        <div class="flex items-center space-x-2 text-xs font-mono text-zinc-400">
-          <span class="diamond-dot bg-aero-amber"></span>
-          <span>STRICT 1-PAGE RESUMAKE SPEC</span>
-        </div>
-        <div class="text-[11px] font-mono text-zinc-500">
-          ENGINE: TECTONIC XE-TEX // 0.40 INCH MARGINS
+      <h1 class="hero-name">
+        Changing the way we <br>
+        <span class="hero-name-italic">tailor & engineer.</span>
+      </h1>
+      <div class="hero-rule"></div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem;">
+        <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-secondary); max-width: 650px;">
+          Multi-agent resume synthesis anchored strictly to verified engineering experience. Generates single-page, Resumake-compliant LaTeX and compiles via Tectonic with zero hallucinations.
+        </p>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted);">
+          <span>ENGINE: TECTONIC XE-TEX // 0.40 INCH MARGINS</span>
         </div>
       </div>
     </div>
 
-    <!-- 01 / Primary Job Ingestion Workspace -->
-    <div class="fmi-card rounded-xl p-6 sm:p-8 relative">
-      <div class="card-corner-tl"></div>
-      <div class="card-corner-tr"></div>
-      <div class="card-corner-bl"></div>
-      <div class="card-corner-br"></div>
-
-      <!-- Top Header & Preset Switches -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-white/[0.06]">
-        <div class="flex items-center space-x-2.5">
-          <span class="mono-label text-white">01 // TARGET JOB DESCRIPTION</span>
-          <span class="text-zinc-600">/</span>
-          <span class="mono-label text-zinc-400" id="wordCountBadge">0 WORDS</span>
-        </div>
-
-        <!-- Quick Demo Presets -->
-        <div class="flex items-center space-x-2">
-          <span class="mono-label text-zinc-500 hidden sm:inline">PRESETS:</span>
-          <button onclick="loadSample('qualcomm')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Qualcomm</button>
-          <button onclick="loadSample('apple')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Apple</button>
-          <button onclick="loadSample('spacex')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">SpaceX</button>
-          <button onclick="loadSample('anduril')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">Anduril</button>
-        </div>
+    <!-- 01 / Section: Target Job Description & Parameter Ingestion -->
+    <section>
+      <div class="section-header">
+        <span class="mono-label">01/05</span>
+        <div class="section-header-rule"></div>
+        <h2 class="section-title">Job Ingestion</h2>
       </div>
 
-      <!-- Textarea -->
-      <textarea 
-        id="jobTextInput" 
-        rows="6" 
-        placeholder="Paste full job posting description here... Company name and role title will be detected automatically." 
-        oninput="handleJobInput()"
-        class="aero-input w-full rounded-md p-4 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
-      ></textarea>
-
-      <!-- Auto-Detected Metadata Strip (Editable Aerospace Pills) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-4">
-        
-        <!-- Company Field -->
-        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
-          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Company Detected</label>
-          <input type="text" id="companyInput" placeholder="Auto-detecting..." class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none">
+      <div class="broadsheet-card">
+        <!-- Top Toolbar -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem;">
+          <span class="mono-label" style="font-size: 0.65rem;">Target Job Posting Text</span>
+          
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="mono-label" style="font-size: 0.62rem; color: var(--color-text-muted);">Presets:</span>
+            <button onclick="loadSample('qualcomm')" class="chip-btn">Qualcomm</button>
+            <button onclick="loadSample('apple')" class="chip-btn">Apple</button>
+            <button onclick="loadSample('spacex')" class="chip-btn">SpaceX</button>
+            <button onclick="loadSample('anduril')" class="chip-btn">Anduril</button>
+            <span style="color: var(--color-border);">|</span>
+            <span class="mono-label" id="wordCountBadge" style="font-size: 0.62rem;">0 Words</span>
+          </div>
         </div>
 
-        <!-- Role Title Field -->
-        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
-          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Role Title</label>
-          <input type="text" id="roleInput" placeholder="Auto-detecting..." class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none">
+        <!-- Textarea -->
+        <textarea 
+          id="jobTextInput" 
+          rows="6" 
+          placeholder="Paste full job posting description here... Company name and role title will be detected automatically." 
+          oninput="handleJobInput()"
+          class="broadsheet-input"
+          style="resize: vertical; min-height: 140px; margin-bottom: 1.25rem;"
+        ></textarea>
+
+        <!-- Metadata Strip (4 Clean Cells) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          
+          <!-- Company Field -->
+          <div style="background: var(--color-surface); padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.6rem; display: block; margin-bottom: 0.35rem;">Company Detected</span>
+            <input type="text" id="companyInput" placeholder="Auto-detecting..." style="width: 100%; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--color-text); outline: none;">
+          </div>
+
+          <!-- Role Title Field -->
+          <div style="background: var(--color-surface); padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.6rem; display: block; margin-bottom: 0.35rem;">Role Title</span>
+            <input type="text" id="roleInput" placeholder="Auto-detecting..." style="width: 100%; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--color-text); outline: none;">
+          </div>
+
+          <!-- Graduation Timeline -->
+          <div style="background: var(--color-surface); padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.6rem; display: block; margin-bottom: 0.35rem;">Graduation Timeline</span>
+            <select id="gradDateSelect" onchange="handleGradDateChange()" style="width: 100%; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--color-text); outline: none; cursor: pointer;">
+              <option value="Expected December 2027">Expected Dec 2027 (Internship Track)</option>
+              <option value="Expected May 2027">Expected May 2027 (Standard Track)</option>
+              <option value="Expected August 2027">Expected Aug 2027 (Summer Track)</option>
+            </select>
+          </div>
+
+          <!-- Target Score -->
+          <div style="background: var(--color-surface); padding: 0.75rem 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.6rem; display: block; margin-bottom: 0.35rem;">Audit Bar</span>
+            <select id="targetScoreSelect" style="width: 100%; background: transparent; border: none; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--color-text); outline: none; cursor: pointer;">
+              <option value="90" selected>90/100 (Executive Strict)</option>
+              <option value="95">95/100 (Perfectionist)</option>
+              <option value="85">85/100 (Standard)</option>
+            </select>
+          </div>
+
         </div>
 
-        <!-- Graduation Date Field -->
-        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
-          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Target Timeline</label>
-          <select id="gradDateSelect" onchange="handleGradDateChange()" class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none cursor-pointer">
-            <option value="Expected December 2027" class="bg-[#0F1219] text-white">Expected Dec 2027 (Internship Track)</option>
-            <option value="Expected May 2027" class="bg-[#0F1219] text-white">Expected May 2027 (Standard Track)</option>
-            <option value="Expected August 2027" class="bg-[#0F1219] text-white">Expected Aug 2027 (Summer Track)</option>
-          </select>
-        </div>
-
-        <!-- Target Audit Score Field -->
-        <div class="p-2.5 rounded-md bg-white/[0.02] border border-white/[0.06] focus-within:border-aero-amber transition">
-          <label class="block mono-label text-[10px] text-zinc-400 mb-1">Adversarial Hurdle</label>
-          <select id="targetScoreSelect" class="w-full bg-transparent font-mono text-xs text-white font-medium focus:outline-none cursor-pointer">
-            <option value="90" selected>90/100 (Executive Strict)</option>
-            <option value="95">95/100 (Perfectionist)</option>
-            <option value="85">85/100 (Standard)</option>
-          </select>
-        </div>
-
-      </div>
-
-      <!-- Eligibility & Timeline Banner (Dynamic) -->
-      <div id="eligibilityWarningPill" class="mt-4 p-3.5 rounded-md bg-emerald-500/[0.08] border border-emerald-500/[0.25] text-emerald-200 text-xs flex items-start space-x-3 transition">
-        <span class="diamond-dot bg-emerald-400 mt-1"></span>
-        <div class="space-y-0.5">
-          <div class="mono-label text-[10px] text-emerald-300">Eligibility Aligned (Internship Track)</div>
-          <div class="text-[11px] font-sans text-emerald-100/90" id="eligibilityWarningText">
+        <!-- Eligibility Notification (Clean Broadsheet Notice) -->
+        <div id="eligibilityWarningPill" style="display: none; padding: 0.85rem 1rem; background: var(--color-highlight); border: 1px solid var(--color-hazard); border-radius: 2px; margin-bottom: 1.25rem;">
+          <div class="mono-label" style="color: var(--color-hazard); font-size: 0.65rem; margin-bottom: 0.25rem;">Eligibility Aligned // Internship Timeline</div>
+          <div id="eligibilityWarningText" style="font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.5;">
             Target posting specifies graduation date of November 2027 or later. Your degree timeline for this internship is set to <strong>Expected December 2027</strong>, fully satisfying eligibility.
           </div>
         </div>
-      </div>
 
-      <!-- ATS Keywords Pill -->
-      <div id="keywordsPill" class="hidden mt-3 inline-flex items-center space-x-2 px-3 py-1 rounded-sm bg-sky-500/[0.1] border border-sky-500/[0.25] text-[11px] font-mono text-sky-300">
-        <span class="diamond-dot bg-sky-400"></span>
-        <span id="keywordsCountText">0 keywords</span>
-      </div>
-
-      <!-- Action Strip -->
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-5 mt-5 border-t border-white/[0.06] gap-4">
-        <div class="flex items-center space-x-2.5 text-xs text-zinc-400 font-mono">
-          <span class="diamond-dot bg-emerald-400"></span>
-          <span>Zero-Tolerance Anti-Hallucination Policy Active</span>
+        <!-- ATS Keywords Pill -->
+        <div id="keywordsPill" style="display: none; margin-bottom: 1.25rem;">
+          <span class="mono-label" style="background: var(--color-surface); padding: 0.35rem 0.75rem; border: 1px solid var(--color-border); border-radius: 2px;" id="keywordsCountText">
+            0 ATS Keywords
+          </span>
         </div>
 
-        <button 
-          id="runButton" 
-          onclick="startRefinement()" 
-          class="btn-aero-primary w-full sm:w-auto px-8 py-3 rounded-sm flex items-center justify-center space-x-2.5 cursor-pointer shadow-lg"
-        >
-          <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-          <span>Refine & Verify Resume</span>
-        </button>
-      </div>
-
-    </div>
-
-    <!-- 02 / Iterative Refinement Studio: ChatGPT Review & Personal Notes -->
-    <div class="fmi-card rounded-xl p-6 sm:p-8 relative" id="feedbackStudioCard">
-      <div class="card-corner-tl"></div>
-      <div class="card-corner-tr"></div>
-      <div class="card-corner-bl"></div>
-      <div class="card-corner-br"></div>
-
-      <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.06]">
-        <div class="flex items-center space-x-3">
-          <span class="diamond-dot bg-aero-amber"></span>
-          <div>
-            <h2 class="mono-label text-white text-xs">02 // ITERATIVE REFINEMENT STUDIO</h2>
-            <p class="text-xs text-zinc-400 font-sans mt-0.5">Ingest external ChatGPT Plus adversarial critiques, recruiter notes, and personal ground-truth directives.</p>
+        <!-- Action Strip -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted);">
+            <i class="fa-solid fa-shield-halved" style="color: var(--color-hazard); margin-right: 0.35rem;"></i>
+            <span>Zero-Tolerance Anti-Hallucination Policy Active</span>
           </div>
-        </div>
-        <span class="mono-label text-zinc-500 text-[10px] hidden md:inline">METHOD 1 FEEDBACK LOOP</span>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
-        <!-- Left: ChatGPT Review Textarea -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <label class="mono-label text-[11px] text-zinc-300 flex items-center space-x-2">
-              <span class="diamond-dot bg-amber-400"></span>
-              <span>ChatGPT Plus Audit Critique</span>
-            </label>
-            <button type="button" onclick="pasteFromClipboard('chatgptFeedbackInput')" class="mono-label text-[10px] text-aero-muted hover:text-white transition">
-              <i class="fa-regular fa-paste"></i> PASTE CLIPBOARD
-            </button>
-          </div>
-          <textarea 
-            id="chatgptFeedbackInput" 
-            rows="5" 
-            placeholder="Paste full critique from ChatGPT Plus here (e.g. 'Final Score: 78/100, Claims to remove: sub-millimeter maze centering, 20% traversal speedup, unbacked percentages...')"
-            class="aero-input w-full rounded-md p-3.5 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
-          ></textarea>
-        </div>
-
-        <!-- Right: Personal Notes & Overrides -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <label class="mono-label text-[11px] text-zinc-300 flex items-center space-x-2">
-              <span class="diamond-dot bg-sky-400"></span>
-              <span>Personal Directives & Ground-Truth</span>
-            </label>
-            <span class="mono-label text-[10px] text-zinc-500">OPTIONAL</span>
-          </div>
-          <textarea 
-            id="personalNotesInput" 
-            rows="5" 
-            placeholder="e.g. 'Won 2nd place at Rowan, not 1st', 'Expected Dec 2027 graduation', 'Never took semiconductor class', 'Emphasize FreeRTOS and oscilloscope'..."
-            class="aero-input w-full rounded-md p-3.5 text-xs font-mono placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
-          ></textarea>
-        </div>
-      </div>
-
-      <!-- Quick Suggestion Presets -->
-      <div class="flex flex-wrap items-center gap-2 pt-3 mt-1">
-        <span class="mono-label text-[10px] text-zinc-500 mr-1">PRESETS:</span>
-        <button type="button" onclick="addPersonalDirective('Won 2nd Place at Rowan Regional (not 1st)')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Rowan 2nd Place</button>
-        <button type="button" onclick="addPersonalDirective('Graduation date: Expected December 2027 (internship track)')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Dec 2027 Grad</button>
-        <button type="button" onclick="addPersonalDirective('Remove unverified metrics: <0.1%, 900%, 20% speedup, sub-millimeter')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Soften Metrics</button>
-        <button type="button" onclick="addPersonalDirective('Remove semiconductor devices course from coursework')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Exclude Semiconductor</button>
-        <button type="button" onclick="addPersonalDirective('Clean title to Lead Firmware & Hardware Engineer / Co-President')" class="btn-aero-outline px-2.5 py-1 text-[10px] rounded-sm">+ Clean Title</button>
-      </div>
-
-      <!-- Re-audit Action Button Strip -->
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 mt-4 border-t border-white/[0.06] gap-3">
-        <div class="text-[11px] font-mono text-zinc-400 flex items-center space-x-2">
-          <i class="fa-solid fa-arrows-rotate text-aero-amber text-xs"></i>
-          <span>Applies critique, scrubs ungrounded claims, synchronizes candidate truth, and re-compiles 1-page PDF.</span>
-        </div>
-        <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
-          <button type="button" onclick="clearFeedback()" class="btn-aero-outline px-3.5 py-2 text-[10px] rounded-sm">CLEAR</button>
-          <button 
-            id="applyFeedbackBtn" 
-            type="button" 
-            onclick="applyFeedbackAndRefine()" 
-            class="btn-aero-primary px-6 py-2.5 rounded-sm flex items-center space-x-2 text-xs cursor-pointer shadow-md"
-          >
-            <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-            <span>Apply Directives & Re-Audit</span>
+          <button id="runButton" onclick="startRefinement()" class="btn-ink">
+            <span>Refine & Verify Resume</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.65rem;"></i>
           </button>
         </div>
-      </div>
-    </div>
 
-    <!-- 03 / Multi-Agent Pipeline Telemetry -->
-    <div id="pipelineTracker" class="fmi-card rounded-xl p-5 sm:p-6 flex flex-col space-y-4">
-      <div class="flex items-center justify-between text-xs pb-3 border-b border-white/[0.06]">
-        <div class="flex items-center space-x-2">
-          <span class="diamond-dot bg-sky-400"></span>
-          <span class="mono-label text-white text-xs">03 // ACTOR-CRITIC DUAL-AGENT PIPELINE</span>
-        </div>
-        <span id="pipelineStatusText" class="mono-label text-aero-amber font-medium">READY</span>
       </div>
+    </section>
 
-      <!-- 4-Step Telemetry Status Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-        <div id="stepIngest" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
-          <span class="diamond-dot bg-zinc-600 mb-2" id="dotIngest"></span>
-          <span class="mono-label text-zinc-300 text-[10px]">1. INGEST & DETECT</span>
-          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Parse role & keywords</span>
-        </div>
-        <div id="stepGen" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
-          <span class="diamond-dot bg-zinc-600 mb-2" id="dotGen"></span>
-          <span class="mono-label text-zinc-300 text-[10px]">2. GENERATOR DRAFT</span>
-          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Candidate profile anchored</span>
-        </div>
-        <div id="stepAudit" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
-          <span class="diamond-dot bg-zinc-600 mb-2" id="dotAudit"></span>
-          <span class="mono-label text-zinc-300 text-[10px]">3. AUDITOR VERIFY</span>
-          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Zero-hallucination check</span>
-        </div>
-        <div id="stepOutput" class="p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center">
-          <span class="diamond-dot bg-zinc-600 mb-2" id="dotOutput"></span>
-          <span class="mono-label text-zinc-300 text-[10px]">4. TECTONIC COMPILE</span>
-          <span class="text-[10px] text-zinc-500 font-sans mt-0.5">Strict 1-page XeTeX PDF</span>
-        </div>
+    <!-- 02 / Section: Iterative Refinement Studio -->
+    <section id="feedbackStudioCard">
+      <div class="section-header">
+        <span class="mono-label">02/05</span>
+        <div class="section-header-rule"></div>
+        <h2 class="section-title">Refinement Loop</h2>
       </div>
 
-      <!-- Telemetry Terminal Stream -->
-      <div id="terminalStream" class="text-[11px] font-mono text-zinc-400 bg-black/80 rounded-md p-4 border border-white/[0.06] max-h-28 overflow-y-auto leading-relaxed">
-        <span>&gt; Ready. Paste a job description to trigger the refinement loop.</span>
+      <div class="broadsheet-card">
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 1.25rem;">
+          Directly paste adversarial critiques from ChatGPT Plus and your own personal directives. The loop synchronizes ground truth and scrubs unbacked claims.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1rem;">
+          
+          <!-- Left: ChatGPT Feedback -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem;">
+              <label class="mono-label" style="font-size: 0.65rem;">ChatGPT Plus Audit Critique</label>
+              <button type="button" onclick="pasteFromClipboard('chatgptFeedbackInput')" class="chip-btn" style="padding: 0.15rem 0.5rem; font-size: 0.58rem;">Paste Clipboard</button>
+            </div>
+            <textarea 
+              id="chatgptFeedbackInput" 
+              rows="5" 
+              placeholder="Paste full critique from ChatGPT Plus here (e.g. 'Final Score: 78/100, Claims to remove: sub-millimeter maze centering, 20% speedup, unverified metrics...')"
+              class="broadsheet-input"
+              style="resize: vertical; min-height: 120px;"
+            ></textarea>
+          </div>
+
+          <!-- Right: Personal Directives -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem;">
+              <label class="mono-label" style="font-size: 0.65rem;">Personal Directives & Overrides</label>
+              <span class="mono-label" style="font-size: 0.58rem; color: var(--color-text-muted);">Optional</span>
+            </div>
+            <textarea 
+              id="personalNotesInput" 
+              rows="5" 
+              placeholder="e.g. 'Won 2nd place at Rowan, not 1st', 'Expected Dec 2027 graduation', 'Never took semiconductor class', 'Emphasize FreeRTOS and oscilloscope'..."
+              class="broadsheet-input"
+              style="resize: vertical; min-height: 120px;"
+            ></textarea>
+          </div>
+
+        </div>
+
+        <!-- Presets -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-bottom: 1.25rem;">
+          <span class="mono-label" style="font-size: 0.6rem; color: var(--color-text-muted); margin-right: 0.25rem;">Quick Directives:</span>
+          <button type="button" onclick="addPersonalDirective('Won 2nd Place at Rowan Regional (not 1st)')" class="chip-btn">+ Rowan 2nd Place</button>
+          <button type="button" onclick="addPersonalDirective('Graduation date: Expected December 2027 (internship track)')" class="chip-btn">+ Dec 2027 Grad</button>
+          <button type="button" onclick="addPersonalDirective('Remove unverified metrics: <0.1%, 900%, 20% speedup, sub-millimeter')" class="chip-btn">+ Soften Metrics</button>
+          <button type="button" onclick="addPersonalDirective('Remove semiconductor devices course from coursework')" class="chip-btn">+ Exclude Semiconductor</button>
+          <button type="button" onclick="addPersonalDirective('Clean title to Lead Firmware & Hardware Engineer / Co-President')" class="chip-btn">+ Clean Title</button>
+        </div>
+
+        <!-- Re-audit Action Button Strip -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-secondary);">
+            <span>Applies directives, synchronizes candidate truth, and re-compiles 1-page PDF.</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" onclick="clearFeedback()" class="btn-wire" style="padding: 0.55rem 1rem;">Clear</button>
+            <button id="applyFeedbackBtn" type="button" onclick="applyFeedbackAndRefine()" class="btn-ink">
+              <span>Apply Directives & Re-Audit</span>
+              <i class="fa-solid fa-arrows-rotate" style="font-size: 0.65rem;"></i>
+            </button>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
-    <!-- 04 / Output Section (Scorecard + PDF / LaTeX / Plaintext Deliverables) -->
-    <div id="resultsWrapper" class="space-y-6 hidden">
-      
-      <!-- Scorecard -->
-      <div class="fmi-card rounded-xl p-6 sm:p-8 flex flex-col space-y-6">
-        <div class="card-corner-tl"></div>
-        <div class="card-corner-tr"></div>
-        <div class="card-corner-bl"></div>
-        <div class="card-corner-br"></div>
+    <!-- 03 / Section: Multi-Agent Telemetry -->
+    <section id="pipelineTracker">
+      <div class="section-header">
+        <span class="mono-label">03/05</span>
+        <div class="section-header-rule"></div>
+        <h2 class="section-title">Telemetry</h2>
+      </div>
 
-        <div class="flex items-center justify-between pb-4 border-b border-white/[0.06]">
-          <div class="flex items-center space-x-3">
-            <span class="diamond-dot bg-emerald-400"></span>
-            <span class="mono-label text-white text-xs">04 // AUDIT VERDICT & TELEMETRY SCORECARD</span>
-            <span id="verdictPill" class="px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
+      <div class="broadsheet-card" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span class="mono-label" style="font-size: 0.65rem;">Actor-Critic Execution State</span>
+          <span id="pipelineStatusText" class="mono-label" style="color: var(--color-hazard);">READY</span>
+        </div>
+
+        <!-- 4 Step Columns -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;">
+          
+          <div id="stepIngest" style="padding: 0.85rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 2px; text-align: center;">
+            <div id="dotIngest" style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-muted); margin: 0 auto 0.4rem auto;"></div>
+            <div class="mono-label" style="font-size: 0.65rem; color: var(--color-text);">1. Ingest</div>
+          </div>
+
+          <div id="stepGen" style="padding: 0.85rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 2px; text-align: center;">
+            <div id="dotGen" style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-muted); margin: 0 auto 0.4rem auto;"></div>
+            <div class="mono-label" style="font-size: 0.65rem; color: var(--color-text);">2. Generator</div>
+          </div>
+
+          <div id="stepAudit" style="padding: 0.85rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 2px; text-align: center;">
+            <div id="dotAudit" style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-muted); margin: 0 auto 0.4rem auto;"></div>
+            <div class="mono-label" style="font-size: 0.65rem; color: var(--color-text);">3. Auditor</div>
+          </div>
+
+          <div id="stepOutput" style="padding: 0.85rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 2px; text-align: center;">
+            <div id="dotOutput" style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-text-muted); margin: 0 auto 0.4rem auto;"></div>
+            <div class="mono-label" style="font-size: 0.65rem; color: var(--color-text);">4. Compile</div>
+          </div>
+
+        </div>
+
+        <!-- Terminal Log Stream -->
+        <div id="terminalStream" style="background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: 2px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-secondary); max-height: 110px; overflow-y: auto; line-height: 1.6;">
+          <div>&gt; Ready. Paste a job description to trigger the refinement loop.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 / Section: Output Deliverables & Scorecard -->
+    <section id="resultsWrapper" style="display: none;">
+      <div class="section-header">
+        <span class="mono-label">04/05</span>
+        <div class="section-header-rule"></div>
+        <h2 class="section-title">Deliverables</h2>
+      </div>
+
+      <!-- Scorecard Card -->
+      <div class="broadsheet-card" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="mono-label">Audit Scorecard</span>
+            <span id="verdictPill" class="mono-label" style="background: var(--color-surface); padding: 0.2rem 0.5rem; border: 1px solid var(--color-hazard); color: var(--color-hazard);">
               APPROVED
             </span>
           </div>
-          <span id="dateStamp" class="mono-label text-zinc-500 text-[10px]"></span>
+          <span id="dateStamp" class="mono-label" style="color: var(--color-text-muted);"></span>
         </div>
 
-        <!-- Metric Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
-            <span class="mono-label text-[10px] text-zinc-400">OVERALL RATING</span>
-            <div class="text-3xl font-display font-bold text-white mt-1">
-              <span id="overallScoreVal">--</span><span class="text-xs font-mono font-normal text-zinc-500">/100</span>
+        <!-- Numbers Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+          
+          <div style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.62rem; display: block;">Overall Score</span>
+            <div style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--color-text); line-height: 1.1; margin-top: 0.25rem;">
+              <span id="overallScoreVal">--</span><span style="font-size: 1rem; font-weight: 400; color: var(--color-text-muted);">/100</span>
             </div>
-            <span class="text-[10px] text-zinc-500 font-mono">Composite Index</span>
           </div>
-          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
-            <span class="mono-label text-[10px] text-zinc-400">AUTHENTICITY</span>
-            <div id="authenticityVal" class="text-2xl font-mono font-bold text-emerald-400 mt-1">40/40</div>
-            <span class="text-[10px] text-zinc-500 font-mono">0 Hallucinations</span>
+
+          <div style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.62rem; display: block;">Authenticity</span>
+            <div id="authenticityVal" style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--color-hazard); line-height: 1.1; margin-top: 0.25rem;">40/40</div>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-text-muted);">0 Hallucinations</span>
           </div>
-          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
-            <span class="mono-label text-[10px] text-zinc-400">ATS KEYWORD MATCH</span>
-            <div id="atsMatchVal" class="text-2xl font-mono font-bold text-sky-400 mt-1">--</div>
-            <span class="text-[10px] text-zinc-500 font-mono">Keyword Density</span>
+
+          <div style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.62rem; display: block;">ATS Keyword Match</span>
+            <div id="atsMatchVal" style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--color-text); line-height: 1.1; margin-top: 0.25rem;">--</div>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-text-muted);">Weighted Density</span>
           </div>
-          <div class="p-4 rounded-md bg-white/[0.02] border border-white/[0.06]">
-            <span class="mono-label text-[10px] text-zinc-400">METRICS & POWER VERBS</span>
-            <div id="metricsVal" class="text-2xl font-mono font-bold text-amber-400 mt-1">--</div>
-            <span class="text-[10px] text-zinc-500 font-mono">Action Outcomes</span>
+
+          <div style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px;">
+            <span class="mono-label" style="font-size: 0.62rem; display: block;">Metrics & Verbs</span>
+            <div id="metricsVal" style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--color-text); line-height: 1.1; margin-top: 0.25rem;">--</div>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-text-muted);">Quantified Impact</span>
           </div>
+
         </div>
 
         <!-- Hallucination Alert (if any) -->
-        <div id="hallucinationBox" class="p-4 rounded-md bg-rose-500/[0.08] border border-rose-500/[0.25] text-rose-300 text-xs hidden">
-          <div class="mono-label text-rose-300 font-bold mb-1 flex items-center space-x-2">
-            <span class="diamond-dot bg-rose-500"></span>
-            <span>HALLUCINATION DETECTED:</span>
-          </div>
-          <ul id="hallucinationUl" class="list-disc list-inside space-y-1 font-mono text-[11px] text-rose-200"></ul>
+        <div id="hallucinationBox" style="display: none; padding: 1rem; background: var(--color-highlight); border: 1px solid var(--color-hazard); border-radius: 2px; margin-bottom: 1rem;">
+          <div class="mono-label" style="color: var(--color-hazard); margin-bottom: 0.35rem;">Hallucination Detected:</div>
+          <ul id="hallucinationUl" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-secondary); padding-left: 1.25rem;"></ul>
         </div>
 
-        <!-- Directives Applied Alert (Feedback Loop) -->
-        <div id="directivesBox" class="p-4 rounded-md bg-sky-500/[0.08] border border-sky-500/[0.25] text-sky-300 text-xs hidden">
-          <div class="mono-label text-sky-300 font-bold mb-1 flex items-center space-x-2">
-            <span class="diamond-dot bg-sky-400"></span>
-            <span>FEEDBACK INGESTED & RESOLVED IN THIS CYCLE:</span>
-          </div>
-          <ul id="directivesUl" class="list-disc list-inside space-y-1 font-mono text-[11px] text-sky-200"></ul>
+        <!-- Directives Applied Alert -->
+        <div id="directivesBox" style="display: none; padding: 1rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 2px;">
+          <div class="mono-label" style="margin-bottom: 0.35rem;">Directives Resolved in this Cycle:</div>
+          <ul id="directivesUl" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-secondary); padding-left: 1.25rem;"></ul>
         </div>
       </div>
 
-      <!-- Segmented Control Tabs (FMI Technical Tabs) -->
-      <div class="flex flex-wrap items-center justify-between gap-3">
-        <div class="inline-flex p-1 rounded-sm bg-[#0E1118] border border-white/[0.08] text-xs font-mono">
-          <button onclick="setTab('pdf')" id="tabBtnPdf" class="px-4 py-1.5 rounded-sm text-white bg-white/[0.12] transition mono-label text-[10px]">PDF PREVIEW</button>
-          <button onclick="setTab('latex')" id="tabBtnLatex" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">LATEX (RESUMAKE)</button>
-          <button onclick="setTab('text')" id="tabBtnText" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">PLAINTEXT</button>
-          <button onclick="setTab('chatgpt')" id="tabBtnChatgpt" class="px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400">CHATGPT PLUS</button>
-        </div>
+      <!-- Segmented Tabs & Content -->
+      <div class="broadsheet-card" style="padding: 1.5rem;">
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-border);">
+          <div style="display: flex; gap: 0.4rem;">
+            <button onclick="setTab('pdf')" id="tabBtnPdf" class="btn-wire" style="padding: 0.45rem 0.85rem; font-size: 0.65rem; background: var(--color-text); color: var(--color-bg); border-color: var(--color-text);">PDF Preview</button>
+            <button onclick="setTab('latex')" id="tabBtnLatex" class="btn-wire" style="padding: 0.45rem 0.85rem; font-size: 0.65rem;">LaTeX</button>
+            <button onclick="setTab('text')" id="tabBtnText" class="btn-wire" style="padding: 0.45rem 0.85rem; font-size: 0.65rem;">Plaintext</button>
+            <button onclick="setTab('chatgpt')" id="tabBtnChatgpt" class="btn-wire" style="padding: 0.45rem 0.85rem; font-size: 0.65rem;">ChatGPT Plus</button>
+          </div>
 
-        <div class="flex items-center space-x-2">
-          <button onclick="copyCurrentTabContent()" id="copyTabBtn" class="btn-aero-outline px-3.5 py-1.5 rounded-sm flex items-center space-x-1.5 text-[11px] cursor-pointer">
-            <i class="fa-regular fa-copy text-[11px]"></i>
-            <span id="copyTabLabel">COPY</span>
-          </button>
-          <a id="downloadBtn" href="#" target="_blank" class="btn-aero-primary px-4 py-1.5 rounded-sm flex items-center space-x-1.5 text-xs font-bold cursor-pointer">
-            <i class="fa-solid fa-arrow-down text-[11px]"></i>
-            <span>DOWNLOAD PDF</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Tab Content Area -->
-      <div class="fmi-card rounded-xl overflow-hidden min-h-[580px] flex flex-col p-1.5">
-        <!-- PDF Tab -->
-        <div id="tabPdf" class="w-full h-[640px] rounded-lg overflow-hidden bg-black">
-          <iframe id="pdfIframe" class="w-full h-full border-0" src="about:blank"></iframe>
-        </div>
-
-        <!-- LaTeX Tab -->
-        <div id="tabLatex" class="hidden p-6 flex-1 flex flex-col">
-          <div class="mono-label text-[10px] text-zinc-400 mb-2">Jake's Resume / Resumake Template 1 Standard • XeTeX / Tectonic Compilable</div>
-          <pre id="latexPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/60 p-4 rounded-md border border-white/5"></pre>
-        </div>
-
-        <!-- Plaintext Tab -->
-        <div id="tabText" class="hidden p-6 flex-1 flex flex-col">
-          <pre id="plainTextPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/60 p-4 rounded-md border border-white/5"></pre>
-        </div>
-
-        <!-- ChatGPT Plus Tab -->
-        <div id="tabChatgpt" class="hidden p-6 flex-1 flex flex-col space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-md bg-white/[0.03] border border-white/[0.08] gap-3">
-            <div>
-              <div class="mono-label text-xs text-white flex items-center space-x-2">
-                <span class="diamond-dot bg-amber-400"></span>
-                <span>METHOD 1: ADVERSARIAL VERIFICATION PROMPT (CHATGPT PLUS)</span>
-              </div>
-              <div class="text-xs text-zinc-400 font-sans mt-1 leading-relaxed">
-                Clicking the button opens ChatGPT in a new tab and copies the complete adversarial audit prompt directly to your clipboard. Simply press <strong>Ctrl+V</strong>.
-              </div>
-            </div>
-            <a 
-              href="https://chatgpt.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onclick="launchChatGPTDirect(event)" 
-              class="btn-aero-primary px-5 py-2.5 rounded-sm flex items-center justify-center space-x-2 text-xs font-bold cursor-pointer shrink-0"
-            >
-              <span>LAUNCH CHATGPT PLUS</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="copyCurrentTabContent()" id="copyTabBtn" class="btn-wire" style="padding: 0.45rem 0.85rem; font-size: 0.65rem;">
+              <i class="fa-regular fa-copy"></i>
+              <span id="copyTabLabel">Copy</span>
+            </button>
+            <a id="downloadBtn" href="#" target="_blank" class="btn-ink" style="padding: 0.45rem 0.85rem; font-size: 0.65rem;">
+              <span>Download PDF ↗</span>
             </a>
           </div>
-          <pre id="chatgptPre" class="flex-1 w-full p-4 rounded-md bg-black/80 border border-white/[0.06] font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all"></pre>
+        </div>
 
-          <!-- Return Loop Callout -->
-          <div class="p-4 rounded-md bg-amber-500/[0.08] border border-amber-500/[0.25] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="space-y-0.5">
-              <div class="mono-label text-xs text-amber-300 flex items-center space-x-2">
-                <span class="diamond-dot bg-amber-400"></span>
-                <span>RECEIVED CHATGPT AUDIT FEEDBACK?</span>
-              </div>
-              <div class="text-xs text-amber-100/80 font-sans">
-                Paste the review into the Iterative Refinement Studio above to automatically incorporate all edits and re-compile.
-              </div>
-            </div>
-            <button 
-              type="button" 
-              onclick="scrollToFeedbackStudio()" 
-              class="btn-aero-primary px-4 py-2 rounded-sm text-xs flex items-center justify-center space-x-1.5 shrink-0 cursor-pointer"
-            >
-              <span>PASTE FEEDBACK ABOVE</span>
-              <i class="fa-solid fa-arrow-up text-[10px]"></i>
-            </button>
+        <!-- PDF View -->
+        <div id="tabPdf" style="width: 100%; height: 650px; background: #222; border-radius: 2px; overflow: hidden;">
+          <iframe id="pdfIframe" style="width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+        </div>
+
+        <!-- LaTeX View -->
+        <div id="tabLatex" style="display: none;">
+          <div class="mono-label" style="margin-bottom: 0.5rem; font-size: 0.62rem;">Resumake Template 1 / Jake's Resume Standard &mdash; XeTeX / Tectonic</div>
+          <pre id="latexPre" style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text); max-height: 550px; overflow-y: auto; white-space: pre-wrap; user-select: all; line-height: 1.5;"></pre>
+        </div>
+
+        <!-- Plaintext View -->
+        <div id="tabText" style="display: none;">
+          <pre id="plainTextPre" style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text); max-height: 550px; overflow-y: auto; white-space: pre-wrap; user-select: all; line-height: 1.5;"></pre>
+        </div>
+
+        <!-- ChatGPT Plus Prompt View -->
+        <div id="tabChatgpt" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="mono-label" style="font-size: 0.65rem;">Method 1: Adversarial Verification Prompt</span>
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" onclick="launchChatGPTDirect(event)" class="btn-ink" style="padding: 0.4rem 0.8rem; font-size: 0.65rem;">Launch ChatGPT Plus ↗</a>
+          </div>
+          <pre id="chatgptPre" style="background: var(--color-surface); padding: 1rem; border: 1px solid var(--color-border); border-radius: 2px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text); max-height: 480px; overflow-y: auto; white-space: pre-wrap; user-select: all; line-height: 1.5;"></pre>
+          
+          <div style="margin-top: 1rem; padding: 0.85rem 1rem; background: var(--color-surface); border: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.8rem; color: var(--color-text-secondary);">Received external critique from ChatGPT?</span>
+            <button type="button" onclick="scrollToFeedbackStudio()" class="btn-wire" style="padding: 0.35rem 0.75rem; font-size: 0.65rem;">Paste Feedback in Studio ↑</button>
           </div>
         </div>
+
+      </div>
+    </section>
+
+    <!-- 05 / Section: Recent Applications -->
+    <section>
+      <div class="section-header">
+        <span class="mono-label">05/05</span>
+        <div class="section-header-rule"></div>
+        <h2 class="section-title">Recent Applications</h2>
       </div>
 
-    </div>
-
-    <!-- 05 / Recent Tailored Applications Drawer -->
-    <div class="pt-6 border-t border-white/[0.08] flex flex-col space-y-4">
-      <div class="flex items-center justify-between text-xs">
-        <div class="flex items-center space-x-2">
-          <span class="diamond-dot bg-zinc-500"></span>
-          <span class="mono-label text-zinc-400">05 // RECENT FLIGHT RECORDS</span>
-        </div>
-        <button onclick="loadRecent()" class="mono-label text-zinc-500 hover:text-white transition">REFRESH</button>
-      </div>
-      <div id="recentContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+      <div id="recentContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
         <!-- Injected via JS -->
       </div>
-    </div>
+    </section>
 
   </main>
 
-  <!-- Technical Toast Notification -->
-  <div id="appleToast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2.5 rounded-sm bg-[#161B26] border border-aero-amber text-white text-xs font-mono shadow-2xl backdrop-blur-xl flex items-center space-x-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-3">
-    <span class="diamond-dot bg-aero-amber"></span>
+  <!-- Editorial Toast Notification -->
+  <div id="appleToast" style="position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 10000; padding: 0.65rem 1.4rem; background: var(--color-text); color: var(--color-bg); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--color-border); box-shadow: 0 10px 25px rgba(0,0,0,0.25); border-radius: 2px; opacity: 0; pointer-events: none; transition: all 0.25s var(--ease-out);">
     <span id="toastMessage">PROMPT COPIED</span>
   </div>
 
@@ -697,6 +754,29 @@
     let activeTab = 'pdf';
     let currentData = null;
     let parseDebounce = null;
+
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('ar_theme', isDark ? 'dark' : 'light');
+      updateThemeLabel(isDark);
+    }
+
+    function updateThemeLabel(isDark) {
+      const lbl = document.getElementById('themeToggleLabel');
+      if (lbl) lbl.innerText = isDark ? 'Broadsheet' : 'Dark';
+    }
+
+    // Initialize Theme
+    (function initTheme() {
+      const saved = localStorage.getItem('ar_theme');
+      if (saved === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeLabel(true);
+      } else {
+        updateThemeLabel(false);
+      }
+    })();
 
     const sampleJDs = {
       qualcomm: {
@@ -755,9 +835,11 @@ Responsibilities:
     function showToast(msg) {
       const toast = document.getElementById('appleToast');
       document.getElementById('toastMessage').innerText = msg;
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
       setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
       }, 3500);
     }
 
@@ -769,7 +851,7 @@ Responsibilities:
       stream.scrollTop = stream.scrollHeight;
     }
 
-    // High-Precision Client-Side Extraction (Synchronized with Python Backend)
+    // High-Precision Extraction
     function localExtractMetadata(text) {
       if (!text) return { company: '', role: '' };
       let company = '';
@@ -891,7 +973,7 @@ Responsibilities:
     function handleJobInput() {
       const text = document.getElementById('jobTextInput').value;
       const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-      document.getElementById('wordCountBadge').innerText = `${words} WORDS`;
+      document.getElementById('wordCountBadge').innerText = `${words} Words`;
 
       const extracted = localExtractMetadata(text);
       if (extracted.company && !document.getElementById('companyInput').matches(':focus')) {
@@ -908,11 +990,11 @@ Responsibilities:
       if (textLower.includes('november 2027') || textLower.includes('2028 or later') || textLower.includes('november 2027 or later') || extracted.company.toLowerCase().includes('qualcomm')) {
         if (gradSelect) gradSelect.value = "Expected December 2027";
         if (navGrad) navGrad.innerText = "Expected Dec 2027";
-        if (conflictPill) conflictPill.classList.remove('hidden');
+        if (conflictPill) conflictPill.style.display = 'block';
       } else {
         if (gradSelect) gradSelect.value = "Expected May 2027";
         if (navGrad) navGrad.innerText = "Expected May 2027";
-        if (conflictPill) conflictPill.classList.add('hidden');
+        if (conflictPill) conflictPill.style.display = 'none';
       }
 
       clearTimeout(parseDebounce);
@@ -933,7 +1015,7 @@ Responsibilities:
           }
           if (data.keywords && data.keywords.length > 0) {
             const pill = document.getElementById('keywordsPill');
-            pill.classList.remove('hidden');
+            pill.style.display = 'block';
             document.getElementById('keywordsCountText').innerText = `${data.keywords.length} ATS KEYWORDS`;
           }
         } catch (e) {}
@@ -946,9 +1028,9 @@ Responsibilities:
       const navGrad = document.getElementById('navGraduationDisplay');
       if (navGrad) navGrad.innerText = val.replace('Expected ', '');
       if (val === 'Expected December 2027') {
-        conflictPill.classList.remove('hidden');
+        conflictPill.style.display = 'block';
       } else {
-        conflictPill.classList.add('hidden');
+        conflictPill.style.display = 'none';
       }
     }
 
@@ -956,13 +1038,15 @@ Responsibilities:
       const steps = ['stepIngest', 'stepGen', 'stepAudit', 'stepOutput'];
       steps.forEach(s => {
         const el = document.getElementById(s);
-        const dot = el.querySelector('.diamond-dot');
+        const dot = el.querySelector('div');
         if (s === stepId) {
-          el.className = "p-3 rounded-md bg-white/[0.08] border border-aero-amber transition-all flex flex-col items-center text-center shadow-lg";
-          if (dot) dot.className = "diamond-dot bg-aero-amber mb-2 animate-ping";
+          el.style.borderColor = 'var(--color-hazard)';
+          el.style.background = 'var(--color-surface-2)';
+          if (dot) dot.style.background = 'var(--color-hazard)';
         } else {
-          el.className = "p-3 rounded-md bg-white/[0.02] border border-white/[0.06] transition-all flex flex-col items-center text-center";
-          if (dot) dot.className = "diamond-dot bg-zinc-600 mb-2";
+          el.style.borderColor = 'var(--color-border)';
+          el.style.background = 'var(--color-surface)';
+          if (dot) dot.style.background = 'var(--color-text-muted)';
         }
       });
       document.getElementById('pipelineStatusText').innerText = stepId.replace('step', '').toUpperCase();
@@ -988,10 +1072,10 @@ Responsibilities:
 
       const btn = document.getElementById('runButton');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>REFINING RESUME...</span>`;
+      btn.innerHTML = `<span>Refining...</span>`;
 
       setPipelineStep('stepIngest');
-      logStream(`Ingesting target parameters for ${company} — ${role} (Graduation: ${gradDate})...`);
+      logStream(`Ingesting target parameters for ${company} — ${role}...`);
 
       try {
         setPipelineStep('stepGen');
@@ -1027,14 +1111,14 @@ Responsibilities:
         alert(`Error: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>REFINE & VERIFY RESUME</span>`;
+        btn.innerHTML = `<span>Refine & Verify Resume</span><i class="fa-solid fa-arrow-right" style="font-size: 0.65rem;"></i>`;
       }
     }
 
     function renderResults(data) {
       currentData = data;
       const wrapper = document.getElementById('resultsWrapper');
-      wrapper.classList.remove('hidden');
+      wrapper.style.display = 'block';
       wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       document.getElementById('overallScoreVal').innerText = data.score;
@@ -1049,20 +1133,22 @@ Responsibilities:
 
       const verdict = document.getElementById('verdictPill');
       if (data.score >= 90) {
-        verdict.className = "px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25";
-        verdict.innerText = "APPROVED (90+ SCORE)";
+        verdict.innerText = "APPROVED";
+        verdict.style.borderColor = "var(--color-hazard)";
+        verdict.style.color = "var(--color-hazard)";
       } else {
-        verdict.className = "px-2.5 py-0.5 rounded-sm mono-label text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/25";
         verdict.innerText = "NEEDS REVISION";
+        verdict.style.borderColor = "var(--color-text-muted)";
+        verdict.style.color = "var(--color-text-muted)";
       }
 
       const dirBox = document.getElementById('directivesBox');
       const dirUl = document.getElementById('directivesUl');
       if (data.directives_applied && data.directives_applied.length > 0 && dirBox && dirUl) {
-        dirBox.classList.remove('hidden');
+        dirBox.style.display = 'block';
         dirUl.innerHTML = data.directives_applied.map(d => `<li>${d}</li>`).join('');
       } else if (dirBox) {
-        dirBox.classList.add('hidden');
+        dirBox.style.display = 'none';
       }
 
       const pdfUrl = `/pdf/${encodeURIComponent(data.pdf_name)}?t=${Date.now()}`;
@@ -1083,11 +1169,15 @@ Responsibilities:
         const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
         const content = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`);
         if (t === tab) {
-          btn.className = "px-4 py-1.5 rounded-sm text-white bg-white/[0.12] transition mono-label text-[10px]";
-          content.classList.remove('hidden');
+          btn.style.background = 'var(--color-text)';
+          btn.style.color = 'var(--color-bg)';
+          btn.style.borderColor = 'var(--color-text)';
+          content.style.display = 'block';
         } else {
-          btn.className = "px-4 py-1.5 rounded-sm hover:text-white transition mono-label text-[10px] text-zinc-400";
-          content.classList.add('hidden');
+          btn.style.background = 'transparent';
+          btn.style.color = 'var(--color-text)';
+          btn.style.borderColor = 'var(--color-border)';
+          content.style.display = 'none';
         }
       });
     }
@@ -1103,7 +1193,7 @@ Responsibilities:
         await navigator.clipboard.writeText(text);
         const lbl = document.getElementById('copyTabLabel');
         lbl.innerText = "COPIED";
-        setTimeout(() => lbl.innerText = "COPY", 2000);
+        setTimeout(() => lbl.innerText = "Copy", 2000);
       }
     }
 
@@ -1161,8 +1251,6 @@ Responsibilities:
       const card = document.getElementById('feedbackStudioCard');
       if (card) {
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        card.classList.add('ring-1', 'ring-aero-amber');
-        setTimeout(() => card.classList.remove('ring-1', 'ring-aero-amber'), 2500);
         const fbInput = document.getElementById('chatgptFeedbackInput');
         if (fbInput) fbInput.focus();
       }
@@ -1197,7 +1285,7 @@ Responsibilities:
 
       const btn = document.getElementById('applyFeedbackBtn');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>APPLYING CRITIQUE...</span>`;
+      btn.innerHTML = `<span>Applying Critique...</span>`;
 
       setPipelineStep('stepIngest');
       logStream(`[Feedback Loop] Ingesting critique & directives for ${company}...`);
@@ -1241,7 +1329,7 @@ Responsibilities:
         alert(`Error: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Apply Directives & Re-Audit</span>`;
+        btn.innerHTML = `<span>Apply Directives & Re-Audit</span><i class="fa-solid fa-arrows-rotate" style="font-size: 0.65rem;"></i>`;
       }
     }
 
@@ -1251,19 +1339,19 @@ Responsibilities:
         const apps = await res.json();
         const container = document.getElementById('recentContainer');
         if (!apps.length) {
-          container.innerHTML = `<div class="text-zinc-500 font-mono text-xs italic py-1">No past applications logged.</div>`;
+          container.innerHTML = `<div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted); font-style: italic;">No past applications logged.</div>`;
           return;
         }
 
         container.innerHTML = apps.slice(0, 3).map(a => `
-          <div class="p-3.5 rounded-md bg-white/[0.025] border border-white/[0.06] flex items-center justify-between hover:border-white/[0.18] transition">
+          <div style="background: var(--color-card); padding: 1rem 1.25rem; border: 1px solid var(--color-border); border-radius: 2px; display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div class="font-bold text-xs text-white font-mono">${a.company}</div>
-              <div class="text-[11px] text-zinc-400 font-sans">${a.role}</div>
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--color-text);">${a.company}</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-secondary); font-family: var(--font-mono);">${a.role}</div>
             </div>
-            <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded-sm mono-label text-[10px] bg-white/[0.06] text-zinc-300">${a.score || '90+'}</span>
-              ${a.pdf_name ? `<a href="/pdf/${encodeURIComponent(a.pdf_name)}" target="_blank" class="text-zinc-400 hover:text-white transition text-xs" title="Open PDF"><i class="fa-solid fa-file-pdf"></i></a>` : ''}
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span class="mono-label" style="background: var(--color-surface); padding: 0.2rem 0.5rem; border: 1px solid var(--color-border);">${a.score || '90+'}</span>
+              ${a.pdf_name ? `<a href="/pdf/${encodeURIComponent(a.pdf_name)}" target="_blank" class="btn-wire" style="padding: 0.25rem 0.5rem; font-size: 0.65rem;" title="Open PDF">PDF ↗</a>` : ''}
             </div>
           </div>
         `).join('');
