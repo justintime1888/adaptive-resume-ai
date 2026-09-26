@@ -1,7 +1,7 @@
 ---
 tags:
   - career/analytics
-last_updated: "2026-08-19 15:45"
+last_updated: "2026-09-10 16:52"
 ---
 
 # 🧠 AI Resume Performance & Learning Analytics Dashboard
@@ -16,7 +16,7 @@ last_updated: "2026-08-19 15:45"
 | :--- | :---: | :---: | :---: | :---: |
 | **Software Engineering** | 0 | 0 | N/A | 0 |
 | **Embedded Systems & Firmware** | 0 | 0 | N/A | 0 |
-| **Robotics & Autonomous Systems** | 0 | 0 | N/A | 0 |
+| **Robotics & Autonomous Systems** | 1 | 0 | 0.0% | 0 |
 | **Hardware & Digital EE** | 0 | 0 | N/A | 0 |
 | **Data Science & AI** | 0 | 0 | N/A | 0 |
 

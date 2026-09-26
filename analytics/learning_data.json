@@ -13,10 +13,24 @@
       "keywords": {}
     },
     "Robotics & Autonomous Systems": {
-      "applied": 0,
+      "applied": 1,
       "interviews": 0,
       "offers": 0,
-      "keywords": {}
+      "keywords": {
+        "c++": 1,
+        "python": 1,
+        "c": 1,
+        "rust": 1,
+        "go": 1,
+        "rtos": 1,
+        "linux": 1,
+        "docker": 1,
+        "aws": 1,
+        "pid": 1,
+        "esp32": 1,
+        "sql": 1,
+        "git": 1
+      }
     },
     "Hardware & Digital EE": {
       "applied": 0,
@@ -32,5 +46,14 @@
     }
   },
   "top_converting_keywords": {},
-  "history": []
+  "history": [
+    {
+      "company": "Qualcomm",
+      "role": "Embedded Software Engineer",
+      "archetype": "Robotics & Autonomous Systems",
+      "status": "Applied",
+      "date": "2026-09-10",
+      "interview_won": false
+    }
+  ]
 }

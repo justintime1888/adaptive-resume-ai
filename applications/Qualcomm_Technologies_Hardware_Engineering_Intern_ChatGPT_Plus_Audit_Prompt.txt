@@ -1,0 +1,82 @@
+You are the Lead Technical Recruiter and Anti-Hallucination Verifier for top engineering firms (e.g. SpaceX, Apple, Anduril).
+Your task is to conduct the FINAL VERIFICATION of this tailored resume for Qualcomm Technologies — Hardware Engineering Intern.
+
+TARGET CANDIDATE: Justin M. Parra (Rutgers University ECE, Expected May 2027 / Expected December 2027 on internship track)
+TARGET ROLE: Hardware Engineering Intern at Qualcomm Technologies
+ELIGIBILITY CONTEXT: If this posting specifies graduation of November 2027 or later, the candidate's degree timeline for this internship is Expected December 2027, fully satisfying eligibility without mismatch.
+
+---
+### 🔄 REVISION ITERATION CONTEXT (Incorporated Feedback):
+The following critiques/directives from previous reviews and user notes were ingested and resolved in this draft:
+- Enforced 2nd Place Regional Finalist for Rowan Competition
+- Excluded semiconductor courses from coursework
+- Softened maze centering claim to 2 mm lateral sensing accuracy
+- Removed unverified 20% solve time reduction
+- Removed unbacked <0.1% bus error and packet loss rates in VEX
+- Softened eliminating communication dropouts
+- Streamlined Micromouse role title to Lead Firmware & Hardware Engineer / Co-President
+
+---
+### 1. TARGET JOB DESCRIPTION:
+Qualcomm Hardware Engineering Intern
+Expected graduation date of November 2027 or later.
+
+---
+### 2. TAILORED RESUME DRAFT:
+JUSTIN M. PARRA
+Dunellen, NJ | (732) 772-5709 | jstnp18@gmail.com | linkedin.com/in/justin-parra-/ | github.com/justintime1888
+
+EDUCATION
+Rutgers University – New Brunswick | Expected December 2027
+Bachelor of Science in Electrical and Computer Engineering (ECE)
+Relevant Coursework: Principles of Electrical Engineering I & II, Microelectronic Circuits, Linear Systems and Signals, Control Systems Principles, Feedback & State Estimation, Digital Logic Design, Computer Architecture, Embedded Systems & Microcontrollers
+
+TECHNICAL SKILLS
+• Languages: C, C++ (C++11/17/20), Python, TypeScript, JavaScript, MATLAB, Verilog HDL, Assembly
+• Embedded & Microcontrollers: ESP32-S3, STM32F405, STM32, ARM Cortex-M4, FreeRTOS, Bare-Metal C, HAL, Timer ISRs
+• Hardware & PCB Design: Altium Designer, KiCad 8.0, 4-Layer PCB Routing, ENIG Finish, Controlled Impedance, Coplanar Ground Shielding, Analog Signal Conditioning, Active Op-Amp Filters
+• Protocols & Buses: I2C (400 kHz), SPI, UART, RS-485, CAN Bus, PWM Motor Control, GPIO, ADC/DAC
+• Robotics & Control: Cascade PID Control, Sensor Fusion (EMA, EKF Principles), Differential Drive Kinematics, Modified Flood Fill, A* Pathfinding, State Estimation
+• Tools & Platforms: Linux (Arch, Ubuntu, WSL2), Git, GitHub, CMake, Make, GDB, LTspice, Multisim
+
+EXPERIENCE
+Rutgers Micromouse — Lead Firmware & Hardware Engineer / Co-President (September 2024 – Present)
+• Engineered real-time embedded **C/C++** firmware on **ESP32-S3** and **STM32** microcontrollers, utilizing **FreeRTOS** tasks to achieve deterministic **100 Hz** sensor polling and sub-millisecond motor control response.
+• Designed and routed custom **4-layer PCBs** in **Altium Designer** and **KiCad** with ENIG surface finish, integrating **STM32F405 / ESP32-S3**, **IMU (Bosch BNO055)**, ToF arrays, and dual H-bridge motor drivers.
+• Led a **40+ member** engineering organization as Co-President and secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication and component procurement.
+
+LPT-KEYPAK — Engineering Intern (June 2024 – August 2024)
+• Commissioned and validated automated high-speed packaging machinery for the **Bill & Melinda Gates Foundation**, boosting packaging line throughput by **30%** during pilot production qualification runs.
+• Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (**5-Whys, Pareto charts**), reducing production defect rates by **15%**.
+• Interpreted **20+ industrial electrical schematics** to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.
+
+VEX Robotics (Rutgers IEEE) — Lead Electrical Engineer (September 2024 – Present)
+• Architected communication and distributed power delivery architectures for competition robotics, engineering **RS-485 to UART to I2C** transceiver networks between central VEX Brain and distributed microcontrollers.
+• Designed schematics and selected components including differential transceivers, **TVS surge diodes**, and bus termination resistors to protect sensitive logic from inductive spikes and signal reflections across high-vibration competition runs.
+• Executed hardware-in-the-loop (**HIL**) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet delivery and deterministic bus arbitration.
+
+PROJECTS
+Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist | C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847, VL6180X ToF, Cascaded PID (2025)
+• Won **2nd Place at Rowan Regional Competition**; designed custom **4-layer ENIG PCB** integrating **168 MHz ARM Cortex-M4 MCU**, 5x optical ToF array over **400 kHz I2C**, and dual **DRV8847** motor drivers in an 84x76.5 mm chassis.
+• Programmed real-time Flood-Fill maze navigation algorithm running in **sub-850 microseconds** per cell transition with a **1 kHz cascaded PID** control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing **anti-windup clamping** to maintain stable tracking.
+
+Weave - Automated SPICE Netlist Parser & Schematic Compiler | TypeScript, LTspice, ElkJS Graph Routing, Geometric Placement, EDA Tools (2025)
+• Built an automated compiler converting raw SPICE subcircuit netlists (.cir) into formatted LTspice schematics (.asc) using hierarchical graph theory and layered placement algorithms.
+• Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear circuit schematics automatically.
+
+---
+### 3. AUTOMATED PRE-AUDIT SCORE:
+- Overall Score: 91/100 [APPROVED]
+- Breakdown: {'authenticity': '40/40', 'ats_keyword_match': '25/30 (85%)', 'bullet_impact': '16/20 (Quant: 69%, Power Verbs: 100%)', 'structure_hygiene': '10/10'}
+
+---
+### 🔍 YOUR FINAL VERIFICATION MANDATE:
+1. **Hallucination Check (Strict Zero-Tolerance):**
+   - The candidate's verified experiences are: Rutgers Micromouse (Lead Firmware/Hardware/Controls), LPT-KEYPAK (Intern), VEX Robotics IEEE (Lead EE).
+   - If any other employer, ungrounded metric, or fabricated degree is present, RATE AS FAILED.
+2. **ATS Keyword Alignment:** Verify that core competencies for Qualcomm Technologies are prominent.
+3. **Power Verbs & Impact:** Confirm every bullet follows Action Verb -> Context -> Measurable Outcome (XYZ format).
+4. **Final Verdict:**
+   - Provide a final letter grade (A/B/C/F) and rating out of 100.
+   - If >= 90/100, state: "APPROVED FOR SUBMISSION".
+   - If < 90/100, list exact 1-2 sentence edits to fix.

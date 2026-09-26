@@ -1,187 +1,235 @@
 {
   "personal": {
-    "full_name": "Jane Doe",
-    "location": "San Francisco, CA",
-    "phone": "(555) 019-2834",
-    "email": "janedoe@example.com",
-    "linkedin": "linkedin.com/in/janedoe",
-    "github": "github.com/janedoe",
-    "portfolio": "janedoe.dev"
+    "full_name": "Justin M. Parra",
+    "location": "Dunellen, NJ",
+    "phone": "(732) 772-5709",
+    "email": "jstnp18@gmail.com",
+    "linkedin": "linkedin.com/in/justin-parra-/",
+    "github": "github.com/justintime1888",
+    "portfolio": "justin-parra-vercel.vercel.app"
   },
   "education": [
     {
-      "institution": "University of California, Berkeley",
-      "location": "Berkeley, CA",
-      "degree": "Bachelor of Science in Computer Science & Electrical Engineering",
+      "institution": "Rutgers University – New Brunswick",
+      "location": "New Brunswick, NJ",
+      "degree": "Bachelor of Science in Electrical and Computer Engineering (ECE)",
       "graduation_date": "Expected May 2027",
-      "gpa": "3.85 / 4.00",
+      "graduation_date_internship": "Expected December 2027",
+      "graduation_timeline_notes": "Completing a selective engineering internship/co-op extends degree timeline to December 2027; standard full-time trajectory completes May/August 2027.",
+      "gpa": "N/A",
       "coursework": [
-        "Data Structures & Algorithms",
-        "Operating Systems",
+        "Principles of Electrical Engineering I & II",
+        "Microelectronic Circuits",
+        "Linear Systems and Signals",
+        "Control Systems Principles",
+        "Feedback & State Estimation",
+        "Digital Logic Design",
         "Computer Architecture",
-        "Control Systems",
-        "Embedded Systems",
-        "Signals & Systems"
+        "Embedded Systems & Microcontrollers",
+        "Data Structures & Algorithms",
+        "Differential Equations for Engineering & Physics"
+      ],
+      "track_interests": [
+        "SoC Systems Engineering",
+        "Digital Design / DV",
+        "CPU Engineering"
       ]
     }
   ],
   "experience": [
     {
-      "company": "Tech Corp",
-      "role": "Software Engineering Intern",
-      "location": "San Jose, CA",
-      "start_date": "June 2025",
-      "end_date": "August 2025",
-      "bullets": [
-        "Engineered real-time telemetry streaming service in C++ and Python processing 10k+ events/sec with <5ms latency.",
-        "Designed and deployed microservices on AWS (ECS, Redis, DynamoDB), reducing API latency by 35%.",
-        "Automated CI/CD validation pipelines with GitHub Actions and Docker, reducing build failure rates by 40%."
-      ]
-    },
-    {
-      "company": "University Robotics Lab",
-      "role": "Lead Firmware & Systems Engineer",
-      "location": "Berkeley, CA",
+      "company": "Rutgers Micromouse",
+      "role": "Lead Firmware & Hardware Engineer / Co-President",
+      "location": "New Brunswick, NJ",
       "start_date": "September 2024",
       "end_date": "Present",
       "bullets": [
-        "Architected dual-core microcontroller firmware (ESP32-S3 / STM32) in modern C++ with FreeRTOS multitasking.",
-        "Implemented sensor fusion pipeline (EKF) combining 9-DOF IMU and Time-of-Flight sensors for high-speed localization.",
-        "Led team of 15 student engineers and managed sprint planning, code reviews, and hardware-in-the-loop validation."
+        "Engineered real-time embedded **C/C++** firmware on **ESP32-S3** and **STM32** microcontrollers, utilizing **FreeRTOS** tasks to achieve deterministic **100 Hz** sensor polling and sub-millisecond motor control response.",
+        "Designed and routed custom **4-layer PCBs** in **Altium Designer** and **KiCad** with ENIG surface finish, integrating **STM32F405 / ESP32-S3**, **IMU (Bosch BNO055)**, ToF arrays, and dual H-bridge motor drivers.",
+        "Led a **40+ member** engineering organization as Co-President and secured **$2,500+** in corporate sponsorship to fund custom PCB fabrication and component procurement.",
+        "Architected **dual-loop cascade PID** feedback controllers fusing **100 Hz IMU** angular velocity (**Bosch BNO055**) with lateral distance error from **VL53L1X Time-of-Flight** sensors, improving heading stability and maintaining **2 mm** lateral sensing accuracy during autonomous navigation.",
+        "Implemented memory-efficient **Modified Flood Fill** exploration and **A* pathfinding** algorithms in modern **C++** with bit-manipulated state matrices, optimizing autonomous traversal under strict embedded SRAM limits.",
+        "Characterized signal-to-noise ratios (SNR), bus rise times, and multi-slave arbitration across **400 kHz I2C** and **SPI** lines using mixed-signal oscilloscopes and logic analyzers, mitigating communication dropouts and bus contention."
+      ]
+    },
+    {
+      "company": "LPT-KEYPAK",
+      "role": "Engineering Intern",
+      "location": "Tewksbury, NJ",
+      "start_date": "June 2024",
+      "end_date": "August 2024",
+      "bullets": [
+        "Commissioned and validated automated high-speed packaging machinery for the **Bill & Melinda Gates Foundation**, boosting packaging line throughput by **30%** during pilot production qualification runs.",
+        "Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (**5-Whys, Pareto charts**), reducing production defect rates by **15%**.",
+        "Interpreted **20+ industrial electrical schematics** to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.",
+        "Validated sensor calibration curves, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters."
+      ]
+    },
+    {
+      "company": "VEX Robotics (Rutgers IEEE)",
+      "role": "Lead Electrical Engineer",
+      "location": "New Brunswick, NJ",
+      "start_date": "September 2024",
+      "end_date": "Present",
+      "bullets": [
+        "Architected communication and distributed power delivery architectures for competition robotics, engineering **RS-485 to UART to I2C** transceiver networks between central VEX Brain and distributed microcontrollers.",
+        "Designed schematics and selected components including differential transceivers, **TVS surge diodes**, and bus termination resistors to protect sensitive logic from inductive spikes and signal reflections across high-vibration competition runs.",
+        "Executed hardware-in-the-loop (**HIL**) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet delivery and deterministic bus arbitration."
       ]
     }
   ],
   "projects": [
     {
-      "name": "Autonomous Navigation Rover",
+      "name": "Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist",
       "technologies": [
-        "C++",
-        "FreeRTOS",
-        "ESP32-S3",
-        "PID Control",
-        "PlatformIO"
+        "C/C++",
+        "STM32F405RG",
+        "KiCad 8.0",
+        "4-Layer ENIG PCB",
+        "DRV8847",
+        "VL6180X ToF",
+        "Cascaded PID"
       ],
       "date": "2025",
       "bullets": [
-        "Designed closed-loop cascade PID controller for dual DC motors, eliminating drift across 50+ maze trials.",
-        "Programmed memory-efficient Modified Flood Fill and A* pathfinding algorithms in C++ under strict embedded SRAM limits."
+        "Won **2nd Place at Rowan Regional Competition**; designed custom **4-layer ENIG PCB** integrating **168 MHz ARM Cortex-M4 MCU**, 5x optical ToF array over **400 kHz I2C**, and dual **DRV8847** motor drivers in an 84x76.5 mm chassis.",
+        "Programmed real-time Flood-Fill maze navigation algorithm running in **sub-850 microseconds** per cell transition with a **1 kHz cascaded PID** control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing **anti-windup clamping** to maintain stable tracking."
       ]
     },
     {
-      "name": "High-Performance Distributed Cache",
+      "name": "Weave - Automated SPICE Netlist Parser & Schematic Compiler",
       "technologies": [
-        "Go",
-        "gRPC",
-        "Raft Consensus",
-        "Docker",
-        "Redis"
+        "TypeScript",
+        "LTspice",
+        "ElkJS Graph Routing",
+        "Geometric Placement",
+        "EDA Tools"
       ],
       "date": "2025",
       "bullets": [
-        "Built distributed in-memory key-value store implementing Raft consensus for fault-tolerant state replication.",
-        "Benchmarked throughput to 50,000 requests/sec with concurrent goroutine pooling and low-lock data structures."
+        "Built an automated compiler converting raw SPICE subcircuit netlists (.cir) into formatted LTspice schematics (.asc) using hierarchical graph theory and layered placement algorithms.",
+        "Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear circuit schematics automatically."
+      ]
+    },
+    {
+      "name": "Analog Filter & Transient Signal Conditioning Analyzer",
+      "technologies": [
+        "LTspice",
+        "MATLAB",
+        "Signal Integrity",
+        "Active Op-Amp Filters",
+        "Transient Analysis"
+      ],
+      "date": "2025",
+      "bullets": [
+        "Simulated active 2nd-order RLC filter topologies and operational amplifier stages in LTspice, evaluating AC frequency responses, Bode phase margins, and transient damping factors.",
+        "Designed hardware low-pass signal conditioning stages to suppress inductive switching transients from high-current DC motors, preventing ADC input distortion and verifying performance with benchtop instrumentation."
+      ]
+    },
+    {
+      "name": "POSIX Robotics Simulation & Telemetry Engine",
+      "technologies": [
+        "C++",
+        "Qt6",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Matplotlib",
+        "PySerial",
+        "POSIX Pipes",
+        "Arch Linux"
+      ],
+      "date": "2025",
+      "bullets": [
+        "Built a headless simulation pipeline in Qt6/C++ benchmarking pathfinding algorithms across 100+ competition maze layouts over POSIX inter-process pipes under Arch Linux.",
+        "Developed a real-time serial telemetry data logger capturing motor PWM output, angular error, and ToF distance streams at 100 Hz using Python and Matplotlib to benchmark PID settling time."
+      ]
+    },
+    {
+      "name": "Autonomous Vision Line-Following Robot",
+      "technologies": [
+        "Embedded C++",
+        "ESP32-S3",
+        "OV2640 Camera",
+        "FreeRTOS",
+        "PlatformIO",
+        "Closed-Loop PID Control"
+      ],
+      "date": "2024",
+      "bullets": [
+        "Built an autonomous mobile robot using an ESP32-S3 and OV2640 camera module, developing an onboard vision-processing pipeline in C++ to detect track curvature in real time.",
+        "Tuned closed-loop PID control algorithms for dual DC motors, maintaining trajectory tracking stability at speeds up to 1.2 m/s with zero track departures."
       ]
     }
   ],
   "skill_pools": {
     "Languages": [
       "C",
-      "C++",
+      "C++ (C++11/17/20)",
       "Python",
-      "Go",
-      "Rust",
-      "JavaScript/TypeScript",
-      "SQL",
-      "Bash"
+      "TypeScript",
+      "JavaScript",
+      "MATLAB",
+      "Verilog HDL",
+      "Assembly",
+      "Bash",
+      "SQL"
     ],
-    "Frameworks & Tools": [
-      "Linux",
-      "Git",
-      "Docker",
-      "AWS",
-      "CMake",
-      "GDB",
-      "PlatformIO",
-      "FreeRTOS",
-      "Qt6"
-    ],
-    "Hardware & Protocols": [
-      "ESP32",
+    "Embedded & Microcontrollers": [
+      "ESP32-S3",
+      "STM32F405",
       "STM32",
-      "ARM Cortex-M",
-      "I2C",
+      "ARM Cortex-M4",
+      "FreeRTOS",
+      "Bare-Metal C",
+      "HAL",
+      "Timer ISRs",
+      "DMA",
+      "PlatformIO",
+      "Arduino"
+    ],
+    "Hardware & PCB Design": [
+      "Altium Designer",
+      "KiCad 8.0",
+      "4-Layer PCB Routing",
+      "ENIG Finish",
+      "Controlled Impedance",
+      "Coplanar Ground Shielding",
+      "Analog Signal Conditioning",
+      "Active Op-Amp Filters",
+      "RLC Transient Analysis",
+      "TVS Surge Protection",
+      "Decoupling"
+    ],
+    "Protocols & Buses": [
+      "I2C (400 kHz)",
       "SPI",
       "UART",
+      "RS-485",
       "CAN Bus",
-      "Oscilloscopes"
+      "PWM Motor Control",
+      "GPIO",
+      "ADC/DAC"
     ],
-    "Concepts & Systems": [
-      "Data Structures",
-      "Algorithms",
-      "Concurrency",
-      "Control Systems",
-      "PID",
-      "Distributed Systems"
+    "Robotics & Control": [
+      "Cascade PID Control",
+      "Sensor Fusion (EMA, EKF Principles)",
+      "Differential Drive Kinematics",
+      "Modified Flood Fill",
+      "A* Pathfinding",
+      "State Estimation"
+    ],
+    "Tools & Platforms": [
+      "Linux (Arch, Ubuntu, WSL2)",
+      "Git",
+      "GitHub",
+      "CMake",
+      "Make",
+      "GDB",
+      "LTspice",
+      "Multisim",
+      "SOLIDWORKS",
+      "Qt6"
     ]
-  },
-  "tracks": {
-    "Software Engineering": {
-      "focus": "SWE / Backend / Distributed Systems / Algorithms",
-      "recommended_template": "software_swe.tex",
-      "priority_skills": [
-        "C++",
-        "Python",
-        "Go",
-        "Data Structures",
-        "Distributed Systems",
-        "Linux",
-        "Docker",
-        "Git"
-      ]
-    },
-    "Embedded Systems & Firmware": {
-      "focus": "Microcontrollers / RTOS / Device Drivers / Hardware Protocols",
-      "recommended_template": "embedded_firmware.tex",
-      "priority_skills": [
-        "C",
-        "C++",
-        "ESP32",
-        "STM32",
-        "FreeRTOS",
-        "I2C",
-        "SPI",
-        "UART",
-        "GDB",
-        "PlatformIO"
-      ]
-    },
-    "Robotics & Autonomous Systems": {
-      "focus": "Control Theory / Sensor Fusion / Kinematics / Navigation",
-      "recommended_template": "modern_clean.tex",
-      "priority_skills": [
-        "C++",
-        "PID Control",
-        "Sensor Fusion",
-        "Kinematics",
-        "A*",
-        "Python",
-        "MATLAB",
-        "ROS"
-      ]
-    },
-    "Hardware & Digital EE": {
-      "focus": "Digital Logic / PCB Design / FPGA / Signal Integrity",
-      "recommended_template": "hardware_ece.tex",
-      "priority_skills": [
-        "Verilog",
-        "FPGA",
-        "PCB Design",
-        "Altium",
-        "Digital Logic",
-        "Oscilloscope",
-        "I2C",
-        "SPI"
-      ]
-    }
   }
 }

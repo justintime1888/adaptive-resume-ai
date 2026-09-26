@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[top=0.38in, bottom=0.38in, left=0.42in, right=0.42in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\setlist[itemize]{
+  leftmargin=1.15em,
+  itemsep=0.8pt,
+  topsep=0.8pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+\newcommand{\Section}[1]{%
+  \vspace{4.0pt}%
+  \textbf{\MakeUppercase{#1}}\par\vspace{-3.5pt}%
+  \rule{\linewidth}{0.55pt}\par\vspace{2.5pt}%
+}
+
+\newcommand{\Company}[2]{\noindent\textbf{#1}\hfill\textbf{#2}\par}
+\newcommand{\RoleDates}[2]{\noindent\textit{#1}\hfill\textit{#2}\par}
+\newcommand{\ProjectHeading}[2]{\noindent\textbf{#1}\hfill\textit{#2}\par}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \textbf{JUSTIN M. PARRA}}\par\vspace{2.0pt}
+  \small Dunellen, NJ $\cdot$ (732) 772-5709 $\cdot$ \href{mailto:jstnp18@gmail.com}{\underline{jstnp18@gmail.com}} $\cdot$ \href{https://linkedin.com/in/justin-parra-/}{\underline{linkedin.com/in/justin-parra-/}} $\cdot$ \href{https://github.com/justintime1888}{\underline{github.com/justintime1888}}
+\end{center}
+\vspace{-6pt}
+
+\Section{Education}
+\Company{Rutgers University -- New Brunswick}{New Brunswick, NJ}
+\RoleDates{Bachelor of Science in Electrical and Computer Engineering (ECE)}{Expected Expected May 2027}
+\vspace{1pt}
+\noindent\small{\textbf{Coursework:} Principles of Electrical Engineering I \& II, Microelectronic Circuits, Semiconductor Devices, Linear Systems and Signals, Control Systems Principles, Digital Logic Design, Computer Architecture, Embedded Systems \& Microcontrollers.}
+\vspace{2pt}
+
+\Section{Technical Skills}
+\begin{itemize}
+  \item \textbf{Languages:} C, C++ (C++11/17/20), Python, TypeScript, JavaScript, MATLAB, Verilog HDL, Assembly
+  \item \textbf{Embedded \& Microcontrollers:} ARM Cortex-M4, FreeRTOS, Bare-Metal C, ESP32-S3, STM32F405, STM32, HAL, Timer ISRs
+  \item \textbf{Hardware \& PCB Design:} Altium Designer, KiCad 8.0, 4-Layer PCB Routing, Controlled Impedance, Coplanar Ground Shielding, Analog Signal Conditioning, Active Op-Amp Filters, RLC Transient Analysis, TVS Surge Protection, Decoupling
+  \item \textbf{Protocols \& Buses:} I2C (400 kHz), SPI, UART, RS-485, CAN Bus, PWM Motor Control, ADC/DAC, GPIO
+  \item \textbf{Robotics \& Control:} Cascade PID Control, Differential Drive Kinematics, Sensor Fusion (EMA, EKF Principles), Modified Flood Fill, A* Pathfinding, State Estimation
+  \item \textbf{Tools \& Platforms:} Linux (Arch, Ubuntu, WSL2), CMake, LTspice, Git, GitHub, Make, GDB, Multisim
+\end{itemize}
+\vspace{2pt}
+
+\Section{Engineering Experience}
+\Company{Rutgers Micromouse}{New Brunswick, NJ}
+\RoleDates{Lead Firmware \& Hardware Engineer | Lead Controls Engineer | Co-President}{September 2024 -- Present}
+\begin{itemize}
+  \item Engineered real-time embedded C/C++ firmware on ESP32-S3 and STM32 microcontrollers, utilizing FreeRTOS tasks to achieve deterministic 100 Hz sensor polling and sub-millisecond motor control response.
+  \item Architected dual-loop cascade PID feedback controllers fusing 100 Hz IMU angular velocity (Bosch BNO055 9-DOF) with lateral distance error from ST VL53L1X Time-of-Flight sensors, eliminating motor drift and achieving sub-millimeter maze centering.
+  \item Implemented memory-efficient Modified Flood Fill exploration and A* pathfinding algorithms in modern C++ with bit-manipulated state matrices, reducing autonomous traversal solve time by 20\% under strict embedded SRAM limits.
+\end{itemize}
+\vspace{2pt}
+\Company{LPT-KEYPAK}{Tewksbury, NJ}
+\RoleDates{Engineering Intern}{June 2024 -- August 2024}
+\begin{itemize}
+  \item Commissioned and validated automated high-speed packaging machinery for the Bill \& Melinda Gates Foundation, boosting packaging line throughput by 30\% during pilot production qualification runs.
+  \item Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (5-Whys, Pareto charts), reducing production defect rates by 15\%.
+  \item Interpreted 20+ industrial electrical schematics to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.
+\end{itemize}
+\vspace{2pt}
+\Company{VEX Robotics (Rutgers IEEE)}{New Brunswick, NJ}
+\RoleDates{Lead Electrical Engineer}{September 2024 -- Present}
+\begin{itemize}
+  \item Architected communication and distributed power delivery architectures for competition robotics, engineering RS-485 to UART to I2C transceiver networks between VEX Brain and microcontrollers.
+  \item Designed schematics and selected components including differential transceivers, TVS transient surge diodes, decoupling filter networks, and bus termination resistors to protect sensitive logic from inductive spikes, reducing communication bus error rates to <0.1\% across high-vibration competition runs.
+  \item Executed hardware-in-the-loop (HIL) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet-loss rates <0.1\% and guarantee deterministic bus arbitration.
+\end{itemize}
+\vspace{2pt}
+\Section{Technical Projects}
+\ProjectHeading{POSIX Robotics Simulation \& Telemetry Engine $|$ \emph{C++, Qt6, Python, NumPy, SciPy}}{2025}
+\begin{itemize}
+  \item Built a headless simulation pipeline in Qt6/C++ benchmarking pathfinding algorithms across 100+ competition maze layouts over POSIX inter-process pipes under Arch Linux.
+  \item Developed a real-time serial telemetry data logger capturing motor PWM output, angular error, and ToF distance streams at 100 Hz using Python and Matplotlib to benchmark PID settling time.
+\end{itemize}
+\vspace{2pt}
+\ProjectHeading{Autonomous Micromouse Robot (Jerrieee) - 1st Place Regional Champion $|$ \emph{C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847}}{2025}
+\begin{itemize}
+  \item Won 1st Place at Rowan Regional Competition; designed custom 4-layer ENIG PCB integrating 168 MHz ARM Cortex-M4 MCU, 5x optical ToF array over 400 kHz I2C, and dual DRV8847 motor drivers in an 84x76.5 mm chassis.
+  \item Programmed real-time Flood-Fill maze navigation algorithm running in <850 $\mu$s per cell transition with a 1 kHz cascaded PID control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing anti-windup clamping to prevent integrator saturation and maintain stable heading and velocity tracking.
+\end{itemize}
+\vspace{2pt}
+\end{document}

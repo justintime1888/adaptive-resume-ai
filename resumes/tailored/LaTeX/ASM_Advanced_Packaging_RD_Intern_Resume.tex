@@ -1,0 +1,109 @@
+\documentclass[10pt]{article}
+
+% ===== FONT =====
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+
+% ===== PAGE / LAYOUT =====
+\usepackage[top=0.28in, bottom=0.28in, left=0.42in, right=0.42in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\setlist[itemize]{
+  leftmargin=1.15em,
+  itemsep=0.2pt,
+  topsep=0.2pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+\newcommand{\ulink}[2]{\href{#1}{\underline{#2}}}
+
+% Header sitting directly on the line
+\newcommand{\Section}[1]{%
+  \vspace{2.5pt}%
+  \textbf{\MakeUppercase{#1}}\par\vspace{-3.5pt}%
+  \rule{\linewidth}{0.5pt}\par\vspace{1.2pt}%
+}
+
+\newcommand{\Company}[2]{\noindent\textbf{#1}\hfill\textbf{#2}\par}
+\newcommand{\RoleDates}[2]{\noindent\textit{#1}\hfill\textit{#2}\par}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{JUSTIN M. PARRA}}\par\vspace{1.0pt}
+  {\small
+  Dunellen, NJ ~|~ (732) 772--5709 ~|~
+  \ulink{mailto:jstnp18@gmail.com}{jstnp18@gmail.com} ~|~
+  \ulink{https://www.linkedin.com/in/justin-parra-/}{linkedin.com/in/justin-parra-/} ~|~
+  \ulink{https://github.com/justintime1888}{github.com/justintime1888}
+  }
+\end{center}
+
+% ===================== EDUCATION =====================
+\Section{Education}
+\Company{Rutgers University -- New Brunswick, NJ}{Expected May 2027}
+\RoleDates{Bachelor of Science in Electrical and Computer Engineering (ECE)}{}
+\vspace{0.2pt}
+{\footnotesize \textbf{Coursework:} Semiconductor Devices, Microelectronic Circuits, Signals \& Systems, Control Systems, Materials Physics}
+
+% ===================== ENGINEERING EXPERIENCE =====================
+\Section{Engineering Experience}
+
+\Company{LPT-KEYPAK}{Tewksbury, NJ}
+\RoleDates{Engineering Intern}{June 2024 -- August 2024}
+\begin{itemize}
+  \item Commissioned and validated automated packaging machinery for the Bill \& Melinda Gates Foundation, boosting line throughput by 30\% during pilot production qualification runs.
+  \item Diagnosed electromechanical and process failure points across automated equipment using root-cause analysis (5-Whys, Pareto charts), reducing production defect rates by 15\%.
+  \item Formulated process validation protocols and authored Best-Known Methods (BKMs) and maintenance SOPs to standardize equipment integration and operator workflows.
+  \item Validated sensor calibration curves, voltage tolerances, and relay timing margins using digital storage oscilloscopes and precision multimeters, ensuring strict quality compliance.
+\end{itemize}
+
+\Company{Rutgers Micromouse}{New Brunswick, NJ}
+\RoleDates{Lead Hardware \& Firmware Engineer \textbar{} Co-President}{September 2024 -- Present}
+\begin{itemize}
+  \item Designed and routed custom 4-layer PCBs in Altium Designer with ENIG surface finish, optimizing trace impedances, power planes, and coplanar ground shielding for signal integrity.
+  \item Developed precision analog IR optical distance-sensing stages with active ambient-light filtering, improving surface detection repeatability to $\pm2$\,mm at velocities up to 1.5\,m/s.
+  \item Characterized signal-to-noise ratios (SNR), rise times, and bus arbitration across 400\,kHz I\textsuperscript{2}C and SPI lines using mixed-signal oscilloscopes and logic analyzers, eliminating data dropouts.
+  \item Directed 40+ student engineers across hardware and software sub-teams, leading design reviews, milestone tracking, and technical presentations to secure \$2,500+ in corporate sponsorship.
+\end{itemize}
+
+\Company{VEX Robotics -- Rutgers IEEE}{New Brunswick, NJ}
+\RoleDates{Lead Electrical Engineer}{September 2024 -- Present}
+\begin{itemize}
+  \item Architected communication and distributed power delivery architectures, engineering RS-485 $\rightarrow$ UART $\rightarrow$ I\textsuperscript{2}C transceiver networks between main controller and peripheral subsystems.
+  \item Executed hardware-in-the-loop (HIL) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet-loss rates $<0.1\%$.
+\end{itemize}
+
+% ===================== PROJECTS =====================
+\Section{Relevant Projects}
+
+\Company{Experimental Telemetry \& Statistical Data Analysis Pipeline}{}
+\RoleDates{Python, NumPy, SciPy, Matplotlib, Data Analysis \& Visualization}{}
+\begin{itemize}
+  \item Built an automated statistical analysis pipeline in Python processing 100+ experimental test runs to evaluate transient settling metrics, overshoot variance, and parameter confidence intervals.
+  \item Generated visual dashboards and distribution plots for experimental data interpretation, identifying process outliers and driving closed-loop system tuning.
+\end{itemize}
+
+\Company{Analog Filter \& Transient Signal Conditioning Analyzer}{}
+\RoleDates{LTspice, MATLAB, Signal Integrity, Circuit Modeling}{}
+\begin{itemize}
+  \item Simulated active 2nd-order RLC filter topologies and op-amp stages in LTspice, evaluating AC frequency responses, Bode phase margins, and transient damping factors.
+  \item Designed hardware low-pass signal conditioning stages to suppress inductive switching transients and prevent ADC input distortion, verifying performance with benchtop instrumentation.
+\end{itemize}
+
+% ===================== TECHNICAL SKILLS =====================
+\Section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}, itemsep=0.8pt, topsep=0.5pt]
+  \item \textbf{Semiconductor \& Packaging:} Hybrid Bonding Concepts (Die-to-Wafer / W2W), Surface Preparation \& Activation, Process Validation \& BKMs, Defectivity Reduction, Process Uniformity, Cleanroom Protocols
+  \item \textbf{Metrology \& Characterization:} Surface Profilometry \& Roughness, AFM Principles, Optical Inspection, Contact Angle / Surface Energy Concepts, Bond Strength Testing, Oscilloscopes, Logic Analyzers
+  \item \textbf{Data Analysis \& Modeling:} Python (NumPy, SciPy, Matplotlib), MATLAB, Design of Experiments (DOE), Statistical Process Control (SPC), Root-Cause Analysis (5-Whys), LTspice, Multisim
+  \item \textbf{Hardware \& Electronic Design:} Altium Designer (4-Layer PCB Routing, ENIG Surface Finish), Analog Signal Conditioning, Sensor Calibration, Microcontrollers (ESP32-S3, STM32), C, C++ (C++11/17)
+\end{itemize}
+
+\end{document}

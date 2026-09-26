@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Search Funnel & Sankey Visualizer — Justin Parra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+
+    body.light-theme {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 40%, #020617 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1.5rem 4rem;
+      line-height: 1.5;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-theme {
+      background: #f1f5f9;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .header-titles h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    body.light-theme .header-titles h1 {
+      background: linear-gradient(135deg, #0f172a 30%, #475569 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-titles p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: rgba(51, 65, 85, 0.8);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    }
+
+    /* Metrics Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .kpi-card.success::before { background: var(--success); }
+    .kpi-card.warning::before { background: var(--warning); }
+    .kpi-card.danger::before { background: var(--danger); }
+
+    .kpi-value {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-top: 0.25rem;
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Chart Card */
+    .chart-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .chart-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 0.3rem;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    body.light-theme .chart-tabs {
+      background: #e2e8f0;
+    }
+
+    .tab-btn {
+      padding: 0.45rem 0.9rem;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    /* Sankey Canvas */
+    #sankey-wrap {
+      width: 100%;
+      overflow-x: auto;
+      min-height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    body.light-theme #sankey-wrap {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    svg.sankey-svg {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      user-select: none;
+    }
+
+    .ribbon {
+      fill-opacity: 0.48;
+      transition: fill-opacity 0.2s, stroke 0.2s;
+      cursor: pointer;
+    }
+
+    .ribbon:hover {
+      fill-opacity: 0.78;
+    }
+
+    .node-group {
+      cursor: ns-resize;
+    }
+
+    .node-group rect {
+      rx: 3px;
+      transition: opacity 0.2s, filter 0.2s;
+    }
+
+    .node-group:hover rect {
+      filter: brightness(1.15);
+    }
+
+    .node-label {
+      font-size: 13px;
+      font-weight: 700;
+      fill: var(--text);
+      pointer-events: none;
+    }
+
+    .node-val {
+      font-size: 16px;
+      font-weight: 800;
+      fill: var(--text);
+      pointer-events: none;
+    }
+
+    /* Empty state notice */
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      margin: 1rem 0;
+      width: 100%;
+    }
+
+    .empty-state h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #38bdf8;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    /* Sankeymatic Syntax Drawer */
+    .syntax-box {
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    body.light-theme .syntax-box {
+      background: #f1f5f9;
+    }
+
+    .syntax-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .syntax-header h4 {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    pre.code-block {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    body.light-theme pre.code-block {
+      background: #ffffff;
+      color: #0369a1;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* Table Section */
+    .table-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .table-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .table-search {
+      padding: 0.5rem 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.8);
+      color: #ffffff;
+      outline: none;
+      width: 260px;
+    }
+
+    body.light-theme .table-search {
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    table.data-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    body.light-theme table.data-table th {
+      background: #f8fafc;
+    }
+
+    table.data-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    body.light-theme table.data-table td {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    table.data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .badge-applied { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-ready { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-screen { background: rgba(129, 140, 248, 0.15); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); }
+    .badge-offer { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-reject { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px);
+      z-index: 1000;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-titles">
+        <h1>📊 Job Search Pipeline & Sankey Funnel</h1>
+        <p>Real-Time Application Telemetry &bull; Last Synced: <strong>September 10, 2026 at 08:59 PM</strong></p>
+      </div>
+      <div class="header-actions">
+        <button class="btn" onclick="toggleTheme()">🌓 Toggle Light/Dark</button>
+        <button class="btn" onclick="location.reload()">🔄 Refresh Data</button>
+        <button class="btn" onclick="copySankeyMatic()">📋 Copy SankeyMATIC Syntax</button>
+        <button class="btn" onclick="downloadSVG()">💾 Download SVG</button>
+        <a class="btn btn-primary" href="https://sankeymatic.com/build/" target="_blank">🌐 Open SankeyMATIC.com</a>
+      </div>
+    </header>
+
+    <!-- Top KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Tracked Roles</div>
+        <div class="kpi-value">1</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Applications Submitted</div>
+        <div class="kpi-value" style="color: #e066a3;">1</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Active Interviews</div>
+        <div class="kpi-value" style="color: #38bdf8;">0</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Offers Received</div>
+        <div class="kpi-value" style="color: #34d399;">0</div>
+      </div>
+      <div class="kpi-card warning">
+        <div class="kpi-label">Interview Rate</div>
+        <div class="kpi-value">0.0%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Awaiting Response</div>
+        <div class="kpi-value" style="color: #2dd4bf;">1</div>
+      </div>
+    </div>
+
+    <!-- Main Sankey Visualization -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 700;">Job Application Funnel Flow</h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Interactive Sankey Diagram &bull; Matches SankeyMATIC format &bull; Drag nodes vertically</p>
+        </div>
+        <div class="chart-tabs">
+          <button class="tab-btn active" id="tab-applied" onclick="setMode('applied')">Active Applications</button>
+          <button class="tab-btn" id="tab-pipeline" onclick="setMode('pipeline')">Full Pipeline (With Queued)</button>
+          <button class="tab-btn" id="tab-sample" onclick="setMode('sample')">Sample Funnel (17 Apps)</button>
+        </div>
+      </div>
+
+      <div id="sankey-wrap">
+        <svg id="sankey-svg" class="sankey-svg" width="920" height="540"></svg>
+      </div>
+
+      <!-- SankeyMATIC Text Box -->
+      <div class="syntax-box">
+        <div class="syntax-header">
+          <h4>SankeyMATIC Compliant Syntax (Ready for Paste)</h4>
+          <button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;" onclick="copySankeyMatic()">Copy Text</button>
+        </div>
+        <pre class="code-block" id="sankeymatic-code">// Application Funnel
+Applications [1] No Answer</pre>
+      </div>
+    </div>
+
+    <!-- Detailed Tracking Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>📋 Live Application Ledger (1 Positions)</h3>
+        <input type="text" class="table-search" id="table-search" placeholder="Search company, role..." oninput="filterTable()">
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data-table" id="jobs-table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Date Applied</th>
+              <th>Response</th>
+              <th>Location</th>
+              <th>Compensation</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+            <tr>
+              <td style="font-weight: 700; color: #38bdf8;">Qualcomm</td>
+              <td>Embedded Software Engineer</td>
+              <td><span class="status-badge badge-applied">Applied</span></td>
+              <td>2026-09-10</td>
+              <td>⚪ Waiting</td>
+              <td style="color: #94a3b8; font-size: 0.8rem;">Remote / Hybrid / On-site</td>
+              <td style="color: #94a3b8; font-size: 0.8rem;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Copied SankeyMATIC syntax to clipboard!</div>
+
+  <script>
+    const LIVE_DATA = {"total_tracked": 1, "ready_to_apply": 0, "applied": 1, "no_answer": 1, "app_rejected": 0, "first_interviews": 0, "first_rejected": 0, "first_in_progress": 0, "second_interviews": 0, "second_rejected": 0, "second_in_progress": 0, "offers": 0, "accepted": 0, "declined": 0, "considering": 0, "response_rate": 0.0, "interview_rate": 0.0, "offer_rate": 0.0};
+    const ALL_JOBS = [
+  {
+    "company": "Qualcomm",
+    "role": "Embedded Software Engineer",
+    "status": "Applied",
+    "date_applied": "2026-09-10",
+    "response": "No",
+    "location": "Remote / Hybrid / On-site",
+    "compensation": "",
+    "follow_up": "",
+    "source": "csv"
+  }
+];
+    let currentMode = 'applied';
+
+    const COLOR_MAP = {
+      'Tracked Opportunities': '#6366f1',
+      'Ready to Apply': '#f59e0b',
+      'Applications': '#e066a3',
+      '1st Interviews': '#4b9cd3',
+      '2nd Interviews': '#e09f58',
+      'Offers': '#f29e84',
+      'Accepted': '#5bb462',
+      'Declined': '#e74c3c',
+      'Rejected': '#ccb732',
+      'No Answer': '#64c7cf',
+      'No Offer': '#64c7cf',
+      'In Progress': '#38bdf8',
+      'Decision Pending': '#a78bfa'
+    };
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      renderSankey();
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + mode).classList.add('active');
+
+      const codeBox = document.getElementById('sankeymatic-code');
+      if (mode === 'pipeline') {
+        codeBox.innerText = `// Job Search Pipeline (End-to-End)
+Tracked Opportunities [1] Applications
+
+// Application Funnel
+Applications [1] No Answer`;
+      } else if (mode === 'applied') {
+        codeBox.innerText = `// Application Funnel
+Applications [1] No Answer`;
+      } else {
+        codeBox.innerText = `// Sample Job Search diagram:\nApplications [4] 1st Interviews\nApplications [9] Rejected\nApplications [4] No Answer\n1st Interviews [2] 2nd Interviews\n1st Interviews [2] No Offer\n2nd Interviews [2] Offers\nOffers [1] Accepted\nOffers [1] Declined`;
+      }
+
+      renderSankey();
+    }
+
+    function getFlows() {
+      if (currentMode === 'sample') {
+        return [
+          { source: 'Applications', target: '1st Interviews', value: 4 },
+          { source: 'Applications', target: 'Rejected', value: 9 },
+          { source: 'Applications', target: 'No Answer', value: 4 },
+          { source: '1st Interviews', target: '2nd Interviews', value: 2 },
+          { source: '1st Interviews', target: 'No Offer', value: 2 },
+          { source: '2nd Interviews', target: 'Offers', value: 2 },
+          { source: 'Offers', target: 'Accepted', value: 1 },
+          { source: 'Offers', target: 'Declined', value: 1 }
+        ];
+      }
+
+      const flows = [];
+      const d = LIVE_DATA;
+
+      if (currentMode === 'pipeline') {
+        if (d.ready_to_apply > 0) {
+          flows.push({ source: 'Tracked Opportunities', target: 'Ready to Apply', value: d.ready_to_apply });
+        }
+        if (d.applied > 0) {
+          flows.push({ source: 'Tracked Opportunities', target: 'Applications', value: d.applied });
+        }
+      }
+
+      // Application branches
+      if (d.first_interviews > 0) {
+        flows.push({ source: 'Applications', target: '1st Interviews', value: d.first_interviews });
+      }
+      if (d.app_rejected > 0) {
+        flows.push({ source: 'Applications', target: 'Rejected', value: d.app_rejected });
+      }
+      if (d.no_answer > 0) {
+        flows.push({ source: 'Applications', target: 'No Answer', value: d.no_answer });
+      }
+
+      // 1st Interview branches
+      if (d.second_interviews > 0) {
+        flows.push({ source: '1st Interviews', target: '2nd Interviews', value: d.second_interviews });
+      }
+      if (d.first_rejected > 0) {
+        flows.push({ source: '1st Interviews', target: 'No Offer', value: d.first_rejected });
+      }
+      if (d.first_in_progress > 0) {
+        flows.push({ source: '1st Interviews', target: 'In Progress', value: d.first_in_progress });
+      }
+
+      // 2nd Interview branches
+      if (d.offers > 0) {
+        flows.push({ source: '2nd Interviews', target: 'Offers', value: d.offers });
+      }
+      if (d.second_rejected > 0) {
+        flows.push({ source: '2nd Interviews', target: 'No Offer', value: d.second_rejected });
+      }
+      if (d.second_in_progress > 0) {
+        flows.push({ source: '2nd Interviews', target: 'In Progress', value: d.second_in_progress });
+      }
+
+      // Offers branches
+      if (d.accepted > 0) {
+        flows.push({ source: 'Offers', target: 'Accepted', value: d.accepted });
+      }
+      if (d.declined > 0) {
+        flows.push({ source: 'Offers', target: 'Declined', value: d.declined });
+      }
+      if (d.considering > 0) {
+        flows.push({ source: 'Offers', target: 'Decision Pending', value: d.considering });
+      }
+
+      return flows;
+    }
+
+    /**
+     * High-Definition Standalone SVG Sankey Layout Engine
+     * Zero external runtime dependencies; 100% offline resilient.
+     */
+    function renderSankey() {
+      const flows = getFlows();
+      const wrap = document.getElementById('sankey-wrap');
+
+      if (!flows || flows.length === 0) {
+        wrap.innerHTML = `
+          <div class="empty-state">
+            <h3>⏳ 5 Applications Queued in "Ready to Apply"</h3>
+            <p>You have 5 curated top-tier roles ready. When you submit them and react in Discord (or set status to <strong>Applied</strong> in your tracker), they will automatically stream across this Sankey diagram!</p>
+            <div style="display:flex; justify-content:center; gap:0.75rem;">
+              <button class="btn btn-primary" onclick="setMode('pipeline')">View in Full Pipeline Mode</button>
+              <button class="btn" onclick="setMode('sample')">View Sample 17-Job Funnel</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const width = 920;
+      const height = 520;
+      const margin = { top: 35, right: 140, bottom: 35, left: 140 };
+      const nodeWidth = 10;
+      const nodePadding = 24;
+
+      // 1. Column assignment for nodes
+      const colMap = {
+        'Tracked Opportunities': 0,
+        'Ready to Apply': 1,
+        'Applications': currentMode === 'pipeline' ? 1 : 0,
+        '1st Interviews': currentMode === 'pipeline' ? 2 : 1,
+        'Rejected': currentMode === 'pipeline' ? 2 : 1,
+        'No Answer': currentMode === 'pipeline' ? 2 : 1,
+        '2nd Interviews': currentMode === 'pipeline' ? 3 : 2,
+        'No Offer': currentMode === 'pipeline' ? 3 : 2,
+        'In Progress': currentMode === 'pipeline' ? 3 : 2,
+        'Offers': currentMode === 'pipeline' ? 4 : 3,
+        'Accepted': currentMode === 'pipeline' ? 5 : 4,
+        'Declined': currentMode === 'pipeline' ? 5 : 4,
+        'Decision Pending': currentMode === 'pipeline' ? 5 : 4
+      };
+
+      // Group nodes
+      const nodesByName = {};
+      flows.forEach(f => {
+        if (!nodesByName[f.source]) nodesByName[f.source] = { name: f.source, outVal: 0, inVal: 0, sourceLinks: [], targetLinks: [] };
+        if (!nodesByName[f.target]) nodesByName[f.target] = { name: f.target, outVal: 0, inVal: 0, sourceLinks: [], targetLinks: [] };
+        nodesByName[f.source].outVal += f.value;
+        nodesByName[f.target].inVal += f.value;
+      });
+
+      const nodes = Object.values(nodesByName);
+      nodes.forEach(n => {
+        n.value = Math.max(n.outVal, n.inVal);
+        n.col = colMap[n.name] !== undefined ? colMap[n.name] : 0;
+      });
+
+      const maxCol = Math.max(...nodes.map(n => n.col));
+      const colStep = (width - margin.left - margin.right) / Math.max(1, maxCol);
+
+      // Group by column
+      const cols = [];
+      for (let c = 0; c <= maxCol; c++) {
+        cols.push(nodes.filter(n => n.col === c));
+      }
+
+      // Compute scale
+      const availHeight = height - margin.top - margin.bottom;
+      let maxColVal = 0;
+      cols.forEach(cNodes => {
+        const sumVal = cNodes.reduce((acc, n) => acc + n.value, 0);
+        if (sumVal > maxColVal) maxColVal = sumVal;
+      });
+
+      const ky = (availHeight - (Math.max(...cols.map(c => c.length)) - 1) * nodePadding) / Math.max(1, maxColVal);
+
+      // Position nodes
+      cols.forEach(cNodes => {
+        const totalNodeH = cNodes.reduce((acc, n) => acc + n.value * ky, 0) + (cNodes.length - 1) * nodePadding;
+        let y = margin.top + (availHeight - totalNodeH) / 2;
+
+        cNodes.forEach(n => {
+          n.x = margin.left + n.col * colStep;
+          n.y = y;
+          n.h = Math.max(4, n.value * ky);
+          n.w = nodeWidth;
+          y += n.h + nodePadding;
+        });
+      });
+
+      // Links positioning
+      const links = flows.map(f => ({
+        source: nodesByName[f.source],
+        target: nodesByName[f.target],
+        value: f.value
+      }));
+
+      nodes.forEach(n => {
+        n.sourceOffset = 0;
+        n.targetOffset = 0;
+      });
+
+      links.forEach(l => {
+        const linkH = l.value * ky;
+        l.sy = l.source.y + l.source.sourceOffset;
+        l.ty = l.target.y + l.target.targetOffset;
+        l.h = linkH;
+        l.source.sourceOffset += linkH;
+        l.target.targetOffset += linkH;
+      });
+
+      // Generate SVG
+      let svgHtml = `<svg id="sankey-svg" class="sankey-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`;
+
+      // Draw Ribbons
+      links.forEach(l => {
+        const x0 = l.source.x + l.source.w;
+        const x1 = l.target.x;
+        const y0_top = l.sy;
+        const y0_bot = l.sy + l.h;
+        const y1_top = l.ty;
+        const y1_bot = l.ty + l.h;
+        const dx = (x1 - x0) * 0.5;
+
+        const pathD = `M ${x0},${y0_top} C ${x0 + dx},${y0_top} ${x1 - dx},${y1_top} ${x1},${y1_top} L ${x1},${y1_bot} C ${x1 - dx},${y1_bot} ${x0 + dx},${y0_bot} ${x0},${y0_bot} Z`;
+        const color = COLOR_MAP[l.target.name] || '#38bdf8';
+
+        svgHtml += `
+          <path class="ribbon" d="${pathD}" fill="${color}">
+            <title>${l.source.name} → ${l.target.name}: ${l.value}</title>
+          </path>
+        `;
+      });
+
+      // Draw Nodes
+      nodes.forEach(n => {
+        const color = COLOR_MAP[n.name] || '#38bdf8';
+        const isLeft = n.col === 0;
+        const textAnchor = isLeft ? 'end' : 'start';
+        const textX = isLeft ? n.x - 12 : n.x + n.w + 12;
+        const centerY = n.y + n.h / 2;
+
+        svgHtml += `
+          <g class="node-group" id="node-${n.name.replace(/\W+/g, '_')}" data-name="${n.name}">
+            <rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" fill="${color}">
+              <title>${n.name}: ${n.value}</title>
+            </rect>
+            <text class="node-val" x="${textX}" y="${centerY - 6}" text-anchor="${textAnchor}">${n.value}</text>
+            <text class="node-label" x="${textX}" y="${centerY + 14}" text-anchor="${textAnchor}">${n.name}</text>
+          </g>
+        `;
+      });
+
+      svgHtml += `</svg>`;
+      wrap.innerHTML = svgHtml;
+    }
+
+    function copySankeyMatic() {
+      const text = document.getElementById('sankeymatic-code').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      });
+    }
+
+    function downloadSVG() {
+      const svgEl = document.getElementById('sankey-svg');
+      if (!svgEl) return;
+      const svgData = new XMLSerializer().serializeToString(svgEl);
+      const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Job_Search_Sankey_${currentMode}.svg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function filterTable() {
+      const q = document.getElementById('table-search').value.toLowerCase();
+      const rows = document.querySelectorAll('#jobs-table tbody tr');
+      rows.forEach(r => {
+        const txt = r.innerText.toLowerCase();
+        r.style.display = txt.includes(q) ? '' : 'none';
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSankey();
+    });
+  </script>
+</body>
+</html>

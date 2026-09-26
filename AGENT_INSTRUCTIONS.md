@@ -5,6 +5,13 @@ When a user opens or references this repository, follow these precise workflows 
 
 ---
 
+## 📌 Core Preference & Job Alert Rule
+- **Employment Type**: **Full-time ONLY**.
+- **Internships**: **Strictly excluded**. Do NOT search for, recommend, alert on, or tailor applications for internships or co-ops.
+- **Target Roles**: Full-time engineering positions (Software Engineer, Embedded Systems / Firmware Engineer, Robotics Software Engineer, Hardware Engineer).
+
+---
+
 ## 🚀 Workflow 1: User Onboarding & Master Resume Generation
 
 When the user says:
@@ -31,17 +38,23 @@ When the user provides a job posting URL, company name, or pastes a job descript
 - *"Here is a job description, make my resume for it"*
 
 ### Instructions:
-1. **Analyze Job Description & ATS Keywords**:
-   - Run or leverage `scripts/tailor_resume.py`:
+1. **Execute Multi-Agent Refinement Engine (Generator <-> Auditor Loop)**:
+   - Run the automated Actor-Critic refinement loop:
      ```bash
-     python3 scripts/tailor_resume.py --company "<Company>" --role "<Role>" --job-text "<Job Description>"
+     python scripts/refinement_loop.py --company "<Company>" --role "<Role>" --job-text "<Job Description>"
      ```
-2. **Select Winning Archetype & Format LaTeX**:
-   - Query `analytics/learning_data.json` to select the highest-converting resume track based on historical win rates.
-   - Generate `resumes/tailored/LaTeX/<Company>_<Role>_Resume.tex` and auto-compile to `resumes/tailored/PDF/<Company>_<Role>_Resume.pdf`.
-3. **Create Application Note & Sync**:
-   - Generate `applications/<Company> - <Role>.md` with 1-tap copy/paste plaintext resume and tailored cover letter draft.
-   - Auto-sync to `applications/jobs_tracker.csv` and Google Sheets.
+   - Automatically loops between:
+     - **Generator Agent:** Prioritizes skills and projects matching the job description strictly using verified ground-truth facts.
+     - **Auditor Subagent (`scripts/resume_verifier.py`):** Conducts zero-tolerance hallucination detection against `candidate_profile.json` and `Master_Resume.md`, scoring Authenticity (40), ATS Keyword Match (30), Bullet Quantification & Impact (20), and Structure (10).
+     - Loops until quality score is **≥ 90/100** with **0 hallucinations**.
+2. **Compile LaTeX to 1-Page PDF**:
+   - Generates publication-grade LaTeX: `resumes/tailored/LaTeX/<Company>_<Role>_Resume.tex`.
+   - Auto-compiles to single-page PDF: `resumes/tailored/PDF/<Company>_<Role>_Resume.pdf`.
+3. **Save Application Record & Sync**:
+   - Generates `applications/<Company> - <Role>.md` with full audit scorecard.
+   - Syncs to `applications/jobs_tracker.csv`.
+4. **Optional Final Boss Verification (Method 1: ChatGPT Plus)**:
+   - Run `python scripts/chatgpt_final_audit.py --company "<Company>" --role "<Role>"` to open ChatGPT with the pre-formatted adversarial audit prompt copied to the Windows clipboard for 1-click Ctrl+V verification.
 
 ---
 
@@ -94,11 +107,17 @@ When the user wants to scan application status updates from Gmail or check what 
 ## 🛠️ CLI Quick Reference
 
 ```bash
-# Tailor resume and compile PDF for a new job
-python3 scripts/tailor_resume.py --company "Tesla" --role "Firmware Engineer" --job-text "..."
+# Run Multi-Agent Generator <-> Auditor loop until 90+ score and 0 hallucinations
+python scripts/refinement_loop.py --company "Tesla" --role "Firmware Engineer" --job-text "..."
+
+# Run standalone Anti-Hallucination & ATS Verifier
+python scripts/resume_verifier.py --resume "resumes/master/Master_Resume.md" --job-text "..."
+
+# Run Method 1 (ChatGPT Plus Final Boss Audit with 1-click clipboard prompt)
+python scripts/chatgpt_final_audit.py --company "Tesla" --role "Firmware Engineer"
 
 # Generate STAR Interview Prep Dossier (.docx)
-python3 scripts/generate_interview_prep.py --company "Tesla" --role "Firmware Engineer"
+python scripts/generate_interview_prep.py --company "Tesla" --role "Firmware Engineer"
 
 # Scan Gmail for status updates & auto-trigger interview prep
 python3 scripts/sync_gmail_tracker.py

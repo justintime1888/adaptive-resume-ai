@@ -51,15 +51,24 @@ def parse_email_signal(subject: str, sender: str, snippet: str) -> dict:
     text = f"{subject} {sender} {snippet}".lower()
     
     # 1. Detect Company
-    comp_match = re.search(r'(?:applying to|application (?:to|at|with)|interest in|interview with|from)\s+([A-Z0-9][A-Za-z0-9\s&.,-]+?)(?:\s+(?:for|regarding|-|!|\.|'s|
-|$))', subject, re.IGNORECASE)
+    comp_match = re.search(r'(?:applying to|application (?:to|at|with)|interest in|interview with|from)\s+([A-Z0-9][A-Za-z0-9\s&.,-]+?)(?:\s+(?:for|regarding|-|!|\.|\'s|\n|$))', subject, re.IGNORECASE)
     company = comp_match.group(1).strip() if comp_match else ""
     if not company and sender:
         s_clean = re.sub(r'<.*?>', '', sender).replace('"', '').strip()
         s_clean = re.sub(r'(?i)(recruiting|careers|talent|team|jobs|no-reply|notifications)', '', s_clean).strip()
         company = s_clean if len(s_clean) > 1 else "Target Company"
 
-    company = re.sub(r'(Inc|LLC|Corp|Corporation|Team|Careers)', '', company, flags=re.IGNORECASE).strip()
+    # Check for Handshake patterns: "Vanguard just messaged you...", "Insmed sent you a new message", "Rebecca Walsh via Handshake"
+    if "handshake" in sender.lower() or "handshake" in text:
+        hs_comp = re.search(r'^([A-Z0-9][A-Za-z0-9\s&.,-]+?)\s+(?:just messaged you|sent you a new message)', subject, re.IGNORECASE)
+        if hs_comp:
+            company = hs_comp.group(1).strip()
+        elif "via handshake" in sender.lower():
+            hs_sender = re.search(r'^([^<]+?)\s+via\s+Handshake', sender, re.IGNORECASE)
+            if hs_sender:
+                company = f"{hs_sender.group(1).strip()} (Handshake)"
+
+    company = re.sub(r' (Inc|LLC|Corp|Corporation|Team|Careers) ', '', company, flags=re.IGNORECASE).strip()
     if not company:
         company = "Target Company"
 
@@ -79,10 +88,13 @@ def parse_email_signal(subject: str, sender: str, snippet: str) -> dict:
     elif any(k in text for k in ["online assessment", "codesignal", "hackerrank", "take-home challenge"]):
         status = "OA / Screen"
         is_interview_invite = True
-    elif any(k in text for k in ["offer letter", "congratulations", "offer of employment"]):
+    elif any(k in text for k in ["offer letter", "congratulations", "offer of employment", "job offer"]):
         status = "Offer"
     elif any(k in text for k in ["not moving forward", "other candidates", "unable to offer", "pursuing other candidates"]):
         status = "Rejected"
+    elif "handshake" in sender.lower() and any(k in text for k in ["sent you a new message", "messaged you", "sees you as a top applicant"]):
+        status = "OA / Screen"
+        is_interview_invite = True
 
     return {
         "company": company,
@@ -92,6 +104,7 @@ def parse_email_signal(subject: str, sender: str, snippet: str) -> dict:
         "subject": subject,
         "snippet": snippet
     }
+
 
 def scan_inbox():
     user_email = os.getenv("GMAIL_EMAIL", "").strip()

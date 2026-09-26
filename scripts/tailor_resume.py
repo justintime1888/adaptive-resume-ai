@@ -28,6 +28,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 from adaptive_learning import recommend_best_archetype, analyze_applications
 from compile_resumes import compile_single_tex
 from track_applications import sync_applications_to_csv
+from ats_checker import ATSChecker
 
 TECH_KEYWORDS = {
     "Languages": ["c", "c++", "c++11", "c++17", "c++20", "python", "go", "rust", "bash", "sql", "verilog", "vhdl", "matlab", "javascript", "typescript"],
@@ -182,7 +183,17 @@ Sincerely,
 {personal.get('email', '')} | {personal.get('linkedin', '')} | {personal.get('github', '')}
 """
 
-    # 6. Generate Markdown Application Record
+    # 6. Run Comprehensive ATS Audit Pipeline
+    checker = ATSChecker()
+    ats_report = checker.run_full_check(
+        plain_text_resume,
+        job_text=job_text,
+        pdf_path=tailored_pdf_path if tailored_pdf_path.exists() else None
+    )
+    ats_scorecard_md = checker.generate_markdown_report(ats_report, company=company, role=role)
+    overall_ats_score = ats_report["overall_score"]
+
+    # 7. Generate Markdown Application Record
     APPS_DIR.mkdir(parents=True, exist_ok=True)
     app_md_path = APPS_DIR / f"{company} - {role}.md"
     today_str = datetime.now().strftime("%Y-%m-%d")
@@ -194,7 +205,8 @@ company: "{company}"
 role: "{role}"
 status: "Applied"
 applied_date: "{today_str}"
-match_score: "{score}%"
+ats_overall_score: "{overall_ats_score}/100"
+ats_match_score: "{ats_report['keyword_audit']['match_score']}%"
 archetype: "{best_archetype}"
 response_received: false
 latex_source: "resumes/tailored/LaTeX/{tex_filename}"
@@ -204,16 +216,12 @@ location: "Remote / Hybrid / On-site"
 
 # 💼 {company} — {role}
 
-> **Company:** `{company}` | **Role:** `{role}` | **Status:** `Applied` | **ATS Match:** `🎯 {score}%`
+> **Company:** `{company}` | **Role:** `{role}` | **Status:** `Applied` | **ATS Overall Score:** `🎯 {overall_ats_score}/100`
 > **Track:** `{best_archetype}` | **Date:** `{today_str}`
 
 ---
 
-## 📊 ATS Match & Keyword Breakdown
-- **🎯 Match Score:** `{score}%`
-- **🧠 Selected Archetype:** `{best_archetype}`
-- **✅ Matched Skills:** `{', '.join(matched_kws) if matched_kws else 'Direct match with core profile!'}`
-- **💡 Suggested Keywords to Emphasize:** `{', '.join(gaps[:8]) if gaps else 'None (Comprehensive coverage)'}`
+{ats_scorecard_md}
 
 ---
 
@@ -250,10 +258,12 @@ location: "Remote / Hybrid / On-site"
     return {
         "company": company,
         "role": role,
-        "match_score": score,
+        "ats_overall_score": overall_ats_score,
+        "match_score": ats_report["keyword_audit"]["match_score"],
         "archetype": best_archetype,
-        "matched_keywords": matched_kws,
-        "gap_keywords": gaps,
+        "matched_keywords": ats_report["keyword_audit"]["matched_keywords"],
+        "gap_keywords": ats_report["keyword_audit"]["missing_keywords"],
+        "ats_report": ats_report,
         "tex_path": str(tailored_tex_path),
         "pdf_path": str(tailored_pdf_path),
         "md_path": str(app_md_path)
@@ -273,6 +283,8 @@ if __name__ == "__main__":
 
     res = tailor_resume(args.company, args.role, desc)
     print(f"\n[✓] Generated Tailored Application for {res['company']} — {res['role']}")
-    print(f"    -> ATS Match: {res['match_score']}% (Track: {res['archetype']})")
+    print(f"    -> Overall ATS Score: 🎯 {res['ats_overall_score']}/100 (Keyword Match: {res['match_score']}%, Track: {res['archetype']})")
     print(f"    -> Application Note: {res['md_path']}")
     print(f"    -> Compiled PDF: {res['pdf_path']}")
+    if res["gap_keywords"]:
+        print(f"    -> ⚠️ Missing Target Keywords to consider adding: {', '.join(res['gap_keywords'][:6])}")

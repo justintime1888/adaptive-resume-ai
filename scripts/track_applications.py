@@ -7,9 +7,16 @@ Scans application notes in applications/ and exports structured jobs_tracker.csv
 import os
 import re
 import csv
+import sys
 import argparse
 from pathlib import Path
 from datetime import datetime
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
@@ -46,7 +53,7 @@ def sync_applications_to_csv():
         writer = csv.writer(csvfile)
         writer.writerows(rows)
 
-    print(f"[✓] Synced {len(rows)-1} applications to CSV: {CSV_FILE}")
+    print(f"[+] Synced {len(rows)-1} applications to CSV: {CSV_FILE}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Track applications & sync CSV.")

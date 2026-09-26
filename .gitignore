@@ -24,3 +24,6 @@ Thumbs.db
 build_part*.py
 setup_repo.py
 test.py
+
+# Reference repos
+resumake-ref/

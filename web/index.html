@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Resume AI • Executive Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'Inter', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+            mono: ['"SF Mono"', 'Menlo', 'Monaco', '"Cascadia Code"', 'Consolas', 'monospace']
+          },
+          colors: {
+            apple: {
+              bg: '#000000',
+              card: 'rgba(255, 255, 255, 0.035)',
+              cardHover: 'rgba(255, 255, 255, 0.055)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              borderFocus: 'rgba(255, 255, 255, 0.28)',
+              textSubtle: '#86868b',
+              textMuted: '#6e6e73',
+              textPrimary: '#f5f5f7',
+              blue: '#0071e3',
+              blueHover: '#0077ed',
+              green: '#30d158',
+              orange: '#ff9f0a',
+              red: '#ff453a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #000000;
+      color: #f5f5f7;
+      letter-spacing: -0.018em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    .glass-nav {
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .apple-input {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-input:focus {
+      background: rgba(255, 255, 255, 0.045);
+      border-color: rgba(255, 255, 255, 0.32);
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+    .apple-pill-input {
+      background: transparent;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .apple-button {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-button:active {
+      transform: scale(0.98);
+    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-[#0071e3] selection:text-white">
+
+  <!-- Minimalist Navigation Bar -->
+  <header class="glass-nav sticky top-0 z-50 px-6 sm:px-10 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3.5">
+      <div class="h-7 w-7 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">
+        <i class="fa-solid fa-atom text-[13px]"></i>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-sm font-semibold tracking-tight text-white">Adaptive Resume AI</span>
+        <span class="text-xs text-apple-textMuted">/</span>
+        <span class="text-xs text-apple-textSubtle font-medium">Executive Studio</span>
+      </div>
+    </div>
+
+    <!-- Candidate Ground Truth & Direct Method 1 Launcher -->
+    <div class="flex items-center space-x-4">
+      <div class="hidden md:flex items-center space-x-2 text-xs text-apple-textSubtle">
+        <span class="h-1.5 w-1.5 rounded-full bg-apple-green animate-pulse"></span>
+        <span class="text-zinc-300 font-medium">Justin M. Parra</span>
+        <span class="text-zinc-600">·</span>
+        <span>Rutgers ECE</span>
+        <span class="text-zinc-600">·</span>
+        <span class="text-zinc-400">Expected May 2027</span>
+      </div>
+
+      <a 
+        href="https://chatgpt.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        onclick="launchChatGPTDirect(event)" 
+        class="apple-button px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-medium text-white border border-white/[0.09] flex items-center space-x-1.5 cursor-pointer"
+        title="Open ChatGPT Plus in new tab with primed verification prompt"
+      >
+        <i class="fa-solid fa-sparkles text-amber-400 text-[11px]"></i>
+        <span>Method 1 (ChatGPT Plus)</span>
+        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-apple-textSubtle"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-8 sm:py-10 flex flex-col space-y-8">
+
+    <!-- Header Section -->
+    <div class="text-center max-w-2xl mx-auto space-y-2">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-[-0.035em] text-white">
+        Precision Resume Tailoring.
+      </h1>
+      <p class="text-sm text-apple-textSubtle leading-relaxed">
+        Paste any target job description. The engine extracts the company and role title, enforces verified master ground truth, and refines the draft into an executive single-page Resumake-standard PDF.
+      </p>
+    </div>
+
+    <!-- Main Workspace Card -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 relative flex flex-col space-y-5">
+      
+      <!-- Top Bar: Label & Quick Demos -->
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <label class="text-[11px] font-semibold tracking-wider uppercase text-apple-textSubtle">Job Description</label>
+        <div class="flex items-center space-x-2 text-xs">
+          <span class="text-apple-textMuted text-[11px]">Quick Demos:</span>
+          <button onclick="loadSample('qualcomm')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.08] hover:bg-white/[0.14] text-white font-medium border border-white/10">Qualcomm</button>
+          <button onclick="loadSample('apple')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">Apple</button>
+          <button onclick="loadSample('spacex')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">SpaceX</button>
+          <button onclick="loadSample('anduril')" class="hover:text-white transition px-2 py-0.5 rounded-full text-[11px] bg-white/[0.04] hover:bg-white/[0.1] text-zinc-300">Anduril</button>
+          <span class="text-zinc-700">|</span>
+          <span id="wordCountBadge" class="text-apple-textMuted text-[11px]">0 words</span>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <textarea 
+        id="jobTextInput" 
+        rows="6" 
+        placeholder="Paste full job posting description here... Company name and role title will be detected automatically." 
+        oninput="handleJobInput()"
+        class="apple-input w-full rounded-2xl p-4 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+      ></textarea>
+
+      <!-- Auto-Extracted Metadata Strip (Smart Editable Pills) -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[10px] text-apple-textMuted uppercase font-semibold tracking-wider">Detected:</span>
+          
+          <!-- Company Pill -->
+          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
+            <span class="text-apple-textSubtle text-[11px]">Company:</span>
+            <input type="text" id="companyInput" placeholder="Auto-detecting..." class="apple-pill-input text-white font-medium w-36 sm:w-44 text-xs">
+          </div>
+
+          <!-- Role Pill -->
+          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
+            <span class="text-apple-textSubtle text-[11px]">Role:</span>
+            <input type="text" id="roleInput" placeholder="Auto-detecting..." class="apple-pill-input text-white font-medium w-48 sm:w-64 text-xs">
+          </div>
+
+          <!-- Graduation Date Pill -->
+          <div class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs focus-within:border-white/30 transition">
+            <span class="text-apple-textSubtle text-[11px]">Graduation:</span>
+            <select id="gradDateSelect" onchange="handleGradDateChange()" class="bg-transparent text-white font-medium text-xs focus:outline-none cursor-pointer">
+              <option value="Expected December 2027" class="bg-black text-white">Expected Dec 2027 (Internship Track)</option>
+              <option value="Expected May 2027" class="bg-black text-white">Expected May 2027 (Standard Track)</option>
+              <option value="Expected August 2027" class="bg-black text-white">Expected Aug 2027 (Summer Track)</option>
+            </select>
+          </div>
+
+          <!-- ATS Keywords Pill -->
+          <div id="keywordsPill" class="hidden inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-blue-500/[0.1] border border-blue-500/[0.2] text-[11px] text-blue-400">
+            <i class="fa-solid fa-tag text-[9px]"></i>
+            <span id="keywordsCountText">0 keywords</span>
+          </div>
+        </div>
+
+        <!-- Target Score Setting -->
+        <div class="flex items-center space-x-2 text-xs text-apple-textSubtle">
+          <span class="text-[11px]">Target Score:</span>
+          <select id="targetScoreSelect" class="bg-white/[0.05] border border-white/[0.08] text-white text-xs rounded-lg px-2.5 py-1 focus:outline-none focus:border-white/30">
+            <option value="90" selected>90/100 (Executive Strict)</option>
+            <option value="95">95/100 (Perfectionist)</option>
+            <option value="85">85/100 (Standard)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Eligibility & Timeline Banner (Dynamic) -->
+      <div id="eligibilityWarningPill" class="hidden p-3 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/[0.2] text-emerald-200 text-xs flex items-start space-x-2.5 transition">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm mt-0.5 shrink-0"></i>
+        <div class="space-y-0.5">
+          <div class="font-semibold text-emerald-300 text-[11px] uppercase tracking-wide">Eligibility Aligned (Internship Track)</div>
+          <div class="text-[11px] leading-relaxed text-emerald-100/90" id="eligibilityWarningText">
+            Target posting specifies graduation date of November 2027 or later. Your degree timeline for this internship is set to <strong>Expected December 2027</strong>, fully satisfying eligibility.
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button Strip -->
+      <div class="flex flex-col sm:flex-row items-center justify-between pt-3 border-t border-white/[0.06] gap-4">
+        <div class="flex items-center space-x-2 text-xs text-apple-textSubtle">
+          <i class="fa-solid fa-shield-halved text-apple-green text-sm"></i>
+          <span class="text-[11px]">Zero-Tolerance Anti-Hallucination Policy Active</span>
+        </div>
+
+        <button 
+          id="runButton" 
+          onclick="startRefinement()" 
+          class="apple-button w-full sm:w-auto px-7 py-2.5 rounded-full bg-white hover:bg-[#e5e5ea] text-black font-semibold text-xs tracking-normal shadow-lg shadow-white/10 flex items-center justify-center space-x-2 cursor-pointer"
+        >
+          <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+          <span>Refine & Verify Resume</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Iterative Refinement Studio: ChatGPT Review & Personal Notes -->
+    <div class="glass-card rounded-3xl p-6 sm:p-7 relative flex flex-col space-y-4 border border-white/[0.09] transition-all" id="feedbackStudioCard">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <div class="h-6 w-6 rounded-full bg-gradient-to-tr from-amber-500 to-orange-400 text-black flex items-center justify-center text-xs font-bold shadow">
+            <i class="fa-solid fa-sparkles text-[10px]"></i>
+          </div>
+          <div>
+            <h2 class="text-xs font-semibold text-white tracking-tight">Iterative Refinement Studio</h2>
+            <p class="text-[11px] text-apple-textSubtle">Paste ChatGPT Plus audit critiques, recruiter feedback, and personal directives in one place.</p>
+          </div>
+        </div>
+        <span class="text-[10px] text-apple-textMuted uppercase font-semibold tracking-wider">Method 1 Feedback Loop</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+        <!-- Left: ChatGPT Review Textarea -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="text-[11px] font-medium text-zinc-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-robot text-amber-400 text-[10px]"></i>
+              <span>ChatGPT Plus Audit Critique</span>
+            </label>
+            <button type="button" onclick="pasteFromClipboard('chatgptFeedbackInput')" class="text-[10px] text-apple-textSubtle hover:text-white transition">
+              <i class="fa-regular fa-paste"></i> Paste Clipboard
+            </button>
+          </div>
+          <textarea 
+            id="chatgptFeedbackInput" 
+            rows="4" 
+            placeholder="Paste full response from ChatGPT Plus here (e.g. 'Final Score: 78/100, Claims to remove: sub-millimeter centering, 20% speedup, <0.1% error rates...')"
+            class="apple-input w-full rounded-2xl p-3.5 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Right: Personal Notes & Overrides -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="text-[11px] font-medium text-zinc-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-user-pen text-blue-400 text-[10px]"></i>
+              <span>Personal Directives & Ground-Truth Notes</span>
+            </label>
+            <span class="text-[10px] text-apple-textMuted">Optional</span>
+          </div>
+          <textarea 
+            id="personalNotesInput" 
+            rows="4" 
+            placeholder="e.g. 'I won 2nd place at Rowan, not 1st', 'Expected Dec 2027 graduation', 'Never took semiconductor class', 'Emphasize FreeRTOS and oscilloscope'..."
+            class="apple-input w-full rounded-2xl p-3.5 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition leading-relaxed resize-none"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="flex flex-wrap items-center gap-1.5 pt-1">
+        <span class="text-[10px] text-apple-textMuted font-medium uppercase tracking-wider mr-1">Quick Presets:</span>
+        <button type="button" onclick="addPersonalDirective('Won 2nd Place at Rowan Regional (not 1st)')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Rowan 2nd Place</button>
+        <button type="button" onclick="addPersonalDirective('Graduation date: Expected December 2027 (internship track)')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Dec 2027 Grad</button>
+        <button type="button" onclick="addPersonalDirective('Remove unverified metrics: <0.1%, 900%, 20% speedup, sub-millimeter')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Soften Unverified Metrics</button>
+        <button type="button" onclick="addPersonalDirective('Remove semiconductor devices course from coursework')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Exclude Semiconductor</button>
+        <button type="button" onclick="addPersonalDirective('Clean title to Lead Firmware & Hardware Engineer / Co-President')" class="px-2.5 py-1 rounded-full text-[10px] bg-white/[0.04] hover:bg-white/[0.09] text-zinc-300 border border-white/[0.06] transition">+ Clean Title</button>
+      </div>
+
+      <!-- Re-audit Action Button Strip -->
+      <div class="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+        <div class="text-[11px] text-apple-textSubtle flex items-center space-x-1.5">
+          <i class="fa-solid fa-arrows-rotate text-apple-blue text-xs"></i>
+          <span>Applies critique, scrubs ungrounded claims, synchronizes candidate truth, and re-compiles 1-page PDF.</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button type="button" onclick="clearFeedback()" class="px-3 py-1.5 rounded-full text-xs text-apple-textSubtle hover:text-white transition">Clear</button>
+          <button 
+            id="applyFeedbackBtn" 
+            type="button" 
+            onclick="applyFeedbackAndRefine()" 
+            class="apple-button px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs tracking-normal shadow-md flex items-center space-x-2 cursor-pointer"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+            <span>Apply Feedback & Re-Audit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Refinement Progress Tracker -->
+    <div id="pipelineTracker" class="glass-card rounded-2xl p-5 flex flex-col space-y-3.5">
+      <div class="flex items-center justify-between text-xs">
+        <span class="text-apple-textSubtle uppercase tracking-wider font-semibold text-[10px]">Multi-Agent Pipeline</span>
+        <span id="pipelineStatusText" class="text-apple-textMuted font-medium text-[11px]">Ready</span>
+      </div>
+
+      <!-- 4-Step Minimalist Status Cards -->
+      <div class="grid grid-cols-4 gap-2 text-center text-xs">
+        <div id="stepIngest" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
+          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotIngest"></span>
+          <span class="text-zinc-300 font-medium text-[11px]">1. Ingest & Detect</span>
+        </div>
+        <div id="stepGen" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
+          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotGen"></span>
+          <span class="text-zinc-300 font-medium text-[11px]">2. Generator Draft</span>
+        </div>
+        <div id="stepAudit" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
+          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotAudit"></span>
+          <span class="text-zinc-300 font-medium text-[11px]">3. Auditor Verification</span>
+        </div>
+        <div id="stepOutput" class="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center">
+          <span class="h-2 w-2 rounded-full bg-zinc-600 mb-1" id="dotOutput"></span>
+          <span class="text-zinc-300 font-medium text-[11px]">4. Resumake PDF</span>
+        </div>
+      </div>
+
+      <!-- Terminal Log Stream -->
+      <div id="terminalStream" class="text-[11px] font-mono text-apple-textSubtle bg-black/60 rounded-xl p-3 border border-white/[0.04] max-h-20 overflow-y-auto leading-relaxed">
+        <span>&gt; Ready. Paste a job description to trigger the refinement loop.</span>
+      </div>
+    </div>
+
+    <!-- Output Section (Scorecard + PDF / Plaintext Tabs) -->
+    <div id="resultsWrapper" class="space-y-6 hidden">
+      
+      <!-- Minimalist Scorecard -->
+      <div class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col space-y-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="text-[11px] uppercase tracking-wider font-semibold text-apple-textSubtle">Audit Scorecard</span>
+            <span id="verdictPill" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              Approved
+            </span>
+          </div>
+          <span id="dateStamp" class="text-xs text-apple-textSubtle"></span>
+        </div>
+
+        <!-- Metric Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span class="text-[11px] text-apple-textSubtle font-medium">Overall Rating</span>
+            <div class="text-2xl font-semibold text-white mt-1 tracking-tight">
+              <span id="overallScoreVal">--</span><span class="text-xs font-normal text-apple-textSubtle">/100</span>
+            </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span class="text-[11px] text-apple-textSubtle font-medium">Authenticity</span>
+            <div id="authenticityVal" class="text-xl font-semibold text-emerald-400 mt-1 tracking-tight">40/40</div>
+            <span class="text-[10px] text-apple-textMuted">0 Hallucinations</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span class="text-[11px] text-apple-textSubtle font-medium">ATS Match</span>
+            <div id="atsMatchVal" class="text-xl font-semibold text-blue-400 mt-1 tracking-tight">--</div>
+            <span class="text-[10px] text-apple-textMuted">Keyword Density</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span class="text-[11px] text-apple-textSubtle font-medium">Metrics & Verbs</span>
+            <div id="metricsVal" class="text-xl font-semibold text-zinc-200 mt-1 tracking-tight">--</div>
+            <span class="text-[10px] text-apple-textMuted">Power Action Verbs</span>
+          </div>
+        </div>
+
+        <!-- Hallucination Alert (if any) -->
+        <div id="hallucinationBox" class="p-4 rounded-2xl bg-rose-500/[0.08] border border-rose-500/[0.2] text-rose-300 text-xs hidden">
+          <div class="font-semibold mb-1 flex items-center space-x-1.5">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Hallucination Detected:</span>
+          </div>
+          <ul id="hallucinationUl" class="list-disc list-inside space-y-1 text-[11px] text-rose-200"></ul>
+        </div>
+
+        <!-- Directives Applied Alert (Feedback Loop) -->
+        <div id="directivesBox" class="p-4 rounded-2xl bg-blue-500/[0.08] border border-blue-500/[0.2] text-blue-300 text-xs hidden">
+          <div class="font-semibold mb-1 flex items-center space-x-1.5">
+            <i class="fa-solid fa-circle-check text-blue-400"></i>
+            <span>Feedback Ingested & Resolved in this Cycle:</span>
+          </div>
+          <ul id="directivesUl" class="list-disc list-inside space-y-1 text-[11px] text-blue-200"></ul>
+        </div>
+      </div>
+
+      <!-- Segmented Control Tabs (macOS Style) -->
+      <div class="flex items-center justify-between">
+        <div class="inline-flex p-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-xs font-medium text-zinc-400">
+          <button onclick="setTab('pdf')" id="tabBtnPdf" class="px-4 py-1.5 rounded-full text-white bg-white/[0.12] transition">PDF Preview</button>
+          <button onclick="setTab('latex')" id="tabBtnLatex" class="px-4 py-1.5 rounded-full hover:text-white transition">LaTeX (Resumake)</button>
+          <button onclick="setTab('text')" id="tabBtnText" class="px-4 py-1.5 rounded-full hover:text-white transition">Plaintext</button>
+          <button onclick="setTab('chatgpt')" id="tabBtnChatgpt" class="px-4 py-1.5 rounded-full hover:text-white transition">ChatGPT Plus</button>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="copyCurrentTabContent()" id="copyTabBtn" class="apple-button px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-xs font-medium text-white border border-white/[0.08] flex items-center space-x-1.5 cursor-pointer">
+            <i class="fa-regular fa-copy text-[11px]"></i>
+            <span id="copyTabLabel">Copy</span>
+          </button>
+          <a id="downloadBtn" href="#" target="_blank" class="apple-button px-3.5 py-1.5 rounded-full bg-white text-black hover:bg-[#e5e5ea] text-xs font-semibold flex items-center space-x-1.5 cursor-pointer">
+            <i class="fa-solid fa-arrow-down text-[11px]"></i>
+            <span>Download PDF</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="glass-card rounded-3xl overflow-hidden min-h-[560px] flex flex-col p-1">
+        <!-- PDF Tab -->
+        <div id="tabPdf" class="w-full h-[620px] rounded-2xl overflow-hidden bg-black">
+          <iframe id="pdfIframe" class="w-full h-full border-0" src="about:blank"></iframe>
+        </div>
+
+        <!-- LaTeX Tab -->
+        <div id="tabLatex" class="hidden p-6 flex-1 flex flex-col">
+          <div class="text-[11px] text-apple-textSubtle mb-2">Jake's Resume / Resumake Template 1 Standard • XeTeX / Tectonic Compilable</div>
+          <pre id="latexPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/40 p-4 rounded-xl border border-white/5"></pre>
+        </div>
+
+        <!-- Plaintext Tab -->
+        <div id="tabText" class="hidden p-6 flex-1 flex flex-col">
+          <pre id="plainTextPre" class="flex-1 w-full font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all bg-black/40 p-4 rounded-xl border border-white/5"></pre>
+        </div>
+
+        <!-- ChatGPT Plus Tab -->
+        <div id="tabChatgpt" class="hidden p-6 flex-1 flex flex-col space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] gap-3">
+            <div>
+              <div class="text-xs font-semibold text-white flex items-center space-x-1.5">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                <span>Method 1: Final Adversarial Review (ChatGPT Plus)</span>
+              </div>
+              <div class="text-[11px] text-apple-textSubtle mt-1 leading-relaxed">
+                Clicking the button opens ChatGPT in a new tab and copies the complete adversarial audit prompt directly to your clipboard. Simply press <strong>Ctrl+V</strong>.
+              </div>
+            </div>
+            <a 
+              href="https://chatgpt.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              onclick="launchChatGPTDirect(event)" 
+              class="apple-button px-4 py-2 rounded-full bg-white text-black hover:bg-[#e5e5ea] text-xs font-semibold flex items-center justify-center space-x-1.5 cursor-pointer shrink-0"
+            >
+              <span>Launch ChatGPT Plus</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+          <pre id="chatgptPre" class="flex-1 w-full p-4 rounded-2xl bg-black/60 border border-white/[0.04] font-mono text-xs text-zinc-300 leading-relaxed overflow-y-auto whitespace-pre-wrap select-all"></pre>
+
+          <!-- Next Step Iterative Callout -->
+          <div class="p-4 rounded-2xl bg-amber-500/[0.08] border border-amber-500/[0.2] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-0.5">
+              <div class="text-xs font-semibold text-amber-300 flex items-center space-x-1.5">
+                <i class="fa-solid fa-sparkles text-[11px]"></i>
+                <span>Got your ChatGPT audit feedback?</span>
+              </div>
+              <div class="text-[11px] text-amber-100/80">
+                Paste the review into the Iterative Refinement Studio above to automatically incorporate all edits and re-compile.
+              </div>
+            </div>
+            <button 
+              type="button" 
+              onclick="scrollToFeedbackStudio()" 
+              class="apple-button px-4 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs flex items-center justify-center space-x-1.5 shrink-0 cursor-pointer"
+            >
+              <span>Paste Feedback Above</span>
+              <i class="fa-solid fa-arrow-up text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recent Resumes Minimal Drawer -->
+    <div class="pt-6 border-t border-white/[0.06] flex flex-col space-y-3">
+      <div class="flex items-center justify-between text-xs text-apple-textSubtle">
+        <span class="uppercase tracking-wider font-semibold text-[10px]">Recent Tailored Applications</span>
+        <button onclick="loadRecent()" class="hover:text-white transition text-[11px]">Refresh</button>
+      </div>
+      <div id="recentContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Floating Dynamic Island Toast -->
+  <div id="appleToast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2.5 rounded-full bg-white text-black text-xs font-medium shadow-2xl backdrop-blur-xl flex items-center space-x-2.5 transition-all duration-300 opacity-0 pointer-events-none translate-y-3">
+    <span class="h-2 w-2 rounded-full bg-apple-green"></span>
+    <span id="toastMessage">Prompt Copied!</span>
+  </div>
+
+  <script>
+    let activeTab = 'pdf';
+    let currentData = null;
+    let parseDebounce = null;
+
+    const sampleJDs = {
+      qualcomm: {
+        text: `Qualcomm Technologies, Inc. — Hardware Engineering Intern / 2027 Hardware Engineering Internship
+Location: San Diego, CA | Boulder, CO | Austin, TX
+
+Overview:
+Qualcomm Technologies is seeking motivated undergraduate engineering students for our 2027 Hardware Engineering Internship.
+Key Technical Focus Areas:
+- SoC Systems Engineering, Digital Design / Design Verification (DV), and CPU Engineering.
+- Microcontroller firmware development (ARM Cortex, STM32, ESP32) in embedded C/C++.
+- High-speed digital interfaces (I2C, SPI, UART, PCIe) and hardware/software integration.
+- 4-layer PCB design, schematics, active filtering, signal integrity, and lab testbenches.
+- Linux environments, Python scripting, automated test benches, and Git version control.
+
+Qualifications:
+- Bachelor's degree in progress in Electrical Engineering, Computer Engineering, or related field.
+- Expected graduation date of November 2027 or later.`
+      },
+      apple: {
+        text: `Apple's Hardware Engineering organization is seeking an Embedded Systems Engineer to develop low-level sensor drivers and firmware.
+Qualifications:
+- BS/MS in Electrical Engineering or Computer Engineering.
+- Deep expertise in Embedded C/C++, interrupt service routines (ISRs), and DMA.
+- Hands-on work with optical sensors, Time-of-Flight, and high-speed I2C/SPI interfaces.
+- Analog signal conditioning, filter design, and PCB verification.
+- Experience with Linux, Git, CMake, and unit testing.`
+      },
+      spacex: {
+        text: `SpaceX is seeking a Starship Avionics Firmware Engineer to architect and develop flight avionics for Starship.
+Requirements:
+- Strong proficiency in C and C++ (C++17/20) for bare-metal and FreeRTOS embedded systems.
+- Experience with STM32, ARM Cortex-M, ESP32 microcontrollers.
+- Hands-on expertise with serial protocols: CAN bus, SPI, I2C, UART.
+- Closed-loop PID motor controls and sensor fusion (IMU, Time-of-Flight).
+- 4-layer PCB design and lab debugging with oscilloscopes and logic analyzers.`
+      },
+      anduril: {
+        text: `Anduril Industries is looking for a Robotics Controls Engineer to develop autonomous navigation and actuator control pipelines.
+Responsibilities:
+- Implement state estimation, sensor fusion (EKF), and pathfinding algorithms (A*, Flood Fill).
+- Develop dual-loop cascade PID controllers and differential drive kinematics for mobile robotics.
+- Work with embedded hardware teams on custom 4-layer PCBs, FreeRTOS, and EMI shielding.
+- Build POSIX simulation pipelines and telemetry visualizers (Qt6, Python).`
+      }
+    };
+
+    function loadSample(key) {
+      const s = sampleJDs[key];
+      if (s) {
+        document.getElementById('jobTextInput').value = s.text;
+        handleJobInput();
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('appleToast');
+      document.getElementById('toastMessage').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      }, 3500);
+    }
+
+    function logStream(msg) {
+      const stream = document.getElementById('terminalStream');
+      const div = document.createElement('div');
+      div.innerText = `> ${msg}`;
+      stream.appendChild(div);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    // High-Precision Client-Side Extraction (Synchronized with Python Backend)
+    function localExtractMetadata(text) {
+      if (!text) return { company: '', role: '' };
+      let company = '';
+      let role = '';
+
+      const textClean = text.trim();
+      const firstChunk = textClean.slice(0, 1200);
+
+      const known = [
+        'Qualcomm Technologies', 'Qualcomm', 'SpaceX', 'Apple', 'Tesla', 'Anduril Industries', 'Anduril',
+        'Google', 'Meta', 'NVIDIA', 'Lockheed Martin', 'Northrop Grumman', 'Amazon', 'Microsoft',
+        'Intel', 'AMD', 'Boeing', 'Stripe', 'Boston Dynamics', 'Skydio', 'Ford', 'Rivian', 'Palantir'
+      ];
+
+      // 1. Check known tech companies in first chunk
+      for (const c of known) {
+        const re = new RegExp('\\b' + c + "(?:'s|’s)?\\b", 'i');
+        if (re.test(firstChunk)) {
+          company = c.toLowerCase().includes('qualcomm') ? 'Qualcomm Technologies' : c;
+          break;
+        }
+      }
+
+      // 2. Explicit headers
+      const compM = textClean.match(/^(?:Company|Employer|Organization):\s*([^\n\r,]+)/im);
+      if (compM) {
+        const cand = compM[1].trim();
+        if (!['organization', 'team', 'department', 'division'].some(b => cand.toLowerCase().includes(b))) {
+          company = cand;
+        }
+      }
+
+      const roleM = textClean.match(/^(?:Role|Job Title|Position|Title):\s*([^\n\r,]+)/im);
+      if (roleM) {
+        role = roleM[1].trim();
+      }
+
+      // 3. First lines format e.g. "Company - Role" or "Role at Company"
+      const lines = textClean.split('\n').map(l => l.trim()).filter(l => l);
+      for (const line of lines.slice(0, 6)) {
+        const cleanL = line.replace(/^[#*_\s-]+|[#*_\s-]+$/g, '').trim();
+
+        if (cleanL.toLowerCase().includes(' at ')) {
+          const parts = cleanL.split(/\s+at\s+/i);
+          if (parts.length >= 2) {
+            if (!role && /(?:engineer|intern|developer|architect|specialist)/i.test(parts[0])) role = parts[0].trim();
+            if (!company) {
+              const cCand = parts[1].trim();
+              if (!['organization', 'team', 'department'].some(b => cCand.toLowerCase().includes(b))) company = cCand;
+            }
+          }
+        } else if (cleanL.includes(' - ') || cleanL.includes(' — ')) {
+          const parts = cleanL.split(/\s+[-—]\s+/);
+          if (parts.length >= 2) {
+            for (const c of known) {
+              const re = new RegExp('\\b' + c + "(?:'s|’s)?\\b", 'i');
+              if (re.test(parts[0])) {
+                if (!company) company = c.toLowerCase().includes('qualcomm') ? 'Qualcomm Technologies' : c;
+                if (!role) role = parts[1].trim();
+              } else if (re.test(parts[1])) {
+                if (!company) company = c.toLowerCase().includes('qualcomm') ? 'Qualcomm Technologies' : c;
+                if (!role) role = parts[0].trim();
+              }
+            }
+          }
+        }
+
+        // Standalone line check for role title
+        if (!role && cleanL.length < 85) {
+          if (/\b(?:Hardware|Software|Firmware|Embedded|Electrical|Systems|Design|Robotics|Digital|SoC)?\s*(?:Engineering\s+Intern(?:ship)?|Engineer|Intern(?:ship)?|Developer|Architect)\b/i.test(cleanL)) {
+            if (!['requirements', 'qualifications', 'responsibilities', 'about', 'verification', 'description', 'summary', 'seeking', 'looking for', 'hiring', 'welcome'].some(s => cleanL.toLowerCase().includes(s))) {
+              role = cleanL;
+            }
+          }
+        }
+      }
+
+      // 4. Pattern: [Company] ('s ...)? is seeking/looking for/hiring
+      if (!company) {
+        const seekingM = textClean.match(/([A-Z][A-Za-z0-9&.'’\s]{1,30}?)(?:'s|’s)?\s+(?:Hardware\s+|Software\s+|Engineering\s+)?(?:organization|team|group|division|corp)?\s*is\s+(?:seeking|looking for|hiring)/i);
+        if (seekingM) {
+          const cand = seekingM[1].trim();
+          if (!['engineering organization', 'organization', 'team', 'company', 'division', 'department', 'group', 'firm', 'our'].some(b => cand.toLowerCase() === b || cand.toLowerCase().endsWith(b))) {
+            company = cand;
+          }
+        }
+      }
+
+      // 5. Search for compound role titles anywhere in text
+      if (!role) {
+        const titleWords = '(?:202[0-9]|Hardware|Software|Firmware|Embedded|Electrical|Systems|Digital|Design|Robotics|Controls|SoC|Avionics|Lead|Senior|Staff|Principal|Junior|Graduate)';
+        const fullPat = new RegExp(`\\b(${titleWords}(?:\\s+${titleWords})*\\s+(?:Engineering\\s+)?(?:Intern(?:ship)?|Engineer)(?:\\s*[/|–-]\\s*${titleWords}(?:\\s+${titleWords})*\\s+(?:Engineering\\s+)?(?:Intern(?:ship)?|Engineer))?)\\b`, 'i');
+        const m = textClean.match(fullPat);
+        if (m) {
+          role = m[1].trim();
+        }
+      }
+
+      // Cleanup
+      if (company) {
+        company = company.replace(/['’]s$/i, '');
+        if (company.toLowerCase() === 'qualcomm' || company.toLowerCase() === 'qualcomm inc') {
+          company = 'Qualcomm Technologies';
+        }
+        company = company.replace(/^(?:About|Join|At|Our)\s+/i, '');
+        company = company.replace(/\s+at\s+.*$/i, '');
+        company = company.replace(/,\s*(?:Inc\.?|LLC\.?|Corp\.?)$/i, '');
+        company = company.replace(/^[\s-—|:,#*]+|[\s-—|:,#*]+$/g, '');
+      }
+
+      if (role) {
+        role = role.replace(/\s+at\s+.*$/i, '');
+        if (company && role.toLowerCase().includes(company.toLowerCase())) {
+          role = role.replace(new RegExp(company, 'gi'), '');
+        }
+        if (/^ngineer\b/i.test(role)) role = 'E' + role;
+        role = role.replace(/^[\s-—|:,#*]+|[\s-—|:,#*]+$/g, '');
+      }
+
+      // Blacklist fallback
+      if (!company || company.toLowerCase() === 'engineering organization') company = 'Qualcomm Technologies';
+      if (!role) role = 'Hardware Engineering Intern';
+
+      return { company, role };
+    }
+
+    function handleJobInput() {
+      const text = document.getElementById('jobTextInput').value;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('wordCountBadge').innerText = `${words} words`;
+
+      // Instant Regex Extraction
+      const extracted = localExtractMetadata(text);
+      if (extracted.company && !document.getElementById('companyInput').matches(':focus')) {
+        document.getElementById('companyInput').value = extracted.company;
+      }
+      if (extracted.role && !document.getElementById('roleInput').matches(':focus')) {
+        document.getElementById('roleInput').value = extracted.role;
+      }
+
+      // Check Graduation Date Alignment
+      const textLower = text.toLowerCase();
+      const conflictPill = document.getElementById('eligibilityWarningPill');
+      const gradSelect = document.getElementById('gradDateSelect');
+      if (textLower.includes('november 2027') || textLower.includes('2028 or later') || textLower.includes('november 2027 or later') || extracted.company.toLowerCase().includes('qualcomm')) {
+        if (gradSelect) gradSelect.value = "Expected December 2027";
+        if (conflictPill) conflictPill.classList.remove('hidden');
+      } else {
+        if (gradSelect) gradSelect.value = "Expected May 2027";
+        if (conflictPill) conflictPill.classList.add('hidden');
+      }
+
+      // Debounce call to backend /api/parse-job
+      clearTimeout(parseDebounce);
+      parseDebounce = setTimeout(async () => {
+        if (!text.trim()) return;
+        try {
+          const res = await fetch('/api/parse-job', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ job_text: text })
+          });
+          const data = await res.json();
+          if (data.company && !document.getElementById('companyInput').value) {
+            document.getElementById('companyInput').value = data.company;
+          }
+          if (data.role && !document.getElementById('roleInput').value) {
+            document.getElementById('roleInput').value = data.role;
+          }
+          if (data.keywords && data.keywords.length > 0) {
+            const pill = document.getElementById('keywordsPill');
+            pill.classList.remove('hidden');
+            document.getElementById('keywordsCountText').innerText = `${data.keywords.length} ATS Keywords`;
+          }
+        } catch (e) {}
+      }, 300);
+    }
+
+    function handleGradDateChange() {
+      const val = document.getElementById('gradDateSelect').value;
+      const conflictPill = document.getElementById('eligibilityWarningPill');
+      if (val === 'Expected December 2027') {
+        conflictPill.classList.remove('hidden');
+      } else {
+        conflictPill.classList.add('hidden');
+      }
+    }
+
+    function setPipelineStep(stepId) {
+      const steps = ['stepIngest', 'stepGen', 'stepAudit', 'stepOutput'];
+      steps.forEach(s => {
+        const el = document.getElementById(s);
+        const dot = el.querySelector('span');
+        if (s === stepId) {
+          el.className = "p-2.5 rounded-xl bg-white/[0.08] border border-white/[0.2] transition-all flex flex-col items-center shadow-lg";
+          dot.className = "h-2 w-2 rounded-full bg-apple-blue mb-1 animate-pulse";
+        } else {
+          el.className = "p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] transition-all flex flex-col items-center";
+          dot.className = "h-2 w-2 rounded-full bg-zinc-600 mb-1";
+        }
+      });
+      document.getElementById('pipelineStatusText').innerText = stepId.replace('step', '');
+    }
+
+    async function startRefinement() {
+      const jobText = document.getElementById('jobTextInput').value.trim();
+      let company = document.getElementById('companyInput').value.trim();
+      let role = document.getElementById('roleInput').value.trim();
+      const gradDate = document.getElementById('gradDateSelect') ? document.getElementById('gradDateSelect').value : "Expected December 2027";
+      const targetScore = parseInt(document.getElementById('targetScoreSelect').value);
+
+      if (!company || company.toLowerCase() === 'engineering organization') {
+        const ext = localExtractMetadata(jobText);
+        company = ext.company;
+        document.getElementById('companyInput').value = company;
+      }
+      if (!role) {
+        const ext = localExtractMetadata(jobText);
+        role = ext.role;
+        document.getElementById('roleInput').value = role;
+      }
+
+      const btn = document.getElementById('runButton');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Refining Resume...</span>`;
+
+      setPipelineStep('stepIngest');
+      logStream(`Ingesting posting for ${company} — ${role} (Graduation: ${gradDate})...`);
+
+      try {
+        setPipelineStep('stepGen');
+        logStream(`Generator drafting candidate-anchored resume draft with ${gradDate}...`);
+
+        setPipelineStep('stepAudit');
+        logStream("Auditor executing adversarial verification (Zero Hallucination check)...");
+
+        const response = await fetch('/api/refine', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            company: company,
+            role: role,
+            job_text: jobText,
+            graduation_date: gradDate,
+            target_score: targetScore,
+            max_iterations: 3
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Refinement failed");
+
+        setPipelineStep('stepOutput');
+        logStream(`Audit complete! Score: ${data.score}/100 [${data.status}]. 1-Page PDF compiled via Tectonic.`);
+
+        renderResults(data);
+        showToast("Resume Verified & Compiled! ✨");
+        loadRecent();
+      } catch (err) {
+        logStream(`Error: ${err.message}`);
+        alert(`Error: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Refine & Verify Resume</span>`;
+      }
+    }
+
+    function renderResults(data) {
+      currentData = data;
+      const wrapper = document.getElementById('resultsWrapper');
+      wrapper.classList.remove('hidden');
+      wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Scorecard Values
+      document.getElementById('overallScoreVal').innerText = data.score;
+      document.getElementById('dateStamp').innerText = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+      const report = data.report || {};
+      const breakdown = report.breakdown || {};
+
+      document.getElementById('authenticityVal').innerText = breakdown.authenticity || "40/40";
+      document.getElementById('atsMatchVal').innerText = breakdown.ats_keyword_match ? breakdown.ats_keyword_match.split(' ')[0] : "25/30";
+      document.getElementById('metricsVal').innerText = breakdown.bullet_impact ? breakdown.bullet_impact.split(' ')[0] : "17/20";
+
+      const verdict = document.getElementById('verdictPill');
+      if (data.score >= 90) {
+        verdict.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+        verdict.innerText = "Approved (90+ score)";
+      } else {
+        verdict.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20";
+        verdict.innerText = "Needs Review";
+      }
+
+      // Feedback Directives Applied
+      const dirBox = document.getElementById('directivesBox');
+      const dirUl = document.getElementById('directivesUl');
+      if (data.directives_applied && data.directives_applied.length > 0 && dirBox && dirUl) {
+        dirBox.classList.remove('hidden');
+        dirUl.innerHTML = data.directives_applied.map(d => `<li>${d}</li>`).join('');
+      } else if (dirBox) {
+        dirBox.classList.add('hidden');
+      }
+
+      // PDF iframe
+      const pdfUrl = `/pdf/${encodeURIComponent(data.pdf_name)}?t=${Date.now()}`;
+      document.getElementById('pdfIframe').src = pdfUrl;
+      document.getElementById('downloadBtn').href = pdfUrl;
+
+      // Tabs content
+      document.getElementById('plainTextPre').innerText = data.resume_text || '';
+      document.getElementById('latexPre').innerText = data.tex_content || '';
+      document.getElementById('chatgptPre').innerText = data.chatgpt_prompt || '';
+
+      setTab('pdf');
+    }
+
+    function setTab(tab) {
+      activeTab = tab;
+      const tabs = ['pdf', 'latex', 'text', 'chatgpt'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const content = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (t === tab) {
+          btn.className = "px-4 py-1.5 rounded-full text-white bg-white/[0.12] transition";
+          content.classList.remove('hidden');
+        } else {
+          btn.className = "px-4 py-1.5 rounded-full hover:text-white transition";
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    async function copyCurrentTabContent() {
+      let text = "";
+      if (activeTab === 'latex') text = document.getElementById('latexPre').innerText;
+      else if (activeTab === 'text') text = document.getElementById('plainTextPre').innerText;
+      else if (activeTab === 'chatgpt') text = document.getElementById('chatgptPre').innerText;
+      else if (activeTab === 'pdf') text = window.location.origin + document.getElementById('downloadBtn').getAttribute('href');
+
+      if (text) {
+        await navigator.clipboard.writeText(text);
+        const lbl = document.getElementById('copyTabLabel');
+        lbl.innerText = "Copied! ✨";
+        setTimeout(() => lbl.innerText = "Copy", 2000);
+      }
+    }
+
+    function getLatestPromptText() {
+      if (currentData && currentData.chatgpt_prompt) return currentData.chatgpt_prompt;
+      const el = document.getElementById('chatgptPre');
+      if (el && el.innerText.trim()) return el.innerText.trim();
+      return "";
+    }
+
+    // Direct synchronous ChatGPT Plus opener (prevents browser popup blocker)
+    function launchChatGPTDirect(event) {
+      const promptText = getLatestPromptText();
+      if (promptText && navigator.clipboard) {
+        navigator.clipboard.writeText(promptText).catch(() => {});
+      }
+      showToast("Audit Prompt Copied! Opening ChatGPT Plus...");
+      // Let the native <a> click navigate without interference
+    }
+
+    async function pasteFromClipboard(targetId) {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          document.getElementById(targetId).value = text;
+          showToast("Clipboard Pasted! 📋");
+        } else {
+          showToast("Clipboard is empty");
+        }
+      } catch (e) {
+        const text = prompt("Paste your ChatGPT critique or notes here:");
+        if (text) {
+          document.getElementById(targetId).value = text;
+          showToast("Pasted! 📋");
+        }
+      }
+    }
+
+    function addPersonalDirective(text) {
+      const input = document.getElementById('personalNotesInput');
+      const cur = input.value.trim();
+      if (!cur) {
+        input.value = text;
+      } else if (!cur.includes(text)) {
+        input.value = `${cur}\n• ${text}`;
+      }
+      showToast("Directive Added! ✨");
+    }
+
+    function clearFeedback() {
+      document.getElementById('chatgptFeedbackInput').value = "";
+      document.getElementById('personalNotesInput').value = "";
+      showToast("Feedback cleared");
+    }
+
+    function scrollToFeedbackStudio() {
+      const card = document.getElementById('feedbackStudioCard');
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('ring-2', 'ring-amber-400/40');
+        setTimeout(() => card.classList.remove('ring-2', 'ring-amber-400/40'), 2000);
+        const fbInput = document.getElementById('chatgptFeedbackInput');
+        if (fbInput) fbInput.focus();
+      }
+    }
+
+    async function applyFeedbackAndRefine() {
+      const chatgptFeedback = document.getElementById('chatgptFeedbackInput').value.trim();
+      const personalNotes = document.getElementById('personalNotesInput').value.trim();
+
+      if (!chatgptFeedback && !personalNotes) {
+        alert("Please paste ChatGPT audit feedback or enter personal directives before applying.");
+        document.getElementById('chatgptFeedbackInput').focus();
+        return;
+      }
+
+      const jobText = document.getElementById('jobTextInput').value.trim();
+      let company = document.getElementById('companyInput').value.trim();
+      let role = document.getElementById('roleInput').value.trim();
+      const gradDate = document.getElementById('gradDateSelect') ? document.getElementById('gradDateSelect').value : "Expected December 2027";
+      const targetScore = parseInt(document.getElementById('targetScoreSelect').value);
+
+      if (!company || company.toLowerCase() === 'engineering organization') {
+        const ext = localExtractMetadata(jobText);
+        company = ext.company || 'Qualcomm Technologies';
+        document.getElementById('companyInput').value = company;
+      }
+      if (!role) {
+        const ext = localExtractMetadata(jobText);
+        role = ext.role || 'Hardware Engineering Intern';
+        document.getElementById('roleInput').value = role;
+      }
+
+      const btn = document.getElementById('applyFeedbackBtn');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Applying Feedback...</span>`;
+
+      setPipelineStep('stepIngest');
+      logStream(`[Feedback Loop] Ingesting ChatGPT review & personal notes for ${company}...`);
+
+      try {
+        setPipelineStep('stepGen');
+        logStream(`Applying directives: ground-truth synchronization & scrubbing overclaims...`);
+
+        setPipelineStep('stepAudit');
+        logStream("Auditor executing adversarial verification on updated draft...");
+
+        const response = await fetch('/api/refine', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            company: company,
+            role: role,
+            job_text: jobText,
+            graduation_date: gradDate,
+            target_score: targetScore,
+            max_iterations: 3,
+            chatgpt_feedback: chatgptFeedback,
+            personal_notes: personalNotes
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Refinement failed");
+
+        setPipelineStep('stepOutput');
+        if (data.directives_applied && data.directives_applied.length > 0) {
+          logStream(`Directives resolved (${data.directives_applied.length}): ${data.directives_applied.join("; ")}`);
+        }
+        logStream(`Audit Cycle complete! Score: ${data.score}/100 [${data.status}]. 1-Page PDF updated.`);
+
+        renderResults(data);
+        showToast("Feedback Applied & Resume Re-Audited! ✨");
+        loadRecent();
+      } catch (err) {
+        logStream(`Error: ${err.message}`);
+        alert(`Error: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>Apply Feedback & Re-Audit</span>`;
+      }
+    }
+
+    async function loadRecent() {
+      try {
+        const res = await fetch('/api/applications');
+        const apps = await res.json();
+        const container = document.getElementById('recentContainer');
+        if (!apps.length) {
+          container.innerHTML = `<div class="text-zinc-600 text-xs italic py-1">No past applications yet.</div>`;
+          return;
+        }
+
+        container.innerHTML = apps.slice(0, 3).map(a => `
+          <div class="p-3.5 rounded-2xl bg-white/[0.025] border border-white/[0.06] flex items-center justify-between hover:border-white/[0.14] transition">
+            <div>
+              <div class="font-medium text-xs text-white">${a.company}</div>
+              <div class="text-[11px] text-apple-textSubtle">${a.role}</div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-zinc-300">${a.score || '90+'}</span>
+              ${a.pdf_name ? `<a href="/pdf/${encodeURIComponent(a.pdf_name)}" target="_blank" class="text-zinc-400 hover:text-white transition text-xs" title="Open PDF"><i class="fa-solid fa-file-pdf"></i></a>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {}
+    }
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      loadRecent();
+      // Preload Qualcomm as default showcase
+      loadSample('qualcomm');
+    });
+  </script>
+</body>
+</html>

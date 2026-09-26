@@ -1,0 +1,128 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.2in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[3]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-6pt}}
+
+\begin{document}
+
+\begin{center}
+  \textbf{\Huge \scshape Justin M. Parra} \\ \vspace{2pt}
+  \small Dunellen, NJ $|$ (732) 772-5709 $|$ \href{mailto:jstnp18@gmail.com}{\underline{jstnp18@gmail.com}} $|$ \href{https://linkedin.com/in/justin-parra-/}{\underline{linkedin.com/in/justin-parra-/}} $|$ \href{https://github.com/justintime1888}{\underline{github.com/justintime1888}}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Rutgers University -- New Brunswick}{New Brunswick, NJ}
+      {Bachelor of Science in Electrical and Computer Engineering (ECE)}{Expected December 2027}
+      \resumeItemListStart
+        \resumeItem{\textbf{Relevant Coursework:} Principles of Electrical Engineering I \& II, Microelectronic Circuits, Linear Systems and Signals, Control Systems Principles, Feedback \& State Estimation, Digital Logic Design, Computer Architecture, Embedded Systems \& Microcontrollers.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd\vspace{-12pt}
+
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages:} C, C++ (C++11/17/20), Python, TypeScript, JavaScript, MATLAB, Verilog HDL, Assembly \\
+     \textbf{Embedded \& Microcontrollers:} ESP32-S3, STM32F405, STM32, ARM Cortex-M4, Bare-Metal C, FreeRTOS, HAL, Timer ISRs \\
+     \textbf{Hardware \& PCB Design:} Altium Designer, KiCad 8.0, 4-Layer PCB Routing, Controlled Impedance, Coplanar Ground Shielding, Analog Signal Conditioning, Active Op-Amp Filters, RLC Transient Analysis, TVS Surge Protection, Decoupling \\
+     \textbf{Protocols \& Buses:} I2C (400 kHz), SPI, UART, CAN Bus, PWM Motor Control, ADC/DAC, RS-485, GPIO \\
+     \textbf{Robotics \& Control:} Cascade PID Control, Differential Drive Kinematics, Sensor Fusion (EMA, EKF Principles), Modified Flood Fill, A* Pathfinding, State Estimation \\
+     \textbf{Tools \& Platforms:} Linux (Arch, Ubuntu, WSL2), Git, GitHub, CMake, LTspice, Make, GDB, Multisim \\
+    }}
+ \end{itemize}\vspace{-14pt}
+
+\section{Engineering Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading{Rutgers Micromouse}{New Brunswick, NJ}{Lead Firmware \& Hardware Engineer | Lead Controls Engineer | Co-President}{September 2024 -- Present}
+      \resumeItemListStart
+        \resumeItem{Engineered real-time embedded \textbf{C/C++} firmware on \textbf{ESP32-S3} and \textbf{STM32} microcontrollers, utilizing \textbf{FreeRTOS} tasks to achieve deterministic \textbf{100 Hz} sensor polling and sub-millisecond motor control response.}
+        \resumeItem{Architected \textbf{dual-loop cascade PID} feedback controllers fusing \textbf{100 Hz IMU} angular velocity (\textbf{Bosch BNO055 9-DOF}) with lateral distance error from \textbf{VL53L1X Time-of-Flight} sensors, eliminating motor drift and achieving sub-millimeter maze centering.}
+        \resumeItem{Implemented memory-efficient \textbf{Modified Flood Fill} exploration and \textbf{A* pathfinding} algorithms in modern \textbf{C++} with bit-manipulated state matrices, reducing autonomous traversal solve time by \textbf{20\%} under strict embedded SRAM limits.}
+      \resumeItemListEnd
+
+    \resumeSubheading{LPT-KEYPAK}{Tewksbury, NJ}{Engineering Intern}{June 2024 -- August 2024}
+      \resumeItemListStart
+        \resumeItem{Commissioned and validated automated high-speed packaging machinery for the \textbf{Bill \& Melinda Gates Foundation}, boosting packaging line throughput by \textbf{30\%} during pilot production qualification runs.}
+        \resumeItem{Diagnosed electromechanical and process failure points across automated manufacturing equipment using structured root-cause analysis (\textbf{5-Whys, Pareto charts}), reducing production defect rates by \textbf{15\%}.}
+        \resumeItem{Interpreted \textbf{20+ industrial electrical schematics} to troubleshoot PLCs, motor drives, and sensor relays; authored technical documentation and maintenance SOPs to standardize workflows.}
+      \resumeItemListEnd
+
+    \resumeSubheading{VEX Robotics (Rutgers IEEE)}{New Brunswick, NJ}{Lead Electrical Engineer}{September 2024 -- Present}
+      \resumeItemListStart
+        \resumeItem{Architected communication and distributed power delivery architectures for competition robotics, engineering \textbf{RS-485 to UART to I2C} transceiver networks between VEX Brain and microcontrollers.}
+        \resumeItem{Designed schematics and selected components including differential transceivers, TVS surge diodes, and bus termination resistors to protect sensitive logic from inductive spikes, reducing communication bus error rates to \textbf{$<$0.1\%} across high-vibration competition runs.}
+        \resumeItem{Executed hardware-in-the-loop (\textbf{HIL}) stress testing and signal integrity validation under severe mechanical vibration using digital oscilloscopes to verify packet-loss rates \textbf{$<$0.1\%} and guarantee deterministic bus arbitration.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd\vspace{-12pt}
+
+\section{Technical Projects}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading{Autonomous Micromouse Robot (Jerrieee) - 2nd Place Regional Finalist}{2025}{C/C++, STM32F405RG, KiCad 8.0, 4-Layer ENIG PCB, DRV8847}
+      \resumeItemListStart
+        \resumeItem{Won \textbf{2nd Place at Rowan Regional Competition}; designed custom \textbf{4-layer ENIG PCB} integrating \textbf{168 MHz ARM Cortex-M4 MCU}, 5x optical ToF array over \textbf{400 kHz I2C}, and dual \textbf{DRV8847} motor drivers in an 84x76.5 mm chassis.}
+        \resumeItem{Programmed real-time Flood-Fill maze navigation algorithm running in \textbf{sub-850 microseconds} per cell transition with a \textbf{1 kHz cascaded PID} control loop correcting gyro heading and velocity errors up to 4.2 m/s, implementing \textbf{anti-windup clamping} to maintain stable tracking.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading{Weave - Automated SPICE Netlist Parser \& Schematic Compiler}{2025}{TypeScript, LTspice, ElkJS Graph Routing, Geometric Placement, EDA Tools}
+      \resumeItemListStart
+        \resumeItem{Built an automated compiler converting raw SPICE subcircuit netlists (.cir) into formatted LTspice schematics (.asc) using hierarchical graph theory and layered placement algorithms.}
+        \resumeItem{Implemented geometric Manhattan routing and net-label heuristics to eliminate overlapping wire segments and generate clear circuit schematics automatically.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\end{document}

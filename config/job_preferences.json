@@ -1,10 +1,16 @@
 {
+  "employment_type": "Full-time",
   "target_roles": [
-    "Software Engineering Intern",
-    "Embedded Software Intern",
-    "Robotics Software Intern",
-    "Firmware Engineering Intern",
-    "Hardware Engineering Intern"
+    "Software Engineer",
+    "Embedded Software Engineer",
+    "Robotics Software Engineer",
+    "Firmware Engineer",
+    "Hardware Engineer"
+  ],
+  "excluded_keywords": [
+    "intern",
+    "internship",
+    "co-op"
   ],
   "target_locations": [
     "San Francisco, CA",
